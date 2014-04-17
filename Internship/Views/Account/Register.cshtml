@@ -1,0 +1,94 @@
+﻿@model Internship.ViewModels.RegistratieModelCreater
+
+@{
+    ViewBag.Title = "Registreer";
+    ViewBag.Active = "Registreer";
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post,
+    new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Registreer</h4>
+    <hr />
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.Bedrijfsnaam, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RegistratieModel.Bedrijfsnaam, new { @class = "form-control", style = "width: 50%" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.Url, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RegistratieModel.Url, new { @class = "form-control", style = "width: 50%" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.Straat, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RegistratieModel.Straat, new { @class = "form-control", style = "width: 50%" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.Straatnummer, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m =>m.RegistratieModel.Straatnummer, new { @class = "form-control", style = "width: 50%" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.Woonplaats, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.RegistratieModel.Woonplaats, Model.GemeenteLijst, new { @class = "form-control", style = "width: 50%" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.Telefoon, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RegistratieModel.Telefoon, new { @class = "form-control", style = "width: 50%" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.Bereikbaarheid, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RegistratieModel.Bereikbaarheid, new { @class = "form-control", style = "width: 50%" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.Activiteit, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RegistratieModel.Activiteit, new { @class = "form-control", style = "width: 50%" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RegistratieModel.Email, new { @class = "form-control", style = "width: 50%" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.RegistratieModel.Password, new { @class = "form-control", type = "password", style = "width: 50%" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RegistratieModel.ConfirmPaswoord, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.RegistratieModel.ConfirmPaswoord, new { @class = "form-control", type = "password", style = "width: 50%" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Registreer" style="width: 50%" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

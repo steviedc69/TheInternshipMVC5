@@ -1,0 +1,20 @@
+﻿@model Internship.Models.Domain.Opdracht
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">@Model.Title</h2>
+    </div>
+    <div class="panel-body">
+        <p>@Model.Omschrijving</p>
+       Schooljaar :  @Model.Schooljaar<br/>
+       Specialisatie : @Model.Specialisatie.Title
+    </div>
+    <div class =" panel-footer">
+        <div class="btn-group">
+
+            <button type="button" class="btn-default"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+            <button type="button" class="btn-default">
+                <span class="glyphicon glyphicon-cog"></span> Edit</button>
+            <button type="button" class="btn-default">  <span class="glyphicon glyphicon-info-sign"></span> Meer info</button>
+</div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@model Internship.ViewModels.LoginModel
+           
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="col-lg-6">
+        <div class="panel-heading">
+            <h3 class="panel-title">Aanmelden</h3>
+        </div>
+        <div class="panel-body">
+            <div class="input-group">
+                <span class="input-group-addon">Email</span>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = true, autofocus = true, placeholder = "..." })
+            </div>
+            <p>
+                @Html.ValidationMessageFor(m => m.Email)
+            </p>
+            <div class="input-group">
+                <span class="input-group-addon">Wachtwoord</span>
+                @Html.PasswordFor(m => m.Passwd, new { @class = "form-control", type = "password", placeholder = "..." })
+            </div>
+            <span>
+                @Html.ValidationMessageFor(m => m.Passwd)
+            </span>
+            <label class="checkbox">
+                @Html.CheckBoxFor(m => m.RememberMe, new { value = "remember-me" })
+                Onthoud me?
+            </label>
+            <input type="submit" value="Aanmelden" class="btn btn-primary btn-block" />
+        </div>
+    </div>
+}

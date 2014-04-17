@@ -1,0 +1,34 @@
+﻿@using Internship.Models.Domain
+@model Internship.Models.Domain.Bedrijf
+
+@{
+    Layout = "_BedrijfLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@Model.Bedrijfsnaam</title>
+    </head>
+    <body>
+        <div>
+            <h1>@Model.Bedrijfsnaam</h1>
+
+            <div class="col-md-3">
+                <a href=@Url.Action("AddOpdracht", "Bedrijf", new { id = Model.Id })><span class="glyphicon glyphicon-plus"></span> Nieuwe opdracht</a>
+            </div>
+        </div>
+
+        <div class="container" style="border-top-width: 15px">
+            @if (Model.Opdrachten == null)
+            {
+                <p>Nog geen opdrachten?? Maak een nieuwe aan.</p>
+            }
+            @foreach (var item in Model.Opdrachten)
+            {
+                @Html.Partial("_OpdrachtPartial",item)
+            }
+        </div>
+    </body>
+</html>

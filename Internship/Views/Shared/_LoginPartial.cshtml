@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity
+<div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+
+ 
+
+
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="@Url.Action("Manage","Account")"><span class="glyphicon glyphicon-user"></span></a>
+                </li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>
+        }
+    }
+    else
+    {
+        
+      <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="~/Images/theinternship-neg.png" alt="The Internship" height="50px" /></a>
+
+         
+    }
+</div>

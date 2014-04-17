@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Internship.Models.Domain.Stagebegeleider" Collapsed="true">
+    <Position X="6.5" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAgAAAAAAAAggAABAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Stagebegeleider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Internship.Models.Domain.Bedrijf" Collapsed="true">
+    <Position X="6" Y="2.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAEiAAACgAABAAAAgAAAAAAACABABACAAAAAAAEgA=</HashCode>
+      <FileName>Models\Domain\Bedrijf.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ContactPersonen" />
+      <Property Name="Opdrachten" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Internship.Models.Domain.ContactPersoon" Collapsed="true">
+    <Position X="3.25" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAACAAAgAAAAAAAAAAAABAIAAIAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\ContactPersoon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Internship.Models.Domain.Opdracht" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>BAACAAAAAAAAAEAAAAAAAAAAAAAEAAAACAAAIAAAAAI=</HashCode>
+      <FileName>Models\Domain\Opdracht.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Specialisatie" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Internship.Models.Domain.Specialisatie" Collapsed="true">
+    <Position X="2" Y="3.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\Specialisatie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Internship.Models.Domain.Student" Collapsed="true">
+    <Position X="7.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAgAAAAgAAAAggAhAAAAACAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Models\Domain\Student.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Internship.Models.Domain.ApplicationUser" Collapsed="true">
+    <Position X="6.5" Y="1.25" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Domain\ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

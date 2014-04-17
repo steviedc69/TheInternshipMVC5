@@ -1,0 +1,141 @@
+﻿@model Internship.ViewModels.CreateOpdrachtViewModel
+
+@{
+    Layout = "_BedrijfLayout.cshtml";
+}
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>addStageopdracht</title>
+</head>
+<body>
+    <div>
+        <h1>Creëer een nieuwe stage opdracht</h1> 
+    </div>
+    @using (Html.BeginForm("AddOpdracht","Bedrijf",FormMethod.Post,new{@class="form-horizontal" ,role ="form"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+           
+            <div class="form-group">
+                @Html.LabelFor(model => model.OpdrachtViewModel.Title, new { @class = "control-label col-md-2" })
+
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.OpdrachtViewModel.Title, new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.OpdrachtViewModel.Schooljaar, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m=>m.OpdrachtViewModel.Schooljaar,Model.SchooljaarSelectList,new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(m=>m.OpdrachtViewModel.Schooljaar)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.OpdrachtViewModel.AantalStudenten,new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.OpdrachtViewModel.AantalStudenten, Model.AantalStudenten, new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(m=>m.OpdrachtViewModel.AantalStudenten)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.OpdrachtViewModel.Omschrijving, new { @class = "control-label col-md-2" })
+
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.OpdrachtViewModel.Omschrijving, new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Omschrijving)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OpdrachtViewModel.Specialisatie, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.OpdrachtViewModel.Specialisatie,
+         Model.SpecialisatieList, new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Specialisatie)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.OpdrachtViewModel.Vaardigheden, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.OpdrachtViewModel.Vaardigheden, new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(m=>m.OpdrachtViewModel.Vaardigheden)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.OpdrachtViewModel.Semesters, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.OpdrachtViewModel.Semesters,
+                        Model.SemesterLijst, new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Semesters)
+                </div>
+            </div>
+            <div class="form-group">
+                @if (Model.OndertekenaarSelectList != null)
+                {
+                    @Html.LabelFor(model => model.OpdrachtViewModel.ContractOndertekenaar, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.OpdrachtViewModel.ContractOndertekenaar,
+                            Model.OndertekenaarSelectList, new { @class = "form-control", style = "width: 50%" })
+                        @Html.ValidationMessageFor(model => model.OpdrachtViewModel.ContractOndertekenaar)
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <p class="control-label col-md-2">
+
+                        @Ajax.ActionLink("Maak nieuwe contactpersoon", "AddOpdracht", new AjaxOptions()
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "GET",
+                        UpdateTargetId = "contactform"
+                    })
+                        </p>
+</div>
+                <div id="contactform"></div>
+            </div>
+            <div class="form-group">
+                @if (Model.OndertekenaarSelectList != null)
+                {
+                    @Html.LabelFor(model => model.OpdrachtViewModel.StageMentor, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.OpdrachtViewModel.ContractOndertekenaar,
+                            Model.StageMentorSelectList, new { @class = "form-control", style = "width: 50%" })
+                        @Html.ValidationMessageFor(model => model.OpdrachtViewModel.StageMentor)
+                    </div>
+                }
+            </div>
+            
+            <div class="form-group">
+                <div class="form-group">
+                    <p class="control-label col-md-2">
+                        @Ajax.ActionLink("Maak nieuwe contactpersoon", "AddOpdracht", new AjaxOptions()
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "GET",
+                        UpdateTargetId = "second"
+                    })
+                    </p>
+                </div>
+                <div id="second"></div>
+            </div>
+            <p>
+                <input type="submit" value="Voeg toe" />
+            </p>
+        </fieldset>
+    }
+</body>
+</html>
