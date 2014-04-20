@@ -236,6 +236,7 @@
     <Compile Include="ViewModels\ContactModel.cs" />
     <Compile Include="ViewModels\loginModel.cs" />
     <Compile Include="ViewModels\ManageModel.cs" />
+    <Compile Include="ViewModels\Mapper.cs" />
     <Compile Include="ViewModels\OpdrachtViewModel.cs" />
     <Compile Include="ViewModels\RegistratieModel.cs" />
     <Compile Include="ViewModels\StageModel.cs" />
@@ -273,6 +274,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -297,7 +299,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
@@ -313,8 +314,9 @@
     <Content Include="Views\Bedrijf\_BedrijfLayout.cshtml" />
     <Content Include="Views\Bedrijf\_OpdrachtPartial.cshtml" />
     <Content Include="Views\Bedrijf\AddOpdracht.cshtml" />
-    <Content Include="Views\Bedrijf\_CreateContact.cshtml" />
     <Content Include="Views\Bedrijf\BeheerContacten.cshtml" />
+    <Content Include="Views\Bedrijf\AddContact.cshtml" />
+    <Content Include="Views\Bedrijf\_CreateContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

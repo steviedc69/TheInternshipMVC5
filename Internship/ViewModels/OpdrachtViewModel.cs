@@ -7,12 +7,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Internship.Models.Domain;
+using Microsoft.Ajax.Utilities;
 
 
 namespace Internship.ViewModels
 {
     public class CreateOpdrachtViewModel
     {
+        public static String BedrijfId { get; set; }
+        public ContactModel ContactModelOndertekenaar { get; set; }
+        public ContactModel ContactModelStageMentor { get; set; }
         public OpdrachtViewModel OpdrachtViewModel { get; set; }
         public SelectList SpecialisatieList { get; private set; }
         public SelectList SemesterLijst { get; private set; }
@@ -20,12 +24,13 @@ namespace Internship.ViewModels
         public SelectList OndertekenaarSelectList { get; private set; }
         public SelectList StageMentorSelectList { get; private set; }
         public SelectList AantalStudenten { get; private set; }
-        public String BedrijfId { get; set; }
+        
 
     public CreateOpdrachtViewModel(IEnumerable<Specialisatie> specialisaties,IEnumerable<ContactPersoon>contactPersonen ,
         OpdrachtViewModel opdrachtViewModel,String berdrijfId)
-        {
-            
+    {
+        ContactModelOndertekenaar = new ContactPersoon().ConvertToContactCreateModel(BedrijfId);
+        ContactModelStageMentor = new ContactPersoon().ConvertToContactCreateModel(BedrijfId);
             SpecialisatieList = new SelectList(specialisaties);
             List<String> lijstSemester = new List<string>(new String[] {"Semester 1", "Semester 2", "Semester 1 en 2"});
             SemesterLijst = new SelectList(lijstSemester);

@@ -30,6 +30,13 @@ namespace Internship
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
+               "~/Scripts/jquery-{version}.js",
+               "~/Scripts/jquery.unobtrusive*",
+               "~/Scripts/jquery.validate*",
+               "~/Scripts/bootstrap.js"
+                           ));
         }
     }
 }

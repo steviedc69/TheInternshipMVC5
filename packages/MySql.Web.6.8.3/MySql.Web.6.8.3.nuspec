@@ -3,7 +3,6 @@
   <metadata>
     <id>MySql.Web</id>
     <version>6.8.3</version>
-    <title>MySql.Web</title>
     <authors>Oracle Corporation</authors>
     <owners>Oracle Corporation</owners>
     <licenseUrl>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</licenseUrl>
@@ -11,9 +10,6 @@
     <iconUrl>http://www.mysql.com/common/logos/logo-mysql-110x57.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>MySQL providers for ASP.NET.</description>
-    <releaseNotes />
-    <copyright />
-    <language />
     <tags>MySQL</tags>
     <dependencies>
       <dependency id="MySql.Data" version="6.8.3" />

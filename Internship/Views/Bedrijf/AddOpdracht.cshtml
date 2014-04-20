@@ -1,4 +1,5 @@
-﻿@model Internship.ViewModels.CreateOpdrachtViewModel
+﻿@using Internship.ViewModels
+@model Internship.ViewModels.CreateOpdrachtViewModel
 
 @{
     Layout = "_BedrijfLayout.cshtml";
@@ -17,15 +18,15 @@
 </head>
 <body>
     <div>
-        <h1>Creëer een nieuwe stage opdracht</h1> 
+        <h1>Creëer een nieuwe stage opdracht</h1>
     </div>
-    @using (Html.BeginForm("AddOpdracht","Bedrijf",FormMethod.Post,new{@class="form-horizontal" ,role ="form"}))
+    @using (Html.BeginForm("AddOpdracht", "Bedrijf", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
         <fieldset>
-           
+
             <div class="form-group">
                 @Html.LabelFor(model => model.OpdrachtViewModel.Title, new { @class = "control-label col-md-2" })
 
@@ -38,15 +39,15 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.OpdrachtViewModel.Schooljaar, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(m=>m.OpdrachtViewModel.Schooljaar,Model.SchooljaarSelectList,new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(m=>m.OpdrachtViewModel.Schooljaar)
+                    @Html.DropDownListFor(m => m.OpdrachtViewModel.Schooljaar, Model.SchooljaarSelectList, new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(m => m.OpdrachtViewModel.Schooljaar)
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m=>m.OpdrachtViewModel.AantalStudenten,new { @class = "control-label col-md-2" })
+                @Html.LabelFor(m => m.OpdrachtViewModel.AantalStudenten, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.OpdrachtViewModel.AantalStudenten, Model.AantalStudenten, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(m=>m.OpdrachtViewModel.AantalStudenten)
+                    @Html.ValidationMessageFor(m => m.OpdrachtViewModel.AantalStudenten)
                 </div>
             </div>
             <div class="form-group">
@@ -71,7 +72,7 @@
                 @Html.LabelFor(model => model.OpdrachtViewModel.Vaardigheden, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextAreaFor(m => m.OpdrachtViewModel.Vaardigheden, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(m=>m.OpdrachtViewModel.Vaardigheden)
+                    @Html.ValidationMessageFor(m => m.OpdrachtViewModel.Vaardigheden)
                 </div>
             </div>
             <div class="form-group">
@@ -97,14 +98,17 @@
                 <div class="form-group">
                     <p class="control-label col-md-2">
 
-                        @Ajax.ActionLink("Maak nieuwe contactpersoon", "AddOpdracht", new AjaxOptions()
+
+                        @Ajax.ActionLink("Maak nieuwe contactpersoon", "AddOpdracht", {modelContact = Model.ContactModelOndertekenaar},new AjaxOptions()
                     {
                         InsertionMode = InsertionMode.Replace,
                         HttpMethod = "GET",
                         UpdateTargetId = "contactform"
+
                     })
-                        </p>
-</div>
+
+                    </p>
+                </div>
                 <div id="contactform"></div>
             </div>
             <div class="form-group">
@@ -118,11 +122,13 @@
                     </div>
                 }
             </div>
+
             
+
             <div class="form-group">
                 <div class="form-group">
                     <p class="control-label col-md-2">
-                        @Ajax.ActionLink("Maak nieuwe contactpersoon", "AddOpdracht", new AjaxOptions()
+                        @Ajax.ActionLink("Maak nieuwe contactpersoon", "AddOpdracht", {modelContact = Model.ContactModelStageMentor},new AjaxOptions()
                     {
                         InsertionMode = InsertionMode.Replace,
                         HttpMethod = "GET",
@@ -137,5 +143,8 @@
             </p>
         </fieldset>
     }
+
+
+
 </body>
 </html>

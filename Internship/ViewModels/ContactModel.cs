@@ -10,6 +10,8 @@ namespace Internship.ViewModels
 {
     public class ContactModel
     {
+        public String BedrijfsId { get; set; }
+        public int id { get; set; }
         [Required(ErrorMessage = "{0} is verplicht")]
         [Display(Name = "Naam : ")]
         public String Naam { get; set; }
@@ -30,5 +32,20 @@ namespace Internship.ViewModels
         [Display(Name = "GSM nummer van contactpersoon : ")]
         [RegularExpression(@"^\(?(04)[1-9]{2}\)?(\-|\s)?[0-9]{6}$", ErrorMessage = "{0} is niet correct ingevoerd.")]
         public String GsmNummer { get; set; }
+    }
+    public class ContactDeleteViewModel
+    {
+        public int Id { get; set; }
+        public String Naam { get; set; }
+        public String Voornaam { get; set; }
+
+        public ContactDeleteViewModel() { }
+
+        public ContactDeleteViewModel(String naam, String voornaam, int id)
+        {
+            Id = id;
+            Naam = naam;
+            Voornaam = voornaam;
+        }
     }
 }
