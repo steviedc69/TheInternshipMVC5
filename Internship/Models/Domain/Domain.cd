@@ -7,53 +7,74 @@
       <FileName>Models\Domain\Stagebegeleider.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Internship.Models.Domain.Bedrijf" Collapsed="true">
-    <Position X="6" Y="2.75" Width="1.25" />
+  <Class Name="Internship.Models.Domain.Bedrijf">
+    <Position X="6" Y="2.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AIAAEiAAACgAABAAAAgAAAAAAACABABACAAAAAAAEgA=</HashCode>
+      <HashCode>AIAAEiAAACgAAAAAAAAAAAAAAAgABABgCAAAAEAAEgA=</HashCode>
       <FileName>Models\Domain\Bedrijf.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Adres" />
+    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="ContactPersonen" />
       <Property Name="Opdrachten" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Internship.Models.Domain.ContactPersoon" Collapsed="true">
-    <Position X="3.25" Y="1.5" Width="1.75" />
+    <Position X="3.5" Y="1.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>gAACAAAgAAAAAAAAAAAABAIAAIAABAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>gAACAAAgAAAAAAAEAAAABAIAAIAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\ContactPersoon.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Internship.Models.Domain.Opdracht" Collapsed="true">
-    <Position X="4" Y="3.5" Width="1.25" />
+    <Position X="3.5" Y="3" Width="1.25" />
     <TypeIdentifier>
-      <HashCode>BAACAAAAAAAAAEAAAAAAAAAAAAAEAAAACAAAIAAAAAI=</HashCode>
+      <HashCode>BAACAAAAAAEAAEAACICAAAAAAAgEAAAgCAgAIAAAABI=</HashCode>
       <FileName>Models\Domain\Opdracht.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Specialisatie" />
+      <Property Name="Adres" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Internship.Models.Domain.Specialisatie" Collapsed="true">
-    <Position X="2" Y="3.5" Width="1.25" />
+    <Position X="1.5" Y="2.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\Specialisatie.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Internship.Models.Domain.Student" Collapsed="true">
-    <Position X="7.75" Y="2.75" Width="1.5" />
+  <Class Name="Internship.Models.Domain.Student">
+    <Position X="7.75" Y="2.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAQAAgAAAAgAAAAggAhAAAAACAAAAAAAAAAAAAEAA=</HashCode>
+      <HashCode>AAAAAAAgAAAAgAAAIggAhAAAAgKAAAAAAACAAAAAEAA=</HashCode>
       <FileName>Models\Domain\Student.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Internship.Models.Domain.ApplicationUser" Collapsed="true">
-    <Position X="6.5" Y="1.25" Width="1.25" />
+    <Position X="6.5" Y="1" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Domain\ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Internship.Models.Domain.Adres" Collapsed="true">
+    <Position X="3.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEAACCAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\Domain\Adres.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Gemeente" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Internship.Models.Domain.Gemeente" Collapsed="true">
+    <Position X="1" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAIAAAAEAAAAhAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\Domain\Gemeente.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

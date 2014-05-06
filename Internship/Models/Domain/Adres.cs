@@ -10,11 +10,16 @@ namespace Internship.Models.Domain
         public int Id { get; set; }
         public String StraatNaam { get; set; }
         public int Nummer { get; set; }
-        public Gemeente Gemeente { get; set; }
+        public virtual Gemeente Gemeente { get; set; }
 
         public Adres()
         {
             
+        }
+
+        public override string ToString()
+        {
+            return StraatNaam + " " + Nummer +" "+ Gemeente.Structuur;
         }
     }
 }

@@ -61,6 +61,12 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC3.3.2.0.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -240,10 +246,12 @@
     <Compile Include="ViewModels\OpdrachtViewModel.cs" />
     <Compile Include="ViewModels\RegistratieModel.cs" />
     <Compile Include="ViewModels\StageModel.cs" />
+    <Compile Include="ViewModels\StudentIndexModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -317,10 +325,20 @@
     <Content Include="Views\Bedrijf\BeheerContacten.cshtml" />
     <Content Include="Views\Bedrijf\AddContact.cshtml" />
     <Content Include="Views\Bedrijf\_CreateContact.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\_StagesPart.cshtml" />
+    <Content Include="Views\Student\OpdrachDetail.cshtml" />
+    <Content Include="Views\Student\_StudentLayout.cshtml" />
+    <Content Include="Views\Bedrijf\AddContactToOpdracht.cshtml" />
+    <Content Include="Views\Bedrijf\_UitLijst.cshtml" />
+    <Content Include="Views\Bedrijf\_ContactDetail.cshtml" />
+    <Content Include="Views\Bedrijf\_ContactFormPartial.cshtml" />
+    <Content Include="Views\Bedrijf\_StagebegUitLijst.cshtml" />
+    <Content Include="Views\Bedrijf\_StageBegeleiderForm.cshtml" />
+    <Content Include="Views\Bedrijf\_OpdrachtenListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -129,3 +129,8 @@ C:\Users\Thomas\Source\Repos\Internship\bin\Microsoft.Owin.Security.MicrosoftAcc
 C:\Users\Thomas\Source\Repos\Internship\obj\Debug\Internship.dll
 C:\Users\Thomas\Source\Repos\Internship\obj\Debug\Internship.pdb
 C:\Users\Thomas\Source\Repos\Internship\obj\Debug\Internship.csprojResolveAssemblyReference.cache
+C:\Users\Steven De Cock\Documents\Visual Studio 2013\Projects\Internship\Internship\bin\Microsoft.Web.Infrastructure.xml
+C:\Users\Steven De Cock\Documents\Visual Studio 2013\Projects\Internship\Internship\bin\PagedList.dll
+C:\Users\Steven De Cock\Documents\Visual Studio 2013\Projects\Internship\Internship\bin\PagedList.Mvc.dll
+C:\Users\Steven De Cock\Documents\Visual Studio 2013\Projects\Internship\Internship\bin\PagedList.xml
+C:\Users\Steven De Cock\Documents\Visual Studio 2013\Projects\Internship\Internship\bin\PagedList.Mvc.xml

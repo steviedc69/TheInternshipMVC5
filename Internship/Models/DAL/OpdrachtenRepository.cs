@@ -23,5 +23,25 @@ namespace Internship.Models.DAL
         {
             return opdrachten.Find(id);
         }
+
+       
+
+        public IEnumerable<Opdracht> GeefStageOpdrachten()
+        {
+            return opdrachten.Where(o=>o.IsStageOpdracht==true).OrderBy(o=>o.Schooljaar);
+        }
+
+        public IEnumerable<Opdracht> GeefStageOpdrachtenMetZoekstring(string search)
+        {
+            IEnumerable<Opdracht> opd = GeefStageOpdrachten();
+            return opd.Where(o => o.Title.Contains(search)
+                ||o.Omschrijving.Contains(search)||o.Vaardigheden.Contains(search)
+                ||o.Specialisatie.Title.Contains(search));
+        }
+
+        public void SaveChanges()
+        {
+            Context.SaveChanges();
+        }
     }
 }

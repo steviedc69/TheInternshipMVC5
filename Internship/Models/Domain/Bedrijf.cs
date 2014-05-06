@@ -12,7 +12,7 @@ namespace Internship.Models.Domain
 
         public String Bedrijfsnaam { get; set; }
         public String Url { get; set; }
-        public Adres Adres { get; set; }
+        public virtual Adres Adres { get; set; }
         public String Telefoon { get; set; }
         public String Bereikbaarheid { get; set; }
         public String Activiteit { get; set; }
@@ -56,12 +56,24 @@ namespace Internship.Models.Domain
                 if (contact.ToString().Equals(voornaamNaam))
                 {
                     c = contact;
+                    return c;
                 }
             }
             return c;
         }
 
-
+        public Opdracht FindOpdracht(int id)
+        {
+            Opdracht opdracht = null;
+            foreach (Opdracht op in Opdrachten)
+            {
+                if (op.Id == id)
+                {
+                    opdracht = op;
+                }
+            }
+            return opdracht;
+        }
 
     }
 }

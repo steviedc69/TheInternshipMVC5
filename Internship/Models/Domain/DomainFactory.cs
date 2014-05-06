@@ -54,21 +54,25 @@ namespace Internship.Models.Domain
                     Naam = achternaam
 
                 };
-
+                //studentRepository.AddStudent(student);
                 repository.CreateAsyncUser(student, pasw);
-                studentRepository.AddStudent(student);
+                
+               // studentRepository.SaveChanges();
             }
         }
 
-        public static Opdracht CreateOpdracht(OpdrachtViewModel viewModel,Bedrijf bedrijf,ISpecialisatieRepository repo)
+        public static Opdracht CreateOpdrachtWithNewAdres(int aantalStudent, String schooljaar, String semesters,
+            String title, String omschijving, String vaardigheden, String specialisatie, Bedrijf bedrijf, String straat, int nummer, String gemeente,
+            ISpecialisatieRepository repo, IGemeenteRepository gemeenteRepository)
         {
             bool sem1 = false;
             bool sem2 = false;
-            if (viewModel.Semesters.Equals("Semester 1"))
+            Adres adres = null;
+            if (semesters.Equals("Semester 1"))
             {
                 sem1 = true;
             }
-            else if (viewModel.Semesters.Equals("Semester 2"))
+            else if (semesters.Equals("Semester 2"))
             {
                 sem2 = true;
             }
@@ -77,19 +81,63 @@ namespace Internship.Models.Domain
                 sem1 = true;
                 sem2 = true;
             }
+       
 
         Opdracht o = new Opdracht()
             {
-                AantalStudenten = viewModel.AantalStudenten,
-                Schooljaar = viewModel.Schooljaar,
-                Omschrijving = viewModel.Omschrijving,
-                Vaardigheden = viewModel.Vaardigheden,
+                AantalStudenten = aantalStudent,
+                Schooljaar = schooljaar,
+                Omschrijving = omschijving,
+                Vaardigheden = vaardigheden,
                 IsSemester1 = sem1,
                 IsSemester2 = sem2,
-                Title = viewModel.Title,
+                Title = title,
                 //Ondertekenaar = bedrijf.FindContactPersoon(viewModel.ContractOndertekenaar),
                 //StageMentor = bedrijf.FindContactPersoon(viewModel.StageMentor),
-                Specialisatie = repo.FindSpecialisatieNaam(viewModel.Specialisatie)
+                Specialisatie = repo.FindSpecialisatieNaam(specialisatie),
+                Adres = AddAdres(straat,nummer,gemeenteRepository.FindGemeenteWithStructuur(gemeente))
+
+                
+            };
+            return o;
+        }
+        
+
+        public static Opdracht CreateOpdrachtWhereAdresIsCompanyAdres(int aantalStudent,String schooljaar,String semesters,
+            String title,String omschijving,String vaardigheden, String specialisatie,Bedrijf bedrijf,ISpecialisatieRepository repo,IGemeenteRepository gemeenteRepository)
+        {
+            bool sem1 = false;
+            bool sem2 = false;
+            Adres adres = null;
+            if (semesters.Equals("Semester 1"))
+            {
+                sem1 = true;
+            }
+            else if (semesters.Equals("Semester 2"))
+            {
+                sem2 = true;
+            }
+            else
+            {
+                sem1 = true;
+                sem2 = true;
+            }
+       
+
+        Opdracht o = new Opdracht()
+            {
+                AantalStudenten = aantalStudent,
+                Schooljaar = schooljaar,
+                Omschrijving = omschijving,
+                Vaardigheden = vaardigheden,
+                IsSemester1 = sem1,
+                IsSemester2 = sem2,
+                Title = title,
+                //Ondertekenaar = bedrijf.FindContactPersoon(viewModel.ContractOndertekenaar),
+                //StageMentor = bedrijf.FindContactPersoon(viewModel.StageMentor),
+                Specialisatie = repo.FindSpecialisatieNaam(specialisatie),
+                Adres = bedrijf.Adres
+
                 
             };
             return o;

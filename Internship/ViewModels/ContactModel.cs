@@ -27,10 +27,10 @@ namespace Internship.ViewModels
         public String ContactEmail { get; set; }
         [Required(ErrorMessage = "{0} is verplicht")]
         [Display(Name = "Telefoonnummer van contactpersoon : ")]
-        [RegularExpression(@"^\d{9}$")]
+        [RegularExpression(@"^0\d{8}$",ErrorMessage = "vb: 011090909")]
         public String ContactTelNr { get; set; }
         [Display(Name = "GSM nummer van contactpersoon : ")]
-        [RegularExpression(@"^\(?(04)[1-9]{2}\)?(\-|\s)?[0-9]{6}$", ErrorMessage = "{0} is niet correct ingevoerd.")]
+        [RegularExpression(@"^\(?(04)[1-9]{2}\)?(\-|\s)?[0-9]{6}$", ErrorMessage = "vb: 0494123456")]
         public String GsmNummer { get; set; }
     }
     public class ContactDeleteViewModel

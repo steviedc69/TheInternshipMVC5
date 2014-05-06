@@ -1,5 +1,8 @@
 ﻿@using Internship.Models.Domain
-@model Internship.Models.Domain.Bedrijf
+@using Microsoft.AspNet.Identity
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Internship.Models.Domain.Opdracht>
 
 @{
     Layout = "_BedrijfLayout.cshtml";
@@ -9,26 +12,19 @@
 
 <html>
     <head>
-        <title>@Model.Bedrijfsnaam</title>
+        <title>@ViewBag.Title</title>
     </head>
     <body>
         <div>
-            <h1>@Model.Bedrijfsnaam</h1>
+            <h1>@ViewBag.Title</h1>
 
-            <div class="col-md-3">
-                <a href=@Url.Action("AddOpdracht", "Bedrijf", new { id = Model.Id })><span class="glyphicon glyphicon-plus"></span> Nieuwe opdracht</a>
-            </div>
+            <p>
+                <a href=@Url.Action("AddOpdracht", "Bedrijf", new { id = User.Identity.GetUserId() })><span class="glyphicon glyphicon-plus"></span> Nieuwe opdracht</a>
+            </p>
+        </div>
+        <div id="opdrachten">
+            @Html.Partial("_OpdrachtenListPartial",Model)
         </div>
 
-        <div class="container" style="border-top-width: 15px">
-            @if (Model.Opdrachten == null)
-            {
-                <p>Nog geen opdrachten?? Maak een nieuwe aan.</p>
-            }
-            @foreach (var item in Model.Opdrachten)
-            {
-                @Html.Partial("_OpdrachtPartial",item)
-            }
-        </div>
     </body>
 </html>

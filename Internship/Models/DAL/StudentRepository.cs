@@ -38,7 +38,7 @@ namespace Internship.Models.DAL
             return studenten.SingleOrDefault(s => s.UserName.Equals(email));
         }
 
-        public Student FindById(int id)
+        public Student FindById(string id)
         {
             return studenten.Find(id);
         }

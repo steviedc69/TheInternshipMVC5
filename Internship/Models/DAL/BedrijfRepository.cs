@@ -57,6 +57,20 @@ namespace Internship.Models.DAL
             bedrijven.Add(bedrijf);
         }
 
+        public Bedrijf FindBedrijfByOpdrachtId(int id)
+        {
+            List<Bedrijf> bedrijfs = FindAll().ToList();
+            Bedrijf b = null;
+            foreach (Bedrijf bedrijf in bedrijfs)
+            {
+                if (bedrijf.FindOpdracht(id)!=null)
+                {
+                    b = bedrijf;
+                }
+            }
+            return b;
+        }
+
         public void SaveChanges()
         {
             context.SaveChanges();

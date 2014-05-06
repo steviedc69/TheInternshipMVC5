@@ -1,0 +1,65 @@
+﻿@using Microsoft.Ajax.Utilities
+@using Microsoft.AspNet.Identity
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Internship.Models.Domain.Opdracht>
+<div class="container">
+    @if (Model == null)
+    {
+        <p>Nog geen opdrachten?? Maak een nieuwe aan.</p>
+    }
+    @foreach (var item in Model)
+    {
+        if (item.IsStageOpdracht)
+         {
+             <div class="panel panel-success">
+                 <div class="panel-heading">
+                     <h2 class="panel-title">@item.Title  werd goedgekeurd  <span class="glyphicon glyphicon-thumbs-up"></span></h2>
+                 </div>
+                 <div class="panel-body">
+                     <p>@item.Omschrijving</p>
+                     Schooljaar :  @item.Schooljaar<br />
+                     Specialisatie : @item.Specialisatie.Title
+                 </div>
+                 <div class=" panel-footer">
+                     <div class="btn-group">
+
+                         <button type="button" class="btn-default"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+                         <button type="button" class="btn-default">
+                             <span class="glyphicon glyphicon-cog"></span> Edit
+                         </button>
+                         <button type="button" class="btn-default">  <span class="glyphicon glyphicon-info-sign"></span> Meer info</button>
+                     </div>
+                 </div>
+             </div>
+         }
+         else
+         {
+             <div class="panel panel-default">
+                 <div class="panel-heading">
+                     <h2 class="panel-title">@item.Title</h2>
+                 </div>
+                 <div class="panel-body">
+                     <p>@item.Omschrijving</p>
+                     Schooljaar :  @item.Schooljaar<br />
+                     Specialisatie :@item.Specialisatie.Title
+                 </div>
+                 <div class=" panel-footer">
+                     <div class="btn-group">
+
+                         <button type="button" class="btn-default"><span class="glyphicon glyphicon-remove"></span> Verwijder</button>
+                         <button type="button" class="btn-default">
+                             <span class="glyphicon glyphicon-cog"></span> Edit
+                         </button>
+                         <button type="button" class="btn-default">  <span class="glyphicon glyphicon-info-sign"></span> Meer info</button>
+                     </div>
+                 </div>
+             </div>
+         }
+    }
+</div>
+@Html.PagedListPager(Model, page =>Url.Action("Index",new
+{
+    id = User.Identity.GetUserId(),page
+        
+}))

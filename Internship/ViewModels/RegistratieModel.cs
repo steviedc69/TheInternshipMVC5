@@ -26,23 +26,25 @@ namespace Internship.ViewModels
     public class RegistratieModel
     {
 
-        [Display(Name="E-mailadres")]
+        [Display(Name="E-mailadres*")]
         [Required(ErrorMessage = "{0} is verplicht")]
         [DataType(DataType.EmailAddress)]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "{0} is niet correct.")]
         public String Email { get; set; }
-        [Display(Name = "Bedrijfsnaam")]
+        [Display(Name = "Bedrijfsnaam*")]
         [Required(ErrorMessage = "{0} is verplicht.")]
         [StringLength(50, ErrorMessage = "{0} is te lang.")]
         public String Bedrijfsnaam { get; set; }
-        [Display(Name = "Website : ")]
+        [Display(Name = "Website* : ")]
         [Required(ErrorMessage = "{0} is verplicht.")]
         [StringLength(50, ErrorMessage = "{0} is te lang.")]
         [DataType(DataType.Url)]
         [RegularExpression(@"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", ErrorMessage = "{0} is niet correct")]
         public String Url { get; set; }
         [StringLength(50, ErrorMessage = "{0} is te lang.")]
+        [Required(ErrorMessage = "{0} is verplicht")]
         public String Straat { get; set; }
+        [Range(1,1999,ErrorMessage = "{0} moet verplicht een nummer zijn groter dan 0")]
         public int Straatnummer { get; set; }
         [Display(Name = "Gemeente : ")]
         public String Woonplaats { get; set; }

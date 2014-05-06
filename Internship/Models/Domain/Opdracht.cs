@@ -27,13 +27,16 @@ namespace Internship.Models.Domain
         public virtual ContactPersoon StageMentor { get; set; }
         public DateTime ActivatieDatum { get; set; }
         public int AantalStudenten { get; set; }
-        public Adres Adres { get; set; }
+        public virtual Adres Adres { get; set; }
+        public bool IsStageOpdracht { get; set; }
+        
 
          public Opdracht()
         {
             ActivatieDatum = DateTime.Now;
+            IsStageOpdracht = false;
         }
 
-       
+      
     }
 }

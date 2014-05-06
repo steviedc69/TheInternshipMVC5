@@ -12,7 +12,7 @@ namespace Internship.Models.Domain
         void AddStudent(Student student);
         IQueryable<Student> FindAll();
         Student FindByEmail(string email);
-        Student FindById(int id);
+        Student FindById(String id);
         IQueryable<Student> FindByName(string naam);
         IQueryable<Student> FindByPlace(string gemeente);
         void UpdateFirstTime(String username, bool notFirstTime);

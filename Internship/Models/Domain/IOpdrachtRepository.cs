@@ -9,6 +9,8 @@ namespace Internship.Models.Domain
     public interface IOpdrachtRepository
     {
         Opdracht FindOpdracht(int id);
-
+        IEnumerable<Opdracht> GeefStageOpdrachten();
+        IEnumerable<Opdracht> GeefStageOpdrachtenMetZoekstring(String search);
+        void SaveChanges();
     }
 }

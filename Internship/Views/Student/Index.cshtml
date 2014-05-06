@@ -1,0 +1,27 @@
+﻿@model Internship.ViewModels.StudentIndexModel
+
+@{
+    Layout = "_StudentLayout.cshtml";
+}
+
+<div>
+    <h1>Welkom @Model.Student.Voornaam</h1>
+</div>
+
+
+
+
+@using (Ajax.BeginForm("Index", new AjaxOptions()
+{
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "Get",
+    UpdateTargetId = "Stages"
+}))
+{
+    <input type="search" name="search" id="search"/>
+    <input type="submit" value="Zoeken" class="btn btn-default"/>
+}
+
+<div id ="Stages" style="margin-top: 10px">
+    @Html.Partial("_StagesPart",Model)
+</div>

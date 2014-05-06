@@ -74,7 +74,7 @@ namespace Internship.Controllers
                         }
                         else
                         {
-                           return RedirectToAction("Index","Student");
+                           return RedirectToAction("Index","Student",student);
                         }
                     }
                     Bedrijf b = BedrijfRepository.FindByEmail(user.UserName);
@@ -167,7 +167,8 @@ namespace Internship.Controllers
                         if (User.Identity.GetUserName().EndsWith("@student.hogent.be"))
                         {
                             StudentRepository.UpdateFirstTime(User.Identity.GetUserName(), true);
-                            return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                           Student s = StudentRepository.FindById(User.Identity.GetUserId());
+                            return RedirectToAction("Index","Student",s);
 
                         }
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });

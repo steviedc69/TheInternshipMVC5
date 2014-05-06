@@ -1,0 +1,47 @@
+﻿@model Internship.ViewModels.StudentOpdrachtDetailModel
+
+
+<div class="panel panel-default">
+    <div class="panel panel-heading">
+        <h2 class="panel panel-title">@Model.Opdracht.Title</h2>
+    </div>
+    <div class =" panel panel-body">
+        <div>
+            Bedrijfsgegevens : @Model.Bedrijf.Bedrijfsnaam
+            @Model.Bedrijf.Adres.ToString()<br/>
+            <a href="@Model.Bedrijf.Url">Bezoek de website</a><br/>
+        </div>
+        <div>
+            Stage-opdracht : 
+            <h4>@Model.Opdracht.Title</h4>
+            <p>Specialisatie : @Model.Opdracht.Specialisatie.Title<br/>
+                Schooljaar : @Model.Opdracht.Schooljaar<br/>
+                @if (Model.Opdracht.IsSemester1)
+                {
+                    <span class="glyphicon glyphicon-ok-circle"> gaat door in de 1ste Semester</span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-remove-circle"> gaat niet door in de 1ste Semester</span>
+                }
+                @if (Model.Opdracht.IsSemester2)
+                {
+                    <span class="glyphicon glyphicon-ok-circle"> gaat door in de 2de Semester</span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-remove-circle"> gaat niet door in de 2de Semester</span>
+                }
+            </p>
+            
+            <p>Omschrijving van de opracht : @Model.Opdracht.Omschrijving</p>
+            <p>Vaardigheden en kennis : @Model.Opdracht.Vaardigheden</p>
+            <p>Aantal stageplaatsen : @Model.Opdracht.AantalStudenten</p>
+            <p>Plaats van de stage :<br/> @Model.Opdracht.Adres.ToString()</p>
+        </div>
+    </div>
+    <div class="panel panel-footer">
+     <button class="btn btn-default">Voeg toe aan favorieten</button>
+    </div>
+
+</div>

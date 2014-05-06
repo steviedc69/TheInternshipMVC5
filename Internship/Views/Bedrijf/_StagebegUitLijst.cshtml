@@ -1,0 +1,23 @@
+﻿@model Internship.ViewModels.CreateContactPersoonView
+
+
+    @using (Ajax.BeginForm("MakeStageBegeleiderFromList", "Bedrijf", new { id = Model.Opdracht.Id }, new AjaxOptions()
+{
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST",
+    UpdateTargetId = "contact2"
+
+}))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.ContactToOpdrachtFromList.ContactPersoon, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.ContactToOpdrachtFromList.ContactPersoon, Model.StageMentorSelectList, new { @class = "form-control", style = "width: 30%" })
+                @Html.ValidationMessageFor(m => m.ContactToOpdrachtFromList.ContactPersoon)
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Voeg toe" class="btn btn-default" />
+        </div>
+    }
+

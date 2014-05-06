@@ -14,7 +14,6 @@ namespace Internship.Models.DAL.Mapper
            // HasKey(s => s.Emailadres);
             Property(s => s.Naam).HasMaxLength(30).IsOptional();
             Property(s => s.Voornaam).HasMaxLength(20).IsOptional();
-
             ToTable("Student");
         }
     }

@@ -119,17 +119,17 @@ namespace Internship.Models.DAL
                     Bereikbaarheid = "nee",
 
                     Straat = "bedrijfstraat",
-                    Straatnummer = 24,
+                    Straatnummer = 24,   
                     //clientside validation op het telefoonnummer!! 
                     Telefoon = "000/000001",
                     //clientside validation op de url!!
                     Url = "www.bedrijf2.be",
-                    Woonplaats = "Aalst"
+                 Woonplaats = "Aalst"   
 
                 };
                 persistIdentitySeed(b2,context,"paswoord123","Bedrijf");
                 context.Bedrijven.Add(b2);
-               */
+            */   
                 context.SaveChanges();
                 //SeedMembership();
 
