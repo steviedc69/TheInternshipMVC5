@@ -48,6 +48,21 @@ namespace Internship.Models.DAL
                 };
                 specialisaties.ForEach(c => context.Specialisaties.Add(c));
 
+                Status status1 = new Status(){Naam = "Pending",AlertClass = "alert alert-info",PanelClass = "panel panel-primary"};
+                Status status2 = new Status(){Naam = "Afgekeurd",AlertClass = "alert alert-danger",PanelClass = "panel panel-danger"};
+                Status status3 = new Status() { Naam = "Stage", AlertClass = "alert alert-success", PanelClass = "panel panel-success" };
+                Status status4 = new Status() { Naam = "Project", AlertClass = "alert alert-info", PanelClass = "panel panel-primary" };
+                var statussen = new List<Status>()
+                {
+                    status1,
+                    status2,
+                    status3,
+                    status4
+                };
+                statussen.ForEach(c=>context.Statussen.Add(c));
+
+          
+
                 s1 = new Student()
                 {
                     Naam = "TestStudent",

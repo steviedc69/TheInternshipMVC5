@@ -71,6 +71,20 @@ namespace Internship.Models.DAL
             return b;
         }
 
+        public Bedrijf FindBedrijfByContactPersId(int id)
+        {
+            List<Bedrijf> bedrijfs = FindAll().ToList();
+            Bedrijf b = null;
+            foreach (Bedrijf bedrijf in bedrijfs)
+            {
+                if (bedrijf.FindContactPersoonById(id) != null)
+                {
+                    b = bedrijf;
+                }
+            }
+            return b;
+        }
+
         public void SaveChanges()
         {
             context.SaveChanges();

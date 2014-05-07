@@ -30,7 +30,8 @@ namespace Internship.Models.DAL
         public DbSet<Specialisatie> Specialisaties { get; set; }
         public DbSet<ContactPersoon> ContactPersonen { get; set; }
         public DbSet<Gemeente> Gemeentes { get; set; }
-        public DbSet<Adres> Adressen { get; set; } 
+        public DbSet<Adres> Adressen { get; set; }
+        public DbSet<Status> Statussen { get; set; } 
         
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

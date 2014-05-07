@@ -15,7 +15,7 @@ namespace Internship.ViewModels
 {
     public class CreateOpdrachtViewModel
     {
-        public static String BedrijfId { get; set; }
+        public String BedrijfId { get; set; }
         public ContactModel ContactModelOndertekenaar { get; set; }
         public ContactModel ContactModelStageMentor { get; set; }
         public OpdrachtViewModel OpdrachtViewModel { get; set; }
@@ -26,7 +26,7 @@ namespace Internship.ViewModels
         public SelectList StageMentorSelectList { get; private set; }
         public SelectList AantalStudenten { get; private set; }
         public SelectList Gemeenten { get; private set; }
-        
+        public Opdracht Opdracht { get; set; }
 
         public CreateOpdrachtViewModel(IEnumerable<Specialisatie> specialisaties,
             IEnumerable<ContactPersoon> contactPersonen,
@@ -38,27 +38,56 @@ namespace Internship.ViewModels
             List<String> lijstSemester = new List<string>(new String[] {"Semester 1", "Semester 2", "Semester 1 en 2"});
             SemesterLijst = new SelectList(lijstSemester);
             SchooljaarSelectList = new SelectList(MakeSchooljaarSelectList());
-            OpdrachtViewModel = OpdrachtViewModel;
+            OpdrachtViewModel = opdrachtViewModel;
             OndertekenaarSelectList = new SelectList(contactPersonen);
             StageMentorSelectList = new SelectList(contactPersonen);
             AantalStudenten = new SelectList(new int[] {1, 2, 3, 4, 5});
             BedrijfId = berdrijfId;
             IEnumerable<Gemeente> gem = gemeenteRepository.GetAlleGemeentes();
             Gemeenten = new SelectList(gem);
-
+            //FillOpdrachtView();
         }
 
+        public void FillOpdrachtView()
+        {
+            if (Opdracht !=null)
+            {
+                OpdrachtViewModel.AantalStudenten = Opdracht.AantalStudenten;
+                OpdrachtViewModel.Gemeente = Opdracht.Adres.Gemeente.Structuur;
+                OpdrachtViewModel.Omschrijving = Opdracht.Omschrijving;
+                OpdrachtViewModel.Schooljaar = Opdracht.Schooljaar;
+                OpdrachtViewModel.Specialisatie = Opdracht.Specialisatie.Title;
+                OpdrachtViewModel.Straat = Opdracht.Adres.StraatNaam;
+                OpdrachtViewModel.Nummer = Opdracht.Adres.Nummer;
+                OpdrachtViewModel.Title = Opdracht.Title;
+                OpdrachtViewModel.Vaardigheden = Opdracht.Vaardigheden;
+                OpdrachtViewModel.Id = Opdracht.Id;
+            }
+        }
 
         private List<String> MakeSchooljaarSelectList()
         {
             List<String> lijstSchooljaren = new List<string>();
             DateTime date = DateTime.Now;
-            for (int i = 0; i < 5; i++)
+            int year = date.Year;
+            if (date.Month < 2)
             {
-                int year = date.Year;
-                String schooljaar = (year + i) + " - " + (year + i + 1);
-                lijstSchooljaren.Add(schooljaar);
+                for (int i = -1; i < 5; i++)
+                {
+                    String schooljaar = (year + i) + " - " + (year + i + 1);
+                    lijstSchooljaren.Add(schooljaar);
+                }
             }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    
+                    String schooljaar = (year + i) + " - " + (year + i + 1);
+                    lijstSchooljaren.Add(schooljaar);
+                }
+            }
+
             return lijstSchooljaren;
         }
     }
@@ -66,7 +95,7 @@ namespace Internship.ViewModels
     public class OpdrachtViewModel
     {
 
-
+        public static int Id { get; set; }
         [Display(Name = "Titel : ")]
         [Required(ErrorMessage = "{0} is verplicht.")]
         [StringLength(50, ErrorMessage = "{0} is te lang.")]

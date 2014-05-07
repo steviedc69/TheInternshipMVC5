@@ -62,6 +62,20 @@ namespace Internship.Models.Domain
             return c;
         }
 
+        public ContactPersoon FindContactPersoonById(int id)
+        {
+            ContactPersoon contact = null;
+            foreach (ContactPersoon contactPersoon in ContactPersonen)
+            {
+                if (contactPersoon.Id == id)
+                {
+                    contact = contactPersoon;
+                }
+            }
+            return contact;
+
+        }
+
         public Opdracht FindOpdracht(int id)
         {
             Opdracht opdracht = null;

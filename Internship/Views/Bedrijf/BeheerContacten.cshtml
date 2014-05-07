@@ -42,7 +42,10 @@
         <td>@c.ContactEmail</td>
         <td>
             <div class="btn-group">
-                <button><span class="glyphicon glyphicon-remove"></span></button>
+            
+                <a class="btn btn-primary" href="@Url.Action("ToRemoveContact","Bedrijf",new{id=c.Id})"><span class="glyphicon glyphicon-remove"></span></a>
+               
+               
                 <button><span class="glyphicon glyphicon-pencil"></span></button>
             </div>
         </td>

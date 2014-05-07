@@ -73,7 +73,9 @@ namespace Internship.App_Start
             kernel.Bind<ISpecialisatieRepository>().To<SpecialisatieRepository>().InRequestScope();
             kernel.Bind<IOpdrachtRepository>().To<OpdrachtenRepository>().InRequestScope();
             kernel.Bind<IGemeenteRepository>().To<GemeenteRepository>().InRequestScope();
-           
+            kernel.Bind<IContactPersoonRepository>().To<ContactPersoonRepository>().InRequestScope();
+            kernel.Bind<IStatusRepository>().To<StatusRepository>().InRequestScope();
+
         }        
     }
 }

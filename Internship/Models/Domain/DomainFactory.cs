@@ -63,7 +63,7 @@ namespace Internship.Models.Domain
 
         public static Opdracht CreateOpdrachtWithNewAdres(int aantalStudent, String schooljaar, String semesters,
             String title, String omschijving, String vaardigheden, String specialisatie, Bedrijf bedrijf, String straat, int nummer, String gemeente,
-            ISpecialisatieRepository repo, IGemeenteRepository gemeenteRepository)
+            ISpecialisatieRepository repo, IGemeenteRepository gemeenteRepository,IStatusRepository statusRepository)
         {
             bool sem1 = false;
             bool sem2 = false;
@@ -81,8 +81,8 @@ namespace Internship.Models.Domain
                 sem1 = true;
                 sem2 = true;
             }
-       
 
+            Status status = statusRepository.FindStatusWithId(1);
         Opdracht o = new Opdracht()
             {
                 AantalStudenten = aantalStudent,
@@ -95,8 +95,8 @@ namespace Internship.Models.Domain
                 //Ondertekenaar = bedrijf.FindContactPersoon(viewModel.ContractOndertekenaar),
                 //StageMentor = bedrijf.FindContactPersoon(viewModel.StageMentor),
                 Specialisatie = repo.FindSpecialisatieNaam(specialisatie),
-                Adres = AddAdres(straat,nummer,gemeenteRepository.FindGemeenteWithStructuur(gemeente))
-
+                Adres = AddAdres(straat,nummer,gemeenteRepository.FindGemeenteWithStructuur(gemeente)),
+                Status = status
                 
             };
             return o;
@@ -104,7 +104,8 @@ namespace Internship.Models.Domain
         
 
         public static Opdracht CreateOpdrachtWhereAdresIsCompanyAdres(int aantalStudent,String schooljaar,String semesters,
-            String title,String omschijving,String vaardigheden, String specialisatie,Bedrijf bedrijf,ISpecialisatieRepository repo,IGemeenteRepository gemeenteRepository)
+            String title,String omschijving,String vaardigheden, String specialisatie,Bedrijf bedrijf,
+            ISpecialisatieRepository repo,IGemeenteRepository gemeenteRepository,IStatusRepository statusRepository)
         {
             bool sem1 = false;
             bool sem2 = false;
@@ -122,7 +123,7 @@ namespace Internship.Models.Domain
                 sem1 = true;
                 sem2 = true;
             }
-       
+            Status status = statusRepository.FindStatusWithId(1);
 
         Opdracht o = new Opdracht()
             {
@@ -136,8 +137,8 @@ namespace Internship.Models.Domain
                 //Ondertekenaar = bedrijf.FindContactPersoon(viewModel.ContractOndertekenaar),
                 //StageMentor = bedrijf.FindContactPersoon(viewModel.StageMentor),
                 Specialisatie = repo.FindSpecialisatieNaam(specialisatie),
-                Adres = bedrijf.Adres
-
+                Adres = bedrijf.Adres,
+                Status = status
                 
             };
             return o;

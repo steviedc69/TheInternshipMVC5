@@ -10,25 +10,25 @@ namespace Internship.Models.DAL
     public class OpdrachtenRepository : IOpdrachtRepository
     {
         private InternshipContext Context;
-        private DbSet<Opdracht> opdrachten; 
+        private DbSet<Opdracht> Opdrachten; 
 
         public OpdrachtenRepository(InternshipContext context)
         {
             this.Context = context;
-            this.opdrachten = context.Opdrachten;
+            this.Opdrachten = context.Opdrachten;
         }
 
 
         public Opdracht FindOpdracht(int id)
         {
-            return opdrachten.Find(id);
+            return Opdrachten.Find(id);
         }
 
        
 
         public IEnumerable<Opdracht> GeefStageOpdrachten()
         {
-            return opdrachten.Where(o=>o.IsStageOpdracht==true).OrderBy(o=>o.Schooljaar);
+            return Opdrachten.Where(o=>o.Status.Naam.Equals("Stage")).OrderBy(o=>o.Schooljaar);
         }
 
         public IEnumerable<Opdracht> GeefStageOpdrachtenMetZoekstring(string search)
@@ -42,6 +42,12 @@ namespace Internship.Models.DAL
         public void SaveChanges()
         {
             Context.SaveChanges();
+        }
+
+        public void RemoveOpdracht(Opdracht opdracht)
+        {
+            Opdrachten.Remove(opdracht);
+
         }
     }
 }

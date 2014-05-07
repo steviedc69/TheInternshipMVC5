@@ -203,6 +203,7 @@
     <Compile Include="Models\DAL\GemeenteRepository.cs" />
     <Compile Include="Models\DAL\InternshipContext.cs" />
     <Compile Include="Models\DAL\InternshipInitializer.cs" />
+    <Compile Include="Models\DAL\IStatusRepository.cs" />
     <Compile Include="Models\DAL\Mapper\AdresMapper.cs" />
     <Compile Include="Models\DAL\Mapper\BedrijfMapper.cs" />
     <Compile Include="Models\DAL\Mapper\ContactPersoonMapper.cs" />
@@ -223,9 +224,11 @@
     <Compile Include="Models\Domain\Bedrijf.cs" />
     <Compile Include="Models\Domain\Bewerkingen.cs" />
     <Compile Include="Models\Domain\ContactPersoon.cs" />
+    <Compile Include="Models\Domain\ContactPersoonRepository.cs" />
     <Compile Include="Models\Domain\DomainFactory.cs" />
     <Compile Include="Models\Domain\Gemeente.cs" />
     <Compile Include="Models\Domain\IBedrijfRepository.cs" />
+    <Compile Include="Models\Domain\IContactPersoonRepository.cs" />
     <Compile Include="Models\Domain\IGemeenteRepository.cs" />
     <Compile Include="Models\Domain\IOpdrachtRepository.cs" />
     <Compile Include="Models\Domain\ISpecialisatieRepository.cs" />
@@ -235,6 +238,8 @@
     <Compile Include="Models\Domain\Opdracht.cs" />
     <Compile Include="Models\Domain\Specialisatie.cs" />
     <Compile Include="Models\Domain\Stagebegeleider.cs" />
+    <Compile Include="Models\Domain\Status.cs" />
+    <Compile Include="Models\Domain\StatusRepository.cs" />
     <Compile Include="Models\Domain\Student.cs" />
     <Compile Include="Models\Domain\ApplicationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -336,6 +341,9 @@
     <Content Include="Views\Bedrijf\_StagebegUitLijst.cshtml" />
     <Content Include="Views\Bedrijf\_StageBegeleiderForm.cshtml" />
     <Content Include="Views\Bedrijf\_OpdrachtenListPartial.cshtml" />
+    <Content Include="Views\Bedrijf\OpdrachtDetail.cshtml" />
+    <Content Include="Views\Bedrijf\ToRemoveOpdracht.cshtml" />
+    <Content Include="Views\Bedrijf\ToRemoveContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

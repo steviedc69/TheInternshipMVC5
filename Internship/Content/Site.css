@@ -119,14 +119,16 @@ a:focus, :focus {
 	min-width: 110px;
     text-align: left;
 }
-
+.white {
+    color: #ffffff;
+}
 .blue {
 	color: #01A3D3;
 }
 
 /* primary Button */
 .btn-primary {
-  color: #ffffff;
+  color: #ffffff !important;
   background-color: #01A3D3;
   border-color: #01A3D3;
 }

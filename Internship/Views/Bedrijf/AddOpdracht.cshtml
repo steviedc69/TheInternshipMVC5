@@ -1,8 +1,17 @@
-﻿@model Internship.ViewModels.CreateOpdrachtViewModel
+﻿@using System.Activities.Statements
+@using Microsoft.AspNet.Identity
+@model Internship.ViewModels.CreateOpdrachtViewModel
 
 @{
     Layout = "_BedrijfLayout.cshtml";
-    @ViewBag.Error;
+    if (Model.Opdracht == null)
+    {
+        ViewBag.id = Model.BedrijfId;
+    }
+    else
+    {
+        ViewBag.id = Model.Opdracht.Id;
+    }
 }
 @section Scripts
 {
@@ -20,7 +29,11 @@
     <div>
         <h1>Creëer een nieuwe stage opdracht</h1>
     </div>
-    @using (Html.BeginForm("AddOpdracht", "Bedrijf", new { @class = "form-horizontal", role = "form" }))
+    
+ 
+    
+
+    @using (Html.BeginForm( new {id =ViewBag.id, @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)

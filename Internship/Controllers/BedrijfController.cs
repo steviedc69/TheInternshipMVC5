@@ -5,6 +5,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using Internship.Models.DAL;
 using Internship.Models.Domain;
 using Internship.ViewModels;
 using Microsoft.Ajax.Utilities;
@@ -23,12 +24,16 @@ namespace Internship.Controllers
         private ISpecialisatieRepository specialisatieRepository;
         private IOpdrachtRepository opdrachtRepository;
         private IGemeenteRepository gemeenteRepository;
+        private IContactPersoonRepository contactPersoonRepository;
+        private IStatusRepository statusRepository;
 
         //public UserController(){}
 
         public BedrijfController(IBedrijfRepository bedrijfR, IStudentRepository studentR,
             IStagebegeleiderRepository stagebegeleiderR, IUserRepository usersRepository,
-            ISpecialisatieRepository specialisatie, IOpdrachtRepository opdracht,IGemeenteRepository gemeenteRepository)
+            ISpecialisatieRepository specialisatie, IOpdrachtRepository opdracht, IContactPersoonRepository contactPersoonRepository, 
+            IGemeenteRepository gemeenteRepository,IStatusRepository statusRepository
+            )
         {
             this.bedrijfRepository = bedrijfR;
             this.stagebegeleiderRepository = stagebegeleiderR;
@@ -37,6 +42,8 @@ namespace Internship.Controllers
             this.specialisatieRepository = specialisatie;
             this.opdrachtRepository = opdracht;
             this.gemeenteRepository = gemeenteRepository;
+            this.contactPersoonRepository = contactPersoonRepository;
+            this.statusRepository = statusRepository;
         }
 
         //
@@ -45,6 +52,7 @@ namespace Internship.Controllers
         {
             Bedrijf b = bedrijfRepository.FindById(id);
             ViewBag.Title = b.Bedrijfsnaam;
+            
             ViewBag.BedrijfId = b.Id;
             return View(b.Opdrachten.ToList().ToPagedList(page??1,5));
         }
@@ -55,11 +63,108 @@ namespace Internship.Controllers
             Bedrijf b = bedrijfRepository.FindById(id);
             specialisaties = specialisatieRepository.FindAllSpecialisaties();
             CreateOpdrachtViewModel model = new CreateOpdrachtViewModel(specialisaties, b.ContactPersonen,
-                new OpdrachtViewModel(){Straat = b.Adres.StraatNaam,Nummer = b.Adres.Nummer,Gemeente = b.Adres.Gemeente.Structuur}, id,gemeenteRepository);
+                new OpdrachtViewModel(){Straat = b.Adres.StraatNaam,Nummer = b.Adres.Nummer,Gemeente = b.Adres.Gemeente.Structuur,IsBedrijfAdres = true}, id,gemeenteRepository);
             return View(model);
         }
 
+        public ActionResult EditOpdracht(int id)
+        {
+            IEnumerable<Specialisatie> specialisaties;
+            Bedrijf b = bedrijfRepository.FindBedrijfByOpdrachtId(id);
+            Opdracht o = opdrachtRepository.FindOpdracht(id);
+            if (o==null)
+            {
+                return HttpNotFound();
+            }
+            specialisaties = specialisatieRepository.FindAllSpecialisaties();
+            CreateOpdrachtViewModel opdrachtView = new CreateOpdrachtViewModel(specialisaties,b.ContactPersonen,new OpdrachtViewModel(),b.Id,gemeenteRepository);
+            opdrachtView.Opdracht = o;
+            opdrachtView.FillOpdrachtView();
 
+            return View("AddOpdracht",opdrachtView);
+        }
+
+        [HttpPost]
+        public ActionResult EditOpdracht([Bind(Prefix = "OpdrachtViewModel")]OpdrachtViewModel model,int id,String button)
+        {
+            Opdracht opdracht = opdrachtRepository.FindOpdracht(id);
+            Bedrijf b = bedrijfRepository.FindBedrijfByOpdrachtId(id);
+            if (opdracht==null)
+            {
+                TempData["Message"] = "Opdracht niet gevonden";
+                return RedirectToAction("Index", "Bedrijf", b);
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    ViewModelToOpdracht(model,opdracht,b);
+                    TempData["Info"] = "Opdracht " + opdracht.Title + " werd aangepast";
+                    if (button.Equals("contact"))
+                    {
+                        return RedirectToAction("AddContactToOpdracht", "Bedrijf", opdracht);
+                    }
+                    else
+                    {
+                        return RedirectToAction("OpdrachtDetail", opdracht);
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    
+                    ModelState.AddModelError("",e.Message);
+                }
+
+            }
+
+            IEnumerable<Specialisatie> specialisaties;
+            specialisaties = specialisatieRepository.FindAllSpecialisaties();
+            CreateOpdrachtViewModel opdrachtView = new CreateOpdrachtViewModel(specialisaties, b.ContactPersonen, new OpdrachtViewModel(), b.Id, gemeenteRepository);
+            opdrachtView.Opdracht = opdracht;
+            opdrachtView.FillOpdrachtView();
+            return View("AddOpdracht", opdrachtView);
+
+        }
+
+        private void ViewModelToOpdracht(OpdrachtViewModel model, Opdracht opdracht,Bedrijf b)
+        {
+            if (model.Semesters.Equals("Semester 1"))
+            {
+                opdracht.IsSemester1 = true;
+                opdracht.IsSemester2 = false;
+            }
+            else if (model.Semesters.Equals("Semester 2"))
+            {
+                opdracht.IsSemester2 = true;
+                opdracht.IsSemester1 = false;
+            }
+            else
+            {
+                opdracht.IsSemester1 = true;
+                opdracht.IsSemester2 = true;
+            }
+
+            if (model.IsBedrijfAdres)
+            {
+                opdracht.Adres = b.Adres;
+            }
+            else
+            {
+                opdracht.Adres = new Adres()
+                {
+                    StraatNaam = model.Straat,
+                    Nummer =(int)model.Nummer,
+                    Gemeente = gemeenteRepository.FindGemeenteWithStructuur(model.Gemeente)
+                };
+            }
+            opdracht.Title = model.Title;
+            opdracht.Omschrijving = model.Omschrijving;
+            opdracht.Schooljaar = model.Schooljaar;
+            opdracht.Vaardigheden = model.Vaardigheden;
+            opdracht.Specialisatie = specialisatieRepository.FindSpecialisatieNaam(model.Schooljaar);
+            opdrachtRepository.SaveChanges();
+        }
         //
         [HttpPost]
         public ActionResult AddOpdracht([Bind(Prefix = "OpdrachtViewModel")]OpdrachtViewModel model, String id, String button)
@@ -77,7 +182,7 @@ namespace Internship.Controllers
                         model.Schooljaar, model.Semesters,
                         model.Title,model.Omschrijving,
                         model.Vaardigheden,model.Specialisatie,bedrijf,
-                        specialisatieRepository,gemeenteRepository);
+                        specialisatieRepository,gemeenteRepository,statusRepository);
                 }
                 else
                 {
@@ -90,7 +195,7 @@ namespace Internship.Controllers
                         model.Vaardigheden, model.Specialisatie, bedrijf,
                         model.Straat,(int)model.Nummer
                         , model.Gemeente, specialisatieRepository,
-                        gemeenteRepository);
+                        gemeenteRepository,statusRepository);
                     }
                     else
                     {
@@ -102,11 +207,13 @@ namespace Internship.Controllers
                 bedrijfRepository.SaveChanges();
                 if (button.Equals("contact"))
                 {
+                    TempData["Info"] = "Opdracht " + opdracht.Title + " werd succesvol aangemaakt";
                     return RedirectToAction("AddContactToOpdracht", "Bedrijf",opdracht );
                 }
                 else
                 {
-                     return RedirectToAction("Index","Bedrijf",bedrijf); 
+                    TempData["Info"] = "Opdracht " + opdracht.Title + " werd succesvol aangemaakt";
+                     return RedirectToAction("OpdrachtDetail","Bedrijf",opdracht); 
                 }
                
             }
@@ -299,6 +406,79 @@ namespace Internship.Controllers
                 }
             }
             return View("_StageBegeleiderForm",model);
+        }
+
+        public ActionResult OpdrachtDetail(int id)
+        {
+            Opdracht opdracht = opdrachtRepository.FindOpdracht(id);
+
+            return View(opdracht);
+        }
+
+        public ActionResult ToRemoveOpdracht(int id)
+        {
+            Opdracht opdracht = opdrachtRepository.FindOpdracht(id);
+
+            return View(opdracht);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveOpdracht(int id,String button)
+        {
+            Opdracht opdracht = opdrachtRepository.FindOpdracht(id);
+            Bedrijf bedrijf = bedrijfRepository.FindBedrijfByOpdrachtId(id);
+            String title = opdracht.Title;
+            if (button.Equals("ja"))
+            {
+                
+                opdrachtRepository.RemoveOpdracht(opdracht);
+                opdrachtRepository.SaveChanges();
+                TempData["Info"] = "De opdracht "+title+" werd verwijderd";
+                return RedirectToAction("Index","Bedrijf", bedrijf);
+            }
+            else
+            {
+                TempData["Message"] = "De opdracht " + title + " werd niet verwijderd";
+                return RedirectToAction("Index","Bedrijf", bedrijf);
+            }
+        }
+
+        public ActionResult ToRemoveContact(int id)
+        {
+            ContactPersoon contact = contactPersoonRepository.FindContactPersoon(id);
+            Bedrijf b = bedrijfRepository.FindBedrijfByContactPersId(id);
+
+            return View(contact);
+
+        }
+
+        [HttpPost]
+        public ActionResult RemoveContact(int id, String button)
+        {
+            ContactPersoon contact = contactPersoonRepository.FindContactPersoon(id);
+            Bedrijf b = bedrijfRepository.FindBedrijfByContactPersId(id);
+            String title = contact.Naam + " " + contact.Voornaam;
+            try
+            {
+                if (button.Equals("ja"))
+                {
+                    contactPersoonRepository.VerwijderContact(contact);
+                    TempData["Info"] = "De contactpersoon, " + title + ", werd verwijderd";
+                    return RedirectToAction("BeheerContacten", b);
+                }
+                else
+                {
+                    TempData["Message"] = "De opdracht " + title + " werd niet verwijderd";
+                    return RedirectToAction("BeheerContacten", b);
+                }
+            }
+            catch (Exception e)
+            {
+
+                TempData["Message"] = e.Message;
+                return View("ToRemoveContact", contact);
+            }
+
         }
     }
 }
