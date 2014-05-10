@@ -1,0 +1,27 @@
+﻿@model Internship.Models.Domain.Bedrijf
+
+@{
+    ViewBag.Title = "ShowProfile";
+    Layout = "~/Views/Bedrijf/_BedrijfLayout.cshtml";
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading"><h2>@Model.Bedrijfsnaam</h2></div>
+    <div class="panel-body">
+        <p>
+            <strong>Activiteit : </strong>@Model.Activiteit
+        </p>
+        <p><strong>Bereikbaarheid : </strong>@Model.Bereikbaarheid</p>
+        <p><strong>Website : </strong>@Model.Url</p>
+        <p><strong>Tel : </strong>@Model.Telefoon</p>
+        <p><strong>Adres : </strong><br/>
+            @Model.Adres.StraatNaam  @Model.Adres.Nummer<br/>
+            @Model.Adres.Gemeente.Structuur</p>
+        
+    </div>
+    <div class="panel-footer">
+        <a href="@Url.Action("EditProfile","Bedrijf",new{id=Model.Id})">Wijzig deze gegevens</a>
+    </div>
+</div>
+

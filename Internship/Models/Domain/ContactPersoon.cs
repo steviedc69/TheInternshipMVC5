@@ -14,10 +14,11 @@ namespace Internship.Models.Domain
         public String ContactEmail { get; set; }
         public String ContactTelNr { get; set; }
         public String GsmNummer { get; set; }
+        public Boolean Actief { get; set; }
 
         public ContactPersoon()
         {
-            
+            Actief = true;
         }
 
         public ContactPersoon(String naam, String voornaam, String functie, String contactEmail, String contactTelNr,

@@ -41,10 +41,7 @@ namespace Internship.Models.Domain
 
         public Boolean IsSemester2
         {
-            get
-            {
-                return isSemester2;
-            }
+            get { return isSemester2; }
             set
             {
                 if (!SecondSemesterPossible())
@@ -64,21 +61,21 @@ namespace Internship.Models.Domain
         public virtual Adres Adres { get; set; }
         public virtual Status Status { get; set; }
 
-         public Opdracht()
+        public Opdracht()
         {
             ActivatieDatum = DateTime.Now;
 
-            
+
         }
 
         private Boolean FirstSemesterPossible()
         {
-           int year = DateTime.Now.Year;
-           int month = DateTime.Now.Month;
-           String[] schooljaar = Schooljaar.Split(' ');
-            if (schooljaar[0].Equals(""+year))
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
+            String[] schooljaar = Schooljaar.Split(' ');
+            if (schooljaar[0].Equals("" + year))
             {
-                if (month>9)
+                if (month > 9)
                 {
                     return false;
                 }
@@ -92,9 +89,9 @@ namespace Internship.Models.Domain
             int year = DateTime.Now.Year;
             int month = DateTime.Now.Month;
             String[] schooljaar = Schooljaar.Split(' ');
-            if (schooljaar[schooljaar.Length-1].Equals(""+year))
+            if (schooljaar[schooljaar.Length - 1].Equals("" + year))
             {
-                if (month>1)
+                if (month > 1)
                 {
                     return false;
                 }
@@ -102,8 +99,65 @@ namespace Internship.Models.Domain
             }
             return true;
         }
-        
 
-      
+        public ContactPersoon HasContact(ContactPersoon persoon)
+        {
+            if (Ondertekenaar != null)
+            {
+
+
+                if (Ondertekenaar.Id == persoon.Id)
+                {
+                    return persoon;
+                }
+            }
+            if (StageMentor != null)
+            {
+
+
+                if (StageMentor.Id == persoon.Id)
+                {
+                    return persoon;
+                }
+            }
+            return null;
+        }
+
+        public Boolean IsContactFromOpdracht(ContactPersoon persoon)
+        {
+            return HasContact(persoon) != null;
+        }
+
+        public String[] SplitSchooljaar()
+        {
+            String[] split = Regex.Split(Schooljaar, " - ");
+            return split;
+        }
+
+        public String SchooljaarFirst()
+        {
+            return SplitSchooljaar()[0];
+        }
+
+        public String SchooljaarSecond()
+        {
+            return SplitSchooljaar()[1];
+        }
+
+        public int? SchoolJaarSecondInt()
+        {
+            return Bewerkingen.TryParseString(SchooljaarSecond());
+        }
+        public int? SchoolJaarFirstInt()
+        {
+            return Bewerkingen.TryParseString(SchooljaarFirst());
+        }
+
+        public override string ToString()
+        {
+          return ""+Title+Omschrijving+Schooljaar+Specialisatie.Title+Vaardigheden;
+        }
     }
+    
+
 }

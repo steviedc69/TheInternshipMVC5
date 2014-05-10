@@ -16,14 +16,15 @@
     </head>
     <body>
         <div>
-
             <h1>@ViewBag.Title</h1>
-
-            <p>
-                <a href=@Url.Action("AddOpdracht", "Bedrijf", new { id = User.Identity.GetUserId() })><span class="glyphicon glyphicon-plus"></span> Nieuwe opdracht</a>
+            <p class="pull-right">
+                <a href=@Url.Action("AddOpdracht", "Bedrijf", new { id = User.Identity.GetUserId() }) class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Nieuwe opdracht</a>
             </p>
         </div>
-        <div id="opdrachten">
+        <div id="search">
+            @Html.Partial("_Search")
+        </div>
+        <div id="opdrachten" style="margin-top: 3%">
             @Html.Partial("_OpdrachtenListPartial",Model)
         </div>
 

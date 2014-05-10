@@ -34,7 +34,7 @@
 
              <ul class="nav navbar-nav navbar-right">
                  <li>
-                     <a href="@Url.Action("Manage", "Account")"><span class="glyphicon glyphicon-user"></span> Account</a>
+                     <a href="@Url.Action("ShowProfile", "Bedrijf",new{id =User.Identity.GetUserId() })"><span class="glyphicon glyphicon-user"></span> Account</a>
                  </li>
                  <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
              </ul>

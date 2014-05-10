@@ -3,10 +3,13 @@
 @using PagedList
 @using PagedList.Mvc
 @model IPagedList<Internship.Models.Domain.Opdracht>
+
+
+
 <div class="container">
     @if (Model == null)
     {
-        <p>Nog geen opdrachten?? Maak een nieuwe aan.</p>
+        <p>Geen opdrachten gevonden</p>
     }
     else
     {
@@ -16,6 +19,7 @@
              <div class="@item.Status.PanelClass">
                  <div class="panel-heading">
                      <h2 class="panel-title">@item.Title</h2>
+                     <strong>Status : </strong>@item.Status.Naam @item.Status.Id
                  </div>
                  <div class="panel-body">
                      <p>@item.Omschrijving</p>
@@ -24,17 +28,17 @@
                  </div>
                  <div class=" panel-footer">
                      <div class="btn-group">
-                         <div class="btn btn-primary">
-                             @Html.ActionLink("Details", "OpdrachtDetail", new { id = item.Id })
-                         </div>
-                         @if (item.Status.Id != 3 || item.Status.Id != 4)
+                         
+                             @Html.ActionLink("Details", "OpdrachtDetail", new { id = item.Id},new{ @class ="btn btn-primary"})
+                        
+                         @if (!(item.Status.Id == 3 || item.Status.Id == 4))
                          {
-                             <div class="btn btn-primary">
-                                 @Html.ActionLink("Verwijder","ToRemoveOpdracht",new {id = item.Id})
-                             </div>
-                             <div class="btn btn-primary">
-                                 @Html.ActionLink("Pas aan","EditOpdracht",new {id = item.Id})
-                             </div>
+                     
+                                 @Html.ActionLink("Verwijder", "ToRemoveOpdracht", new { id = item.Id }, new { @class = "btn btn-primary" })
+                   
+                      
+                                 @Html.ActionLink("Pas aan", "EditOpdracht", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        
                          }
                      </div>
                  </div>

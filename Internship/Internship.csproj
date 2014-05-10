@@ -231,6 +231,7 @@
     <Compile Include="Models\Domain\IContactPersoonRepository.cs" />
     <Compile Include="Models\Domain\IGemeenteRepository.cs" />
     <Compile Include="Models\Domain\IOpdrachtRepository.cs" />
+    <Compile Include="Models\Domain\ISearchStragegy.cs" />
     <Compile Include="Models\Domain\ISpecialisatieRepository.cs" />
     <Compile Include="Models\Domain\IStagebegeleiderRepository.cs" />
     <Compile Include="Models\Domain\IStudentRepository.cs" />
@@ -256,6 +257,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-ui-1.10.4.custom.css" />
+    <Content Include="Content\jquery-ui-1.10.4.custom.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -288,6 +291,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -297,6 +302,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -344,6 +350,10 @@
     <Content Include="Views\Bedrijf\OpdrachtDetail.cshtml" />
     <Content Include="Views\Bedrijf\ToRemoveOpdracht.cshtml" />
     <Content Include="Views\Bedrijf\ToRemoveContact.cshtml" />
+    <Content Include="Views\Bedrijf\_EditContact.cshtml" />
+    <Content Include="Views\Bedrijf\ShowProfile.cshtml" />
+    <Content Include="Views\Bedrijf\EditProfile.cshtml" />
+    <Content Include="Views\Bedrijf\_Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

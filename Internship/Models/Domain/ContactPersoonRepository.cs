@@ -29,9 +29,17 @@ namespace Internship.Models.Domain
             return contactpersonen.Find(id);
         }
 
+        public ContactPersoon FindPersoonWithNaamVoornaamEmail(String naam, String voornaam, String email)
+        {
+            return
+                contactpersonen.SingleOrDefault(
+                    c => c.Naam.Equals(naam) && c.Voornaam.Equals(voornaam) && c.ContactEmail.Equals(email));
+        }
         public void SaveChanges()
         {
             context.SaveChanges();
         }
+
+      
     }
 }

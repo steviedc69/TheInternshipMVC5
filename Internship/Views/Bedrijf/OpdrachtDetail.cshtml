@@ -14,7 +14,8 @@
     </div>
     <div class="panel-body">
         <p><strong>Schooljaar :</strong> @Model.Schooljaar</p>
-        <ul><strong>Semesters : </strong>
+        <ul>
+            <strong>Semesters : </strong>
             @if (@Model.IsSemester1)
             {
                 <li>Gaat door in de 1ste semester</li>
@@ -25,128 +26,132 @@
             }
         </ul>
         <p>
-            <strong> Omschrijving :</strong> <br/>
+            <strong> Omschrijving :</strong> <br />
             @Model.Omschrijving
         </p>
-        <p><strong>Specialisatie :</strong> <br/>
+        <p>
+            <strong>Specialisatie :</strong> <br />
             @Model.Specialisatie.Title
         </p>
-        <p><strong>Vaardigheden : </strong>
-            <br/>@Model.Vaardigheden
+        <p>
+            <strong>Vaardigheden : </strong>
+            <br />@Model.Vaardigheden
         </p>
         <p>
-            <strong>Contract ondertekenaar :</strong>  <br/>
+            <strong>Contract ondertekenaar :</strong>  <br />
             @if (@Model.Ondertekenaar == null)
             {
-                <p>U heeft nog geen contactpersoon opgegeven, u kan dit nu doen of later<br/>
-                    @Html.ActionLink("Maak contactpersoon aan voor deze stage opdracht","AddContactToOpdracht",new{id = Model.Id})</p>
-                    
+            <p>
+                U heeft nog geen contactpersoon opgegeven, u kan dit nu doen of later<br />
+                @Html.ActionLink("Maak contactpersoon aan voor deze stage opdracht", "AddContactToOpdracht", new { id = Model.Id })
+            </p>
+
             }
             else
             {
                 @Model.Ondertekenaar.ToString()
             }
-            
-        </p>
-        <p>
-            <strong>Stage mentor :</strong> <br/>
-            @if (@Model.StageMentor == null)
-            {
-                <p>U heeft nog geen contactpersoon opgegeven, u kan dit nu doen of later<br/>
-                    @Html.ActionLink("Maak contactpersoon aan voor deze stage opdracht","AddContactToOpdracht",new{id = Model.Id})</p>
-            }
-            else
-            {
-                @Model.StageMentor.ToString()
-            }
-        </p>
-        <p><strong>Aantal studenten :</strong> @Model.AantalStudenten</p>
-        <p><strong>Adres : </strong><br/>
-        @Model.Adres.StraatNaam  @Model.Adres.Nummer<br/>@Model.Adres.Gemeente.Structuur</p>
-        @if (@Model.Status.Id==3)
-        {
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-thumbs-up"></span>    Uw stage opdracht werd goedgekeurd door de administratie
-                </div>
-                <div class="panel-body">
-             
-                    @if (@Model.AdminComment != null)
+
+            </p>
+            <p>
+                <strong>Stage mentor :</strong> <br />
+                @if (@Model.StageMentor == null)
+                {
+                <p>
+                    U heeft nog geen contactpersoon opgegeven, u kan dit nu doen of later<br />
+                    @Html.ActionLink("Maak contactpersoon aan voor deze stage opdracht", "AddContactToOpdracht", new { id = Model.Id })
+                </p>
+                }
+                else
+                {
+                    @Model.StageMentor.ToString()
+                }
+                </p>
+                <p><strong>Aantal studenten :</strong> @Model.AantalStudenten</p>
+                <p>
+                    <strong>Adres : </strong><br />
+                    @Model.Adres.StraatNaam  @Model.Adres.Nummer<br />@Model.Adres.Gemeente.Structuur
+                </p>
+                @if (@Model.Status.Id == 3)
+                {
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-thumbs-up"></span>    Uw stage opdracht werd goedgekeurd door de administratie
+                        </div>
+                        <div class="panel-body">
+
+                            @if (@Model.AdminComment != null)
+                            {
+                                <p>
+                                    <strong>De administratie gaf u volgende feedback : </strong><br />
+                                    @Model.AdminComment
+                                </p>
+                            }
+
+                        </div>
+                    </div>
+
+                }
+                else if (@Model.Status.Id == 1)
+                {
+                    <div class="alert alert-info"><strong>Info!</strong><p>Uw opdracht wordt op dit moment verwerkt door de administratie, zij zullen u zo <br />spoedig mogelijk op de hoogte brengen van hun bevindingen</p></div>
+
+                }
+                else if (@Model.Status.Id == 4)
+                {
+                    <div class="@Model.Status.PanelClass">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-thumbs-up"></span>    Uw opdracht werd goedgekeurd door de administratie en zal als projectwerk worden opgenomen
+                        </div>
+                        <div class="panel-body">
+
+                            @if (@Model.AdminComment != null)
+                            {
+                                <p>
+                                    <strong>De administratie gaf u volgende feedback : </strong><br />
+                                    @Model.AdminComment
+                                </p>
+                            }
+
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="@Model.Status.PanelClass">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-thumbs-down"></span>    Uw opdracht werd niet goedgekeurd door de administratie.
+                        </div>
+                        <div class="panel-body">
+
+                            @if (@Model.AdminComment != null)
+                            {
+                                <p>
+                                    <strong>De administratie gaf u volgende feedback : </strong><br />
+                                    @Model.AdminComment
+                                </p>
+                            }
+
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+
+            <div class="panel-footer">
+                <div class="btn-group-sm">
+                    @Html.ActionLink("Pas aan", "EditOpdracht", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                    @if (@Model.Status.Id == 1 || @Model.Status.Id == 2)
                     {
-                        <p><strong>De administratie gaf u volgende feedback : </strong><br/>
-                            @Model.AdminComment
-                        </p>  
+                        @Html.ActionLink("Verwijder", "ToRemoveOpdracht", new { id = Model.Id }, new { @class = "btn btn-primary" })
                     }
-                    
                 </div>
             </div>
 
-        }
-        else if (@Model.Status.Id == 1)
-        {
-            <div class="alert alert-info"><strong>Info!</strong><p>Uw opdracht wordt op dit moment verwerkt door de administratie, zij zullen u zo <br />spoedig mogelijk op de hoogte brengen van hun bevindingen</p></div>
 
-        }
-        else if (@Model.Status.Id == 4)
-        {
-                        <div class="@Model.Status.PanelClass">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-thumbs-up"></span>    Uw opdracht werd goedgekeurd door de administratie en zal als projectwerk worden opgenomen
-                </div>
-                <div class="panel-body">
-             
-                    @if (@Model.AdminComment != null)
-                    {
-                        <p><strong>De administratie gaf u volgende feedback : </strong><br/>
-                            @Model.AdminComment
-                        </p>  
-                    }
-                    
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="@Model.Status.PanelClass">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-thumbs-down"></span>    Uw opdracht werd niet goedgekeurd door de administratie.
-                </div>
-                <div class="panel-body">
 
-                    @if (@Model.AdminComment != null)
-                    {
-                        <p>
-                            <strong>De administratie gaf u volgende feedback : </strong><br />
-                            @Model.AdminComment
-                        </p>
-                    }
-
-                </div>
-            </div>
-   
-        }
-
-    </div>
-    @if (@Model.Status.Id==1)
-    {
-           <div class="panel-footer">
-        <div class="btn-group-sm">
-            <div class="btn btn-primary">
-                @Html.ActionLink("details", "OpdrachtDetail", new { id = Model.Id })
-            </div>
-            <div class="btn btn-primary">
-                @Html.ActionLink("Verwijder", "ToRemoveOpdracht", new { id = Model.Id })
-            </div>
-            <div class="btn btn-primary">
-                @Html.ActionLink("Pas aan", "EditOpdracht", new { id =Model.Id})
-            </div>
         </div>
-    </div> 
-    }
-
-
-</div>
-<div class="btn btn-primary">
-    @Html.ActionLink("Terug naar lijst", "Index",new { id = User.Identity.GetUserId() })
-
+<div>
+    @Html.ActionLink("Terug naar lijst", "Index", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-primary" })
 </div>

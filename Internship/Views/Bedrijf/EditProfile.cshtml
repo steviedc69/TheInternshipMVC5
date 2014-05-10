@@ -1,0 +1,74 @@
+﻿@model Internship.ViewModels.RegistratieModelCreater
+
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Bedrijf/_BedrijfLayout.cshtml";
+}
+
+<h2>Wijzig profiel</h2>
+
+@using (Html.BeginForm("EditProfile", "Bedrijf", FormMethod.Post,
+    new {@class = "form-horizontal", role = "form"}))
+{
+    @Html.AntiForgeryToken()
+    <h4>Registreer</h4>
+    <hr />
+    @Html.ValidationSummary(false)
+    <div class="form-group">
+        @Html.LabelFor(m => m.UpdateModel.Bedrijfsnaam, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UpdateModel.Bedrijfsnaam, new {@class = "form-control", style = "width: 50%"})
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UpdateModel.Url, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UpdateModel.Url, new {@class = "form-control", style = "width: 50%"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UpdateModel.Straat, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UpdateModel.Straat, new {@class = "form-control", style = "width: 50%"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UpdateModel.Straatnummer, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UpdateModel.Straatnummer, new {@class = "form-control", style = "width: 50%"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UpdateModel.Woonplaats, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.UpdateModel.Woonplaats, Model.GemeenteLijst, new {@class = "form-control", style = "width: 50%"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UpdateModel.Telefoon, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UpdateModel.Telefoon, new {@class = "form-control", style = "width: 50%"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UpdateModel.Bereikbaarheid, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UpdateModel.Bereikbaarheid, new {@class = "form-control", style = "width: 50%"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UpdateModel.Activiteit, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UpdateModel.Activiteit, new {@class = "form-control", style = "width: 50%"})
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Wijzig" style="width: 50%" />
+        </div>
+    </div>
+  
+}

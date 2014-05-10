@@ -10,6 +10,8 @@ namespace Internship.Models.Domain
     {
         void VerwijderContact(ContactPersoon contact);
         ContactPersoon FindContactPersoon(int id);
+        ContactPersoon FindPersoonWithNaamVoornaamEmail(String naam, String voornaam, String email);
         void SaveChanges();
+
     }
 }

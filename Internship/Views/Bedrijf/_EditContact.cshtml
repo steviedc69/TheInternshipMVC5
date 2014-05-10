@@ -1,0 +1,82 @@
+﻿@model Internship.ViewModels.ContactModel
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+    </div>
+    <div class="panel-body">
+
+
+
+
+        @using (Html.BeginForm("ConfirmEditContact", "Bedrijf", new { id = @Model.id }))
+        {
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Naam, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Naam, new { @class = "form-control", style = "width: 50%" })
+                        @Html.ValidationMessageFor(m => m.Naam)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Voornaam, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Voornaam, new { @class = "form-control", style = "width: 50%" })
+                        @Html.ValidationMessageFor(m => m.Voornaam)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Functie, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Functie, new { @class = "form-control", style = "width: 50%" })
+                        @Html.ValidationMessageFor(m => m.Functie)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ContactEmail, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.ContactEmail, new { @class = "form-control", style = "width: 50%" })
+                        @Html.ValidationMessageFor(m => m.ContactEmail)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ContactTelNr, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.ContactTelNr, new { @class = "form-control", style = "width: 50%" })
+                        @Html.ValidationMessageFor(m => m.ContactTelNr)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.GsmNummer, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.GsmNummer, new { @class = "form-control", style = "width: 50%" })
+                        @Html.ValidationMessageFor(m => m.GsmNummer)
+                    </div>
+                </div>
+            </div>
+  
+                   <div class="form-control">
+                        <div class="btn-group-sm">
+                            <button name="button" value="submit" class="btn btn-primary">opslaan</button>
+                            <button name="button" value="annuleer" class="btn btn-primary">Annuleer</button>
+                        </div>
+                    </div>
+          
+
+
+        }
+
+
+    </div>
+</div>
+
+
+
+
+@*</div>
+    </div>*@

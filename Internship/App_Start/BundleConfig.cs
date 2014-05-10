@@ -29,14 +29,18 @@ namespace Internship
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/jquery-ui-1.10.4.custom.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                "~/Scripts/jquery-{version}.js",
                "~/Scripts/jquery.unobtrusive*",
                "~/Scripts/jquery.validate*",
-               "~/Scripts/bootstrap.js"
+               "~/Scripts/bootstrap.js",
+               "~/Scripts/jquery-ui-1.10.4.custom.min.js",
+               "~/Scripts/script.js"
                            ));
+            
         }
     }
 }

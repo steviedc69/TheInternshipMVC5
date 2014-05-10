@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Policy;
 using Internship.Models.Domain;
+using Microsoft.Ajax.Utilities;
 using Microsoft.SqlServer.Server;
 
 namespace Internship.Models.Domain
@@ -18,14 +19,17 @@ namespace Internship.Models.Domain
         public String Activiteit { get; set; }
 
 
-        public virtual ICollection<ContactPersoon>ContactPersonen { get; private set; } 
-        public virtual ICollection<Opdracht>Opdrachten { get; set; } 
+        public virtual ICollection<ContactPersoon> ContactPersonen { get; private set; }
+        public virtual ICollection<Opdracht> Opdrachten { get; set; }
+
+        private ISearchStragegy SearchStragegy { get; set; }
 
         public Bedrijf()
         {
-           ContactPersonen = new List<ContactPersoon>(); 
-           Opdrachten = new List<Opdracht>(); 
+            ContactPersonen = new List<ContactPersoon>();
+            Opdrachten = new List<Opdracht>();
         }
+
 
 
         public void AddContactPersoon(ContactPersoon persoon)
@@ -89,5 +93,71 @@ namespace Internship.Models.Domain
             return opdracht;
         }
 
-    }
+        public List<Opdracht> FindOpdrachtWithContact(ContactPersoon persoon)
+        {
+            List<Opdracht> opdrachten = new List<Opdracht>();
+            foreach (Opdracht opdracht in Opdrachten)
+            {
+                if (opdracht.IsContactFromOpdracht(persoon))
+                {
+                    opdrachten.Add(opdracht);
+                }
+            }
+            return opdrachten;
+        }
+
+        public Boolean IsOpdrachtenWithContact(ContactPersoon persoon)
+        {
+            return FindOpdrachtWithContact(persoon).Count != 0;
+        }
+
+        public IList<Opdracht> GetArchive(int year)
+        {
+            IList<Opdracht> opdracten = new List<Opdracht>();
+            foreach (Opdracht o in Opdrachten)
+            {
+                int? y = o.SchoolJaarSecondInt();
+                if (y != null && y < year)
+                {
+                    opdracten.Add(o);
+                }
+            }
+            return opdracten;
+        }
+
+        public IList<Opdracht> GetListOfActiveOpdrachten(int year, int month)
+        {
+            IList<Opdracht> opdrachts = new List<Opdracht>();
+
+            foreach (Opdracht o in Opdrachten)
+            {
+                if (o.SchoolJaarSecondInt() != null && o.SchoolJaarSecondInt() == year && month < 7 &&
+                    o.IsSemester2 == true)
+                {
+                    opdrachts.Add(o);
+                }
+                if (o.SchoolJaarFirstInt() >= year)
+                {
+                    opdrachts.Add(o);
+                }
+
+            }
+            return opdrachts;
+        }
+
+        public void AddStrategy(ISearchStragegy strategy)
+        {
+            this.SearchStragegy = strategy;
+        }
+
+        public IList<Opdracht> SearchResult(IList<Opdracht> opdrachts, String search)
+        {
+            if (SearchStragegy != null)
+            {
+                return SearchStragegy.Search(opdrachts, search);
+            }
+            return null;
+        }
+
+}
 }

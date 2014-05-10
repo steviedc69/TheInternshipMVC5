@@ -51,5 +51,14 @@ namespace Internship.Models.Domain
 
             return Sb.ToString();
         }
+
+        public static int? TryParseString(String s)
+        {
+            int num;
+            bool result = Int32.TryParse(s, out num);
+            return num;
+        }
+
+        
     }
 }
