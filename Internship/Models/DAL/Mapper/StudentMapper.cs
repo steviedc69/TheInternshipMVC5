@@ -14,6 +14,13 @@ namespace Internship.Models.DAL.Mapper
            // HasKey(s => s.Emailadres);
             Property(s => s.Naam).HasMaxLength(30).IsOptional();
             Property(s => s.Voornaam).HasMaxLength(20).IsOptional();
+            HasMany(s => s.Favorites).WithMany(o => o.StudentenFavorites).Map(s =>
+            {
+                s.ToTable("Favorites");
+                s.MapLeftKey("StudentId");
+                s.MapRightKey("OpdrachtId");
+            });
+            HasOptional(s=>s.StageOpdracht).WithMany(o=>o.StageStudenten).Map(s=>s.MapKey("StageId")).WillCascadeOnDelete(false);
             ToTable("Student");
         }
     }

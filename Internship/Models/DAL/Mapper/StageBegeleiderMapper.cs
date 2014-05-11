@@ -14,6 +14,13 @@ namespace Internship.Models.DAL.Mapper
         {
             //HasKey(s => s.Emailadres);
             //derest zullen we wel zien zeker
+            HasMany(s => s.Preferences).WithMany(o => o.StageBegeleiderPreference).Map(s =>
+            {
+                s.ToTable("BegeleiderPreferences");
+                s.MapLeftKey("StagebegeleiderId");
+                s.MapRightKey("OpdrachtId");
+            });
+
             ToTable("Stagebegeleider");
         }
 

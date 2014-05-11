@@ -23,6 +23,7 @@ namespace Internship.Models.Domain
         public virtual ICollection<Opdracht> Opdrachten { get; set; }
 
         private ISearchStragegy SearchStragegy { get; set; }
+        public String ImageUrl { get; set; }
 
         public Bedrijf()
         {

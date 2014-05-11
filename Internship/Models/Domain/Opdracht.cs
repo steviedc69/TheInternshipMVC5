@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -60,6 +61,13 @@ namespace Internship.Models.Domain
         public int AantalStudenten { get; set; }
         public virtual Adres Adres { get; set; }
         public virtual Status Status { get; set; }
+        [InverseProperty("Favorites")]
+        public virtual ICollection<Student> StudentenFavorites { get; set; }
+        [InverseProperty("Preferences")]
+        public virtual ICollection<Stagebegeleider> StageBegeleiderPreference { get; set; }
+
+        public virtual ICollection<Student> StageStudenten { get; set; }
+        public virtual Stagebegeleider Begeleider { get; set; }
 
         public Opdracht()
         {
