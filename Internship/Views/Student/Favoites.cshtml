@@ -1,0 +1,16 @@
+﻿@model PagedList.IPagedList<Internship.Models.Domain.Opdracht>
+
+@{
+    ViewBag.Title = "Favoites";
+    Layout = "~/Views/Student/_StudentLayout.cshtml";
+}
+
+<h2>Mijn favorieten</h2>
+
+
+    <div id="Stages" style="margin-top: 10px">
+        @Html.Partial("_StagesPart", Model)
+    </div>
+
+
+

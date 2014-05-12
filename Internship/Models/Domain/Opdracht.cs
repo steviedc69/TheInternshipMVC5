@@ -65,7 +65,8 @@ namespace Internship.Models.Domain
         public virtual ICollection<Student> StudentenFavorites { get; set; }
         [InverseProperty("Preferences")]
         public virtual ICollection<Stagebegeleider> StageBegeleiderPreference { get; set; }
-
+        [InverseProperty("Opdrachten")]
+        public virtual Bedrijf Bedrijf { get; set; }
         public virtual ICollection<Student> StageStudenten { get; set; }
         public virtual Stagebegeleider Begeleider { get; set; }
 

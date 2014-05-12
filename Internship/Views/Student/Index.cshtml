@@ -1,21 +1,42 @@
-﻿@model Internship.ViewModels.StudentIndexModel
+﻿@using Internship.Models.Domain
+@using Microsoft.AspNet.Identity
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Internship.Models.Domain.Opdracht>
 
 @{
     Layout = "_StudentLayout.cshtml";
+    ViewBag.Title = "Index";
 }
-
+@section scripts{
+    <script>
+        function showMessage(data) {
+            $("#added").html(data).show();
+        }
+        function clearMessage() {
+            $('#added').html("").hide();
+        }
+        function clearSearch() {
+            $("#search").val("");
+        }
+        function clearMessagendSearch() {
+            clearMessage();
+            clearSearch();
+        }
+    </script>
+}
+<div class="alert alert-success" style="display: none" id="added"></div>
 <div>
-    <h1>Welkom @Model.Student.Voornaam</h1>
+    <h1>Welkom</h1>
 </div>
-
-
 
 
 @using (Ajax.BeginForm("Index", new AjaxOptions()
 {
     InsertionMode = InsertionMode.Replace,
     HttpMethod = "Get",
-    UpdateTargetId = "Stages"
+    UpdateTargetId = "Stages",
+    OnSuccess = "clearSearch"
 }))
 {
     <input type="search" name="search" id="search"/>

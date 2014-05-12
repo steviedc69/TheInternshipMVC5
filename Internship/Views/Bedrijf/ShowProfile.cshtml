@@ -6,22 +6,40 @@
 }
 
 
-<div class="panel panel-default">
-    <div class="panel-heading"><h2>@Model.Bedrijfsnaam</h2></div>
-    <div class="panel-body">
-        <p>
-            <strong>Activiteit : </strong>@Model.Activiteit
-        </p>
-        <p><strong>Bereikbaarheid : </strong>@Model.Bereikbaarheid</p>
-        <p><strong>Website : </strong>@Model.Url</p>
-        <p><strong>Tel : </strong>@Model.Telefoon</p>
-        <p><strong>Adres : </strong><br/>
-            @Model.Adres.StraatNaam  @Model.Adres.Nummer<br/>
-            @Model.Adres.Gemeente.Structuur</p>
-        
-    </div>
-    <div class="panel-footer">
-        <a href="@Url.Action("EditProfile","Bedrijf",new{id=Model.Id})">Wijzig deze gegevens</a>
+    <div class="panel panel-default col-lg-5 text-center">
+<div class="panel-heading row"><div class="col-xs-10 col-md-3 text-left">
+    <h2>@Model.Bedrijfsnaam</h2></div>
+    <div class="col-xs-10 col-md-3" style="align-content: flex-end">
+        <a href="#" class="thumbnail">
+            @if (@Model.ImageUrl != null)
+            {
+                <img data-src="holder.js/100%x180" alt="logo" src="/Images/HG.gif">
+            }
+            else
+            {
+                <img data-src="holder.js/100%x180" alt="logo" src="/Images/HG.gif">
+            }
+
+        </a>
     </div>
 </div>
+        <div class="panel-body">
+            <p>
+                <strong>Activiteit : </strong>@Model.Activiteit
+            </p>
+            <p><strong>Bereikbaarheid : </strong>@Model.Bereikbaarheid</p>
+            <p><strong>Website : </strong>@Model.Url</p>
+            <p><strong>Tel : </strong>@Model.Telefoon</p>
+            <p>
+                <strong>Adres : </strong><br />
+                @Model.Adres.StraatNaam  @Model.Adres.Nummer<br />
+                @Model.Adres.Gemeente.Structuur
+            </p>
+
+        </div>
+        <div class="panel-footer">
+            <a href="@Url.Action("EditProfile","Bedrijf",new{id=Model.Id})">Wijzig deze gegevens</a>
+        </div>
+    </div>
+
 

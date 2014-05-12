@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Internship.Models.Domain;
 using Internship.ViewModels;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace Internship.Controllers
 {
@@ -34,35 +35,56 @@ namespace Internship.Controllers
 
         //
         // GET: /Student/
-        public ActionResult Index(String id, string search = null)
+        public ActionResult Index(String id,int?page,string search = null)
         {
-            StudentIndexModel model = new StudentIndexModel(studentRepository, id, opdrachtRepository, search);
+            Student student = FindStudent(id);
+            IList<Opdracht> opdrachten = opdrachtRepository.GeefStageOpdrachten().ToList();
             if (Request.IsAjaxRequest())
             {
-                model = new StudentIndexModel(studentRepository, id, opdrachtRepository, search);
-                return PartialView("_StagesPart", model);
+                if (search != null)
+                {
+                    ViewBag.Selection = "Resultaten voor: " + search;
+                    opdrachten = opdrachtRepository.GeefStageOpdrachtenMetZoekstring(search).ToList();
+                }   
+                return PartialView("_StagesPart", opdrachten.ToPagedList(page??1,12));
             }
-            return View(model);
+
+            return View(opdrachten.ToPagedList(page??1,12));
         }
 
-        public ActionResult GetOpdrachtDetail(int? id,String student)
+        public ActionResult GetOpdrachtDetail(int id)
         {
-            if (id.HasValue)
-            {
-                StudentOpdrachtDetailModel model = new StudentOpdrachtDetailModel(studentRepository, student, opdrachtRepository,(int)id, bedrijfRepository);
-                return View("OpdrachDetail", model);
-            }
-
-            return RedirectToAction("Index", student);
+           
+            return RedirectToAction("Index");
 
         }
 
         [HttpPost]
-        public ActionResult AddToFavorites(String id, int opdrId)
+        public ActionResult AddToFavorites(int id)
         {
-            Student student = studentRepository.FindById(id);
-            Opdracht opr = opdrachtRepository.FindOpdracht(opdrId);
-            return View("Index");
+            //Student student = FindStudent(id);
+            Opdracht opr = opdrachtRepository.FindOpdracht(id);
+            Student student = FindStudent(User.Identity.GetUserId());
+            student.AddOpdrachtToFavorites(opr);
+            studentRepository.SaveChanges();
+
+            if (Request.IsAjaxRequest())
+            {
+                return Content(opr.Title+" werd toegevoegd aan favorieten");
+            }
+            ViewBag["info"] = opr.Title + " werd toegevoegd aan favorieten";
+            return RedirectToAction("Index", student);
+        }
+
+        public ActionResult GetFavorites(String id,int?page)
+        {
+            Student student = FindStudent(id);
+            return View("Favoites",student.Favorites.ToList().ToPagedList(page?? 1, 12));
+        }
+
+        public Student FindStudent(String id)
+        {
+            return studentRepository.FindById(id);
         }
 }
 }

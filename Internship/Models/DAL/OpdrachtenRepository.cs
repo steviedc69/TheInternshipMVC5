@@ -36,7 +36,8 @@ namespace Internship.Models.DAL
             IEnumerable<Opdracht> opd = GeefStageOpdrachten();
             return opd.Where(o => o.Title.Contains(search)
                 ||o.Omschrijving.Contains(search)||o.Vaardigheden.Contains(search)
-                ||o.Specialisatie.Title.Contains(search));
+                ||o.Specialisatie.Title.Contains(search)||o.Adres.Gemeente.Structuur.Contains(search)
+                ||o.Bedrijf.Bedrijfsnaam.Contains(search));
         }
 
         public void SaveChanges()

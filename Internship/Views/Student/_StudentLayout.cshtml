@@ -34,6 +34,7 @@
                         <li>
                             <a href="@Url.Action("Manage", "Account")"><span class="glyphicon glyphicon-user"></span> Account</a>
                         </li>
+                       
                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     </ul>
 
@@ -42,7 +43,7 @@
                 <a class="navbar-brand" href="@Url.Action("Index", "Student",new{id=User.Identity.GetUserId()})"><img src="~/Images/theinternship-neg.png" alt="The Internship" height="50px" /></a>
                 <ul class=" nav navbar-nav navbar-left">
                     <li>
-                        <span class="glyphicon glyphicon-book"></span> Beheer Contactpersonen
+                        <a href="@Url.Action("GetFavorites", "Student", new { id = User.Identity.GetUserId() })"><span class="glyphicon glyphicon-heart-empty"></span> Favorieten</a>
                     </li>
                 </ul>
             }

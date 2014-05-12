@@ -57,10 +57,7 @@ namespace Internship.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Email.EndsWith("@student.hogent.be"))
-                {
-                    DomainFactory.CreateNewStudent(model.Email,UserRepository,StudentRepository);
-                }
+               
                 var user = await UserRepository.FindAsyncUser(model.Email, model.Passwd);
                 if (user != null)
                 {
@@ -138,10 +135,10 @@ namespace Internship.Controllers
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
+                message == ManageMessageId.ChangePasswordSuccess ? "Uw paswoord is gewijzigd"
+                : message == ManageMessageId.SetPasswordSuccess ? "Uw paswoord is ingesteld"
+                : message == ManageMessageId.RemoveLoginSuccess ? "Externe login werd verwijderd"
+                : message == ManageMessageId.Error ? "Er is iets misgelopen."
                 : "";
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
@@ -171,6 +168,7 @@ namespace Internship.Controllers
                             return RedirectToAction("Index","Student",s);
 
                         }
+
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     else

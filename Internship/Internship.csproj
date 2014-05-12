@@ -321,7 +321,6 @@
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -354,6 +353,8 @@
     <Content Include="Views\Bedrijf\ShowProfile.cshtml" />
     <Content Include="Views\Bedrijf\EditProfile.cshtml" />
     <Content Include="Views\Bedrijf\_Search.cshtml" />
+    <Content Include="Views\Bedrijf\_ChangePassword.cshtml" />
+    <Content Include="Views\Student\Favoites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

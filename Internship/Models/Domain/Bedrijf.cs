@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Policy;
 using Internship.Models.Domain;
 using Microsoft.Ajax.Utilities;
@@ -20,6 +21,7 @@ namespace Internship.Models.Domain
 
 
         public virtual ICollection<ContactPersoon> ContactPersonen { get; private set; }
+        [InverseProperty("Bedrijf")]
         public virtual ICollection<Opdracht> Opdrachten { get; set; }
 
         private ISearchStragegy SearchStragegy { get; set; }

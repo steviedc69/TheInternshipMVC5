@@ -16,7 +16,8 @@ using MySql.Data.MySqlClient;
 
 namespace Internship.Models.DAL
 {
-    public class InternshipInitializer : DropCreateDatabaseIfModelChanges<InternshipContext>
+    public class InternshipInitializer : //DropCreateDatabaseAlways<InternshipContext> 
+        DropCreateDatabaseIfModelChanges<InternshipContext>
     {
         private Student s1;
 
@@ -65,9 +66,9 @@ namespace Internship.Models.DAL
 
                 s1 = new Student()
                 {
-                    Naam = "TestStudent",
-                    Voornaam = "jantje",
-                    UserName = "testStudent@student.hogent.be",
+                    Naam = "De Cock",
+                    Voornaam = "Steven",
+                    UserName = "steven.decock.k2806@student.hogent.be",
                     Straat = "studentstraat",
                     Straatnummer = 34,
                     Gebdatum = "30-12-1999",

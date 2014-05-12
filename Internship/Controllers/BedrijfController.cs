@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Internship.Models.DAL;
 using Internship.Models.Domain;
 using Internship.ViewModels;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using PagedList;
 using PagedList.Mvc;
 
@@ -694,6 +696,49 @@ namespace Internship.Controllers
             RegistratieModelCreater creater = new RegistratieModelCreater(gemeenteRepository,model);
             return RedirectToAction("EditProfile", creater);
 
+        }
+
+        public ActionResult ChangePassword(String id)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_ChangePassword",new ManageModel());
+                //return RedirectToAction("Manage", "Account");
+            }
+            return RedirectToAction("Manage", "Account");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(String id,ManageModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                IdentityResult result = await userRepository.ChangePaswordAsync(id, model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
+                {
+                    ViewBag["info"] = "Wachtwoord werd gewijzigd";
+                    return View("EditProfile", id);
+                }
+                else
+                {
+                    AddErrors(result);
+                }
+            }
+
+
+            return RedirectToAction("ChangePassword", id);
+
+        }
+
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
         }
 }
 }

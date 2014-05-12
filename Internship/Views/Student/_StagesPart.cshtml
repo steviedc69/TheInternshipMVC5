@@ -1,30 +1,72 @@
-﻿@model Internship.ViewModels.StudentIndexModel
+﻿@using Internship.Models.Domain
+@using Microsoft.AspNet.Identity
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Internship.Models.Domain.Opdracht>
 
 
-@if (!Model.Opdrachten.Any())
+@if (!Model.Any())
 {
-    <p>Geen Stages gevonden die beantwoorden aan uw zoekstring : @Model.Search</p>
+    <p>Geen Stages gevonden die beantwoorden aan uw zoekstring</p>
 
 }
 else
 {
-    foreach (var item in Model.Opdrachten)
-    {
-      <div class="panel panel-default">
-    <div class="panel-heading">
-        <h2 class="panel-title">@item.Title</h2>
-        <h3>@item.Adres.Gemeente.Naam</h3>
-    </div>
-    <div class="panel-body">
-        <p>@item.Omschrijving</p>
-        Schooljaar :  @item.Schooljaar<br />
-        Specialisatie : @item.Specialisatie.Title
-    </div>
-    <div class=" panel-footer">
-            @Html.ActionLink("Details","GetOpdrachtDetail",new{id = item.Id,student=Model.Student.Id})
-        </div>
-    </div>
+    <h4>@ViewBag.Selection</h4>
+    int i = 0;
 
+    foreach (var item in Model)
+    {
+        i++;
+        if (i == 1)
+        {
+            @:<div class="row" style="margin-bottom: 20px">
+
+
+        }
+
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img data-src="holder.js/300x200" alt="@item.Bedrijf.Bedrijfsnaam" src="@item.Bedrijf.ImageUrl">
+                <div class="caption">
+                    <h3>@item.Title</h3>
+                    <p><strong>Plaats :</strong> @item.Adres.Gemeente.Naam</p>
+                    <p><strong>Specialisatie : </strong> @item.Specialisatie.Title</p>
+                    <p><strong>Omschrijving : </strong> @item.Omschrijving</p>
+                    <div class="btn-group">
+                        @Html.ActionLink("Details", "GetOpdrachtDetail", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @if (ViewBag.Title.Equals("Index"))
+                        {
+                            using (Ajax.BeginForm("AddToFavorites", "Student", new {id = item.Id}, new AjaxOptions()
+                             {
+                                 HttpMethod = "Post",
+                                 OnSuccess = "showMessage(data)"
+
+                             })
+                                 )
+                             {
+                                 <button type="submit" class="btn btn-primary">Voeg toe aan favorieten</button>
+                             }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        if (i == 3)
+        {
+            i = 0;
+            @:</div>
+        }
     }
 }
+
+<div class="bottom-left">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    id = User.Identity.GetUserId(),
+    page
+
+}))
+</div>
 
