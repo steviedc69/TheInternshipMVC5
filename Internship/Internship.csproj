@@ -387,6 +387,7 @@
     <Content Include="Views\StageBegeleider\GetProfile.cshtml" />
     <Content Include="Views\StageBegeleider\EditProfile.cshtml" />
     <Content Include="Views\StageBegeleider\ChangePassword.cshtml" />
+    <Content Include="Views\StageBegeleider\_SearchPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

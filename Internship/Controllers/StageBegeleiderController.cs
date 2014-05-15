@@ -42,7 +42,11 @@ namespace Internship.Controllers
         public ActionResult Index(String id, int? page)
         {
             IList<Opdracht> stageopdrachten = opdrachtRepository.GeefActieveOpdrachten().ToList();
-            return View(stageopdrachten.ToPagedList(page ?? 1, 12));
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_SearchPartial", new CreateSearchModel(bedrijfRepository, new SearchModel()));
+            }
+            return View(stageopdrachten.ToPagedList(page ?? 1, 7));
         }
 
         public Stagebegeleider FindStagebegeleider(String id)
@@ -114,10 +118,10 @@ namespace Internship.Controllers
 
         public IList<Opdracht> SortHelper(Stagebegeleider begeleider, String select = null)
         {
-            if (select == null||select.Equals("Schooljaar"))
+            if (select == null || select.Equals("Schooljaar"))
             {
                 begeleider.AddSort(new SortBySchoojaar(begeleider.TeBegeleidenOpdrachten.ToList()));
-               
+
             }
             else
             {
@@ -177,7 +181,7 @@ namespace Internship.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditProfile(StagebegeleiderModel model,String id,String button)
+        public ActionResult EditProfile(StagebegeleiderModel model, String id, String button)
         {
             Stagebegeleider begeleider = FindStagebegeleider(id);
             if (button.Equals("annuleer"))
@@ -202,14 +206,15 @@ namespace Internship.Controllers
             return View(new ManageModel());
         }
 
-            [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(String id, ManageModel model)
-            {
-                Stagebegeleider begeleider = FindStagebegeleider(id);
+        {
+            Stagebegeleider begeleider = FindStagebegeleider(id);
             if (ModelState.IsValid)
             {
-                IdentityResult result = await userRepository.ChangePaswordAsync(id, model.OldPassword, model.NewPassword);
+                IdentityResult result =
+                    await userRepository.ChangePaswordAsync(id, model.OldPassword, model.NewPassword);
                 if (result.Succeeded)
                 {
                     TempData["Info"] = "Wachtwoord werd gewijzigd";
@@ -221,8 +226,22 @@ namespace Internship.Controllers
                     return RedirectToAction("ChangePassword", model);
                 }
             }
-               return RedirectToAction("ChangePassword", model);
+            return RedirectToAction("ChangePassword", model);
 
         }
+        [HttpPost]
+        public ActionResult Search([Bind(Prefix = "Model")] SearchModel model,String id,int? page)
+        {
+            Stagebegeleider begeleider = FindStagebegeleider(id);
+            begeleider.AddSearch(new SearchByStatus.SearchWithSearchModel(model));
+            List<Opdracht> opdrachten = opdrachtRepository.GeefActieveOpdrachten().ToList();
+            List<Opdracht> searchList = begeleider.SearchResult(opdrachten).ToList();
+            if (searchList.Count == 0)
+            {
+                ViewData["Info"] = "Geen opdrachten gevonden voor uw aanvraag, probeer opnieuw";
+            }
+            ViewBag.Title = "Index";
+            return PartialView("_StagesPart",searchList.ToPagedList(page ?? 1, 7));
     }
+}
 }

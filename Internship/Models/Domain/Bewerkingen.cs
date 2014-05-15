@@ -97,5 +97,30 @@ namespace Internship.Models.Domain
 
         }
         
+         public static List<String> MakeSchooljaarSelectList()
+        {
+            List<String> lijstSchooljaren = new List<string>();
+            DateTime date = DateTime.Now;
+            int year = date.Year;
+            if (date.Month < 2)
+            {
+                for (int i = -1; i < 5; i++)
+                {
+                    String schooljaar = (year + i) + " - " + (year + i + 1);
+                    lijstSchooljaren.Add(schooljaar);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    
+                    String schooljaar = (year + i) + " - " + (year + i + 1);
+                    lijstSchooljaren.Add(schooljaar);
+                }
+            }
+
+            return lijstSchooljaren;
+        }
     }
-}
+    }

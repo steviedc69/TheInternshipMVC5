@@ -37,7 +37,7 @@ namespace Internship.ViewModels
             SpecialisatieList = new SelectList(specialisaties);
             List<String> lijstSemester = new List<string>(new String[] {"Semester 1", "Semester 2", "Semester 1 en 2"});
             SemesterLijst = new SelectList(lijstSemester);
-            SchooljaarSelectList = new SelectList(MakeSchooljaarSelectList());
+            SchooljaarSelectList = new SelectList(Bewerkingen.MakeSchooljaarSelectList());
             OpdrachtViewModel = opdrachtViewModel;
             OndertekenaarSelectList = new SelectList(contactPersonen);
             StageMentorSelectList = new SelectList(contactPersonen);
@@ -50,7 +50,7 @@ namespace Internship.ViewModels
 
         public void FillOpdrachtView()
         {
-            if (Opdracht !=null)
+            if (Opdracht != null)
             {
                 OpdrachtViewModel.AantalStudenten = Opdracht.AantalStudenten;
                 OpdrachtViewModel.Gemeente = Opdracht.Adres.Gemeente.Structuur;
@@ -65,31 +65,6 @@ namespace Internship.ViewModels
             }
         }
 
-        private List<String> MakeSchooljaarSelectList()
-        {
-            List<String> lijstSchooljaren = new List<string>();
-            DateTime date = DateTime.Now;
-            int year = date.Year;
-            if (date.Month < 2)
-            {
-                for (int i = -1; i < 5; i++)
-                {
-                    String schooljaar = (year + i) + " - " + (year + i + 1);
-                    lijstSchooljaren.Add(schooljaar);
-                }
-            }
-            else
-            {
-                for (int i = 0; i < 5; i++)
-                {
-                    
-                    String schooljaar = (year + i) + " - " + (year + i + 1);
-                    lijstSchooljaren.Add(schooljaar);
-                }
-            }
-
-            return lijstSchooljaren;
-        }
     }
 
     public class OpdrachtViewModel

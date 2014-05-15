@@ -166,5 +166,9 @@ namespace Internship.Models.Domain
             return null;
         }
 
-}
+        public override string ToString()
+        {
+            return Bedrijfsnaam+" "+Adres.Gemeente.Naam;
+        }
+    }
 }

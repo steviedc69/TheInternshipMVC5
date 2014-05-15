@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNet.Identity
+@model Internship.ViewModels.CreateSearchModel
+           
+
+@using (Ajax.BeginForm("Search", new {id = User.Identity.GetUserId()},new AjaxOptions()
+{
+    HttpMethod = "Post",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "Stages"
+}))
+{
+    <div class="col-xs-4 col-sm-2">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Model.Bedrijven)
+            @Html.DropDownListFor(m => m.Model.Bedrijven, Model.Bedrijven, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Model.Schooljaar)
+            @Html.DropDownListFor(m => m.Model.Schooljaar, Model.Schooljaar, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Model.Gemeente)
+            @Html.TextBoxFor(m => m.Model.Gemeente, new { @class = "form-control", placeholder = "Postcode/Gemeente" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Model.Trefwoord)
+            @Html.TextBoxFor(m => m.Model.Trefwoord, new { @class = "form-control" })
+        </div>
+
+
+        <button type="submit" name="submit" id="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>  Zoek</button>
+
+    </div>
+
+}

@@ -22,6 +22,7 @@ namespace Internship.Models.Domain
         public Boolean IsFirstTime { get; set; }
 
         private Sort Sort { get; set; }
+        private ISearchStragegy SearchStragegy { get; set; }
         public Stagebegeleider()
         {
             IsFirstTime = true;
@@ -73,6 +74,16 @@ namespace Internship.Models.Domain
                 }
             }
             return list;
+        }
+
+        public void AddSearch(ISearchStragegy search)
+        {
+            this.SearchStragegy = search;
+        }
+
+        public IList<Opdracht> SearchResult(IList<Opdracht> opdrachten)
+        {
+            return SearchStragegy.Search(opdrachten, null);
         }
     }
 }

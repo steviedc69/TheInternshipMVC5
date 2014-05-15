@@ -12,6 +12,22 @@
 <div class="alert alert-success" style="display: none" id="added"></div>
 <h2>Welkom</h2>
 
-<div id="Stages">
-    @Html.Partial("_StagesPart",Model)
+<div class="row">
+
+    <div id="search">
+        @using (Ajax.BeginForm("Index", new { id = User.Identity.GetUserId() }, new AjaxOptions()
+       {
+           HttpMethod = "Get",
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "search",
+
+
+       }))
+        {
+            <button class="btn btn-primary" type="submit" id="zoekSubmit"><span class="glyphicon glyphicon-search"></span>  Zoeken</button>
+        }
+    </div>
+    <div id="Stages">
+        @Html.Partial("_StagesPart", Model)
+    </div>
 </div>

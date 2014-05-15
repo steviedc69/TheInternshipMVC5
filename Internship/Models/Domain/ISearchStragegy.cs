@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Internship.ViewModels;
 using WebGrease.Css.Extensions;
 
 namespace Internship.Models.Domain
@@ -119,6 +120,38 @@ namespace Internship.Models.Domain
                             .OrderBy(o => o.Specialisatie.Title)
                             .ToList();
                 }
+            }
+        }
+        public class SearchWithSearchModel : ISearchStragegy
+        {
+            private SearchModel Model { get; set; }
+
+            public SearchWithSearchModel(SearchModel model)
+            {
+                this.Model = model;
+            }
+
+            public IList<Opdracht> Search(IList<Opdracht> opdrachten, string search = null)
+            {
+                List<Opdracht> temp = opdrachten.ToList();
+                
+                if (Model.Bedrijven!=null && temp.Count != 0)
+                {
+                    temp.RemoveAll(o => !(o.Bedrijf.ToString().Equals(Model.Bedrijven)));
+                }
+                if (Model.Schooljaar != null && temp.Count != 0)
+                {
+                    temp.RemoveAll(o => !(o.Schooljaar.Equals(Model.Schooljaar)));
+                }
+                if (Model.Gemeente != null && temp.Count != 0)
+                {
+                    temp.RemoveAll(o => !(o.Adres.Gemeente.Structuur.Contains(Model.Gemeente)));
+                }
+                if (Model.Trefwoord != null && temp.Count != 0)
+                {
+                    temp.RemoveAll(o => !(o.ToString().Contains(Model.Trefwoord)));
+                }
+                return temp;
             }
         }
     }
