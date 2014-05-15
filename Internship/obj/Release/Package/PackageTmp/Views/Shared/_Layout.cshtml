@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8" />
+    <title>The Internship | @ViewBag.Title</title>
+    <link href="~/Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Applicatie voor het beheren van stages. In samenwerking met de HoGent.">
+    <meta name="author" content="iDev">
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        @Html.Partial("_LoginPartial")
+        </div>
+    <div class="container">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                @TempData["Message"]
+            </div>
+        }
+        @if (TempData["Info"] != null)
+        {
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                @TempData["Info"]
+            </div>
+        }
+
+        @RenderBody()
+
+
+        <hr style="clear: both" />
+
+        <footer >
+            <div class="content-wrapper">
+                <div class="text-center">
+                    <p>
+                        <img src="~/Images/HG.gif" height="30px" />&nbsp;<img src="~/Images/theinternship-pos.png" height="50px" />
+                    </p>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav ">
+                            <li class="@(ViewBag.Active == "Info" ? "active" : "")">@Html.ActionLink("Info", "About", "Home")</li>
+                            <li class="@(ViewBag.Active == "Contact" ? "active" : "")">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                        <p>
+                            &copy; @DateTime.Now.Year |
+                            Steven De Cock - Thomas Cloostermans - Christof Van Cauteren | iDev
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

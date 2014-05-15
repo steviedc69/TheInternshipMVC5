@@ -24,11 +24,17 @@ namespace Internship.Models.DAL
             return Opdrachten.Find(id);
         }
 
-       
 
+        public IEnumerable<Opdracht> GeefActieveOpdrachten()
+        {
+            int year = DateTime.Now.Year;
+            
+            return Opdrachten.Where(o => o.Status.Id == 3 || o.Status.Id == 5 ).OrderBy(o=>o.Schooljaar);//&& o.SchoolJaarFirstInt()>=year 
+               // && o.SchoolJaarSecondInt()>year).OrderBy(o => o.Schooljaar);
+        }
         public IEnumerable<Opdracht> GeefStageOpdrachten()
         {
-            return Opdrachten.Where(o=>o.Status.Naam.Equals("Stage")).OrderBy(o=>o.Schooljaar);
+            return Opdrachten.Where(o=>o.Status.Id==3||o.Status.Id==5).OrderBy(o=>o.Schooljaar);
         }
 
         public IEnumerable<Opdracht> GeefStageOpdrachtenMetZoekstring(string search)

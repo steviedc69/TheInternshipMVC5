@@ -51,7 +51,7 @@ namespace Internship.Models.DAL
 
         public IQueryable<Student> FindByPlace(string gemeente)
         {
-            return studenten.Where(s => s.Woonplaats == gemeente);
+            return studenten.Where(s => s.Adres.Gemeente.Naam == gemeente);
         }
 
         public void UpdateFirstTime(String username,bool notFirstTime)

@@ -30,7 +30,7 @@ namespace Internship.Controllers
         {
            
             this.BedrijfRepository = bedrijfRepository;
-            this.StagebegeleiderRepository = StagebegeleiderRepository;
+            this.StagebegeleiderRepository = stagebegeleider;
             this.StudentRepository = studentRepository;
             this.UserRepository = userRepository;
             this.gemeenteRepository = gemeenteRepository;
@@ -74,11 +74,27 @@ namespace Internship.Controllers
                            return RedirectToAction("Index","Student",student);
                         }
                     }
-                    Bedrijf b = BedrijfRepository.FindByEmail(user.UserName);
-                    if (b !=null)
+                    if (user.UserName.EndsWith("@hogent.be"))
                     {
-                        return RedirectToAction("Index", "Bedrijf", b);
+                        Stagebegeleider stagebegeleider = user as Stagebegeleider;
+                        if (stagebegeleider.IsFirstTime)
+                        {
+                            return RedirectToAction("Manage");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "StageBegeleider", stagebegeleider);
+                        }
                     }
+                    else
+                    {
+                        Bedrijf b = BedrijfRepository.FindByEmail(user.UserName);
+                        if (b != null)
+                        {
+                            return RedirectToAction("Index", "Bedrijf", b);
+                        } 
+                    }
+                  
                 }
                 else
                 {
@@ -109,7 +125,7 @@ namespace Internship.Controllers
             if (ModelState.IsValid)
             {
 
-                var user = DomainFactory.createBedrijf(model.Bedrijfsnaam, model.Activiteit, model.Bereikbaarheid,
+                var user = DomainFactory.createBedrijf(model.Bedrijfsnaam, model.Activiteit, model.PerAuto,model.Openbaarvervoer,
                     model.Url,
                     model.Straat, model.Straatnummer, model.Woonplaats, model.Telefoon, model.Email,gemeenteRepository);
                 var result = await UserRepository.CreateAsyncUser(user, model.Password);
@@ -167,6 +183,13 @@ namespace Internship.Controllers
                            Student s = StudentRepository.FindById(User.Identity.GetUserId());
                             return RedirectToAction("Index","Student",s);
 
+                        }
+                        if (User.Identity.GetUserName().EndsWith("@hogent.be"))
+                        {
+                                
+                            StagebegeleiderRepository.UpdateFirstTime(User.Identity.GetUserName());
+                            Stagebegeleider s = StagebegeleiderRepository.FindById(User.Identity.GetUserId());
+                            return RedirectToAction("Index", "StageBegeleider", s);
                         }
 
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });

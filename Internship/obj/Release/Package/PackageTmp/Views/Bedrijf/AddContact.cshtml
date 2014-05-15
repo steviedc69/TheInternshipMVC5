@@ -1,0 +1,15 @@
+﻿@model Internship.ViewModels.ContactModel
+
+@{
+    ViewBag.Title = "AddContact";
+    Layout = "~/Views/Bedrijf/_BedrijfLayout.cshtml";
+}
+
+<h2>AddContact</h2>
+
+<div>@Html.Partial("_CreateContact", Model)</div>
+<input type="button" value="maak aan"/>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

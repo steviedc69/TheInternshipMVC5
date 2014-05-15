@@ -16,7 +16,7 @@ namespace Internship.Models.Domain
     public static class DomainFactory
     {
 
-        public static Bedrijf createBedrijf(String bedrijfnaam, String activiteit, String bereikbaarheid,
+        public static Bedrijf createBedrijf(String bedrijfnaam, String activiteit, Boolean perAuto,Boolean openbVervoer,
             String url, String straat, int nummer, String woonplaats, String telefoon, String email,IGemeenteRepository gemeenteRepo)
         {
             Gemeente g = gemeenteRepo.FindGemeenteWithStructuur(woonplaats);
@@ -26,7 +26,8 @@ namespace Internship.Models.Domain
             {
                 Bedrijfsnaam = bedrijfnaam,
                 Activiteit = activiteit,
-                Bereikbaarheid = bereikbaarheid,
+                Openbaarvervoer = openbVervoer,
+                PerAuto =  perAuto,
                 Url = url,
                 Telefoon = telefoon,
                 UserName = email,

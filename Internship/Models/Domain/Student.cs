@@ -11,14 +11,11 @@ namespace Internship.Models.Domain
 
         public String Naam { get; set; }
         public String Voornaam { get; set; }
-        public String Straat { get; set; }
-        public int Straatnummer { get; set; }
-        public String Woonplaats { get; set; }
-        public int Postcode { get; set; }
+        public virtual Adres Adres { get; set; }
         public String Gsmnummer { get; set; }
         public String Gebdatum { get; set; }
         public bool NotFirstTime { get; set; }
-
+        
         [InverseProperty("StudentenFavorites")]
         public virtual ICollection<Opdracht> Favorites { get; set; }
         [InverseProperty("StageStudenten")]
@@ -28,7 +25,7 @@ namespace Internship.Models.Domain
         public Student()
         {
             NotFirstTime = false;
-
+            ImageUrl = "/Images/user.png";
         }
 
         public void AddOpdrachtToFavorites(Opdracht opdracht)

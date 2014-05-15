@@ -1,0 +1,79 @@
+﻿@model Internship.Models.Domain.Bedrijf
+
+@{
+    ViewBag.Title = "BeheerContacten";
+    Layout = "~/Views/Bedrijf/_BedrijfLayout.cshtml";
+}
+
+
+
+
+<div class="page-header">
+    <h1>@Model.Bedrijfsnaam</h1>
+ 
+</div>
+<div id = "dialog" style="display: none" ></div>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Beheer uw contactpersonen</div>
+    <div class="panel-body">
+ 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Voornaam</th>
+                    <th>Functie</th>
+                    <th><span class="glyphicon glyphicon-phone"></span></th>
+                    <th><span class="glyphicon glyphicon-phone-alt"></span></th>
+                    <th><span class="glyphicon glyphicon-envelope"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.ContactPersonen)
+                {
+
+                    if (c.Actief)
+                    {
+
+
+                            <tr>
+                                <td>@c.Naam</td>
+                                <td>@c.Voornaam</td>
+                                <td>@c.Functie</td>
+                                <td>@c.GsmNummer</td>
+                                <td>@c.ContactTelNr</td>
+                                <td>@c.ContactEmail</td>
+                                <td>
+                                    <div class="btn-group">
+
+                                        @Html.ActionLink(" ", "ToRemoveContact", "Bedrijf", new { id = c.Id }, new { @class = "btn btn-primary glyphicon glyphicon-remove" })
+                                        @*<a class="btn btn-primary pasaan"  href="@Url.Action("EditContact","Bedrijf",new{id=c.Id})"><span class="glyphicon glyphicon-pencil"></span></a>*@
+                                        @*<div class="btn btn-primary white">
+                                            <span class="glyphicon glyphicon-pencil">*@
+                                               @Ajax.ActionLink(" ", "EditContact", new { id = c.Id},new AjaxOptions()
+                                                                         {
+                                                                             InsertionMode = InsertionMode.Replace,
+                                                                             UpdateTargetId = "dialog",
+                                                                             OnSuccess = "openPopup"
+                                                                            
+                                                                         },new {@class ="btn btn-primary glyphicon glyphicon-pencil pasaan"})
+
+
+                                            @*</span>
+                                        </div>*@
+                                    </div>
+                                </td>
+                            </tr>
+ 
+
+                    }
+                }
+        
+            </tbody>
+        </table>
+    </div>
+</div>

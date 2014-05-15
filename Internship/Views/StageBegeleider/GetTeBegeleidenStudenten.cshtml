@@ -1,0 +1,22 @@
+﻿@model Internship.Models.Domain.Stagebegeleider
+
+@{
+    ViewBag.Title = "GetTeBegeleidenStudenten";
+    Layout = "~/Views/StageBegeleider/_StageBegeleiderLayout.cshtml";
+}
+
+<ul class="nav nav-tabs">
+    <li ><a href="@Url.Action("GetTeBegeleidenStages",new{id=Model.Id})">Per stage</a></li>
+    <li class="active"> <a href="#">Per student</a></li>
+</ul>
+
+<h2>Studenten</h2>
+
+<div class="row">
+    <div class="col-md-2" id="list">
+        @Html.Partial("_StudentenList", Model.GetStudentenList())
+    </div>
+    <div class="col-md-10">
+        <div id="details"></div>
+    </div>
+    </div>

@@ -10,8 +10,9 @@ namespace Internship.Models.Domain
     {
         IQueryable<Stagebegeleider> FindAll();
         Stagebegeleider FindByEmail(string email);
-        Stagebegeleider FindById(int id);
+        Stagebegeleider FindById(String id);
         IQueryable<Stagebegeleider> FindByName(string naam);
+        void UpdateFirstTime(String username);
         void SaveChanges();
     }
 }

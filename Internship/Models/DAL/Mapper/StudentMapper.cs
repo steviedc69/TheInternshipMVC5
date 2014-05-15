@@ -20,6 +20,7 @@ namespace Internship.Models.DAL.Mapper
                 s.MapLeftKey("StudentId");
                 s.MapRightKey("OpdrachtId");
             });
+            HasOptional(s => s.Adres).WithMany().Map(m => m.MapKey("adresId")).WillCascadeOnDelete(true);
             HasOptional(s=>s.StageOpdracht).WithMany(o=>o.StageStudenten).Map(s=>s.MapKey("StageId")).WillCascadeOnDelete(false);
             ToTable("Student");
         }

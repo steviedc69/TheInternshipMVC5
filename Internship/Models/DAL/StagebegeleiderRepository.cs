@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using Internship.Models.Domain;
@@ -30,7 +31,7 @@ namespace Internship.Models.DAL
             return stagebegeleiders.SingleOrDefault(s => s.UserName.Equals(email));
         }
 
-        public Stagebegeleider FindById(int id)
+        public Stagebegeleider FindById(String id)
         {
             return stagebegeleiders.Find(id);
         }
@@ -40,6 +41,14 @@ namespace Internship.Models.DAL
         public IQueryable<Stagebegeleider> FindByName(string naam)
         {
             return stagebegeleiders.Where(s => s.Naam == naam || s.Voornaam == naam);
+        }
+
+        public void UpdateFirstTime(String username)
+        {
+            Stagebegeleider s = FindByEmail(username);
+            s.IsFirstTime= false;
+            stagebegeleiders.AddOrUpdate(s);
+            SaveChanges();
         }
 
         public void SaveChanges()

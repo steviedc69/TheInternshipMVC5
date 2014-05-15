@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using System.Web.UI.WebControls.WebParts;
+using Internship.ViewModels;
 
 namespace Internship.Models.Domain
 {
@@ -59,6 +62,40 @@ namespace Internship.Models.Domain
             return num;
         }
 
+        private static String MakeBody(String title,String schooljaar, String omschijving,String specialisatie)
+        {
+            return "Uw opdracht " + title + " voor " + schooljaar + "<br/>" + "Met volgende omschrijving : " +
+                   omschijving + "<br/>" +
+                   "En specialisatie : " + specialisatie +
+                   ".<br/> Werd succesvol aangemaakt, uw aanvraag wordt door onze administratie verwerkt<br/>" +
+                   "en u wordt zo snel mogelijk op de hoogte gebracht." + "<br/><br/>" + "Met vriendelijke groet,<br/><br/>" +
+                   "IDev<br/><br/>";
+
+
+        }
+
+        public static void SendMail(String email, OpdrachtViewModel model)
+        {
+            MailMessage message = new MailMessage();
+            message.To.Add(email);
+            message.From = new MailAddress("noreply@idev.be");
+            message.CC.Add("stevie.dc.SDC@gmail.com");
+            message.Subject = "Nieuwe aanvraag " + model.Title;
+            message.Body = MakeBody(model.Title, model.Schooljaar, model.Omschrijving, model.Specialisatie);
+            message.IsBodyHtml = true;
+            
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential
+            ("stevie.dc.SDC@gmail.com", "Samsungs4");// Enter seders User name and password  
+            smtp.EnableSsl = true;
+            smtp.Send(message);
+         
+
+        }
         
     }
 }

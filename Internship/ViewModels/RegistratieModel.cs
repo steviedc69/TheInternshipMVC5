@@ -15,6 +15,7 @@ namespace Internship.ViewModels
         public RegistratieModel RegistratieModel { get; set; }
         public SelectList GemeenteLijst { get; set; }
         public UpdateModel UpdateModel { get; set; }
+        public RegistratieModelStudent ModelStudent { get; set; }
 
         public RegistratieModelCreater(IGemeenteRepository repository,RegistratieModel model)
         {
@@ -30,7 +31,45 @@ namespace Internship.ViewModels
             GemeenteLijst = new SelectList(gemeentes);
             UpdateModel = umodel;
         }
+
+        public RegistratieModelCreater(IGemeenteRepository repository, RegistratieModelStudent studentModel)
+        {
+            IEnumerable<Gemeente> gemeentes = repository.GetAlleGemeentes();
+            GemeenteLijst = new SelectList(gemeentes);
+            ModelStudent = studentModel;
+
+        }
     }
+
+    public class RegistratieModelStudent
+    {
+        [Display(Name = "Naam : ")]
+        [Required(ErrorMessage = "{0} is verplicht")]
+        public String Naam { get; set; }
+        [Display(Name = "Voornaam : ")]
+        [Required(ErrorMessage = "{0} is verplicht")]
+        public String Voornaam { get; set; }
+        [Display(Name = "GSM nummer : ")]
+        [RegularExpression(@"^\(?(04)[1-9]{2}\)?(\-|\s)?[0-9]{6}$", ErrorMessage = "vb: 0494123456")]
+        public String GsmNummer { get; set; }
+        [Display(Name = "Straat : ")]
+        public String Straat { get; set; }
+        [Display(Name = "Nummer :")]
+        [Range(1, 1999, ErrorMessage = "{0} moet verplicht een nummer zijn groter dan 0")]
+        public int Straatnummer { get; set; }
+        public String Gemeente { get; set; }
+        
+        
+        [DataType(DataType.Date, ErrorMessage = "{0} moet een datum zijn")]
+        [Display(Name = "Geboortedatum :")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}",ApplyFormatInEditMode = true)]
+      
+        public DateTime? GeboorteDatum { get; set; }
+        public String Image { get; set; }
+
+
+    
+}
 
     public class RegistratieModel
     {
@@ -60,7 +99,10 @@ namespace Internship.ViewModels
         [StringLength(10,ErrorMessage = "{0} is te lang")]
         [Required(ErrorMessage = "{0} is verplicht")]
         public String Telefoon { get; set; }
-        public String Bereikbaarheid { get; set; }
+        [Display(Name = "Openbaar vervoer :")]
+        public Boolean Openbaarvervoer { get; set; }
+        [Display(Name = "Per auto : ")]
+        public Boolean PerAuto { get; set; }
         public String Activiteit { get; set; }
         [Required]
         [StringLength(20, MinimumLength = 8, ErrorMessage = "Paswoorden moeten minstens 8 tekens lang zijn.")]
@@ -102,7 +144,12 @@ namespace Internship.ViewModels
         [StringLength(10, ErrorMessage = "{0} is te lang")]
         [Required(ErrorMessage = "{0} is verplicht")]
         public String Telefoon { get; set; }
-        public String Bereikbaarheid { get; set; }
+        [Display(Name = "Openbaar vervoer :")]
+        public Boolean Openbaarvervoer { get; set; }
+        [Display(Name = "Per auto : ")]
+        public Boolean PerAuto { get; set; }
         public String Activiteit { get; set; }
+        [Display(Name = "Logo : ")]
+        public String Image { get; set; }
     }
 }

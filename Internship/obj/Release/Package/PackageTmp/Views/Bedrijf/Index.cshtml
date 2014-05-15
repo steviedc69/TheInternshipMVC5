@@ -1,0 +1,32 @@
+﻿@using Internship.Models.Domain
+@using Microsoft.AspNet.Identity
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Internship.Models.Domain.Opdracht>
+
+@{
+    Layout = "_BedrijfLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@ViewBag.Title</title>
+    </head>
+    <body>
+        <div>
+            <h1>@ViewBag.Title</h1>
+            <p class="pull-right">
+                <a href=@Url.Action("AddOpdracht", "Bedrijf", new { id = User.Identity.GetUserId() }) class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Nieuwe opdracht</a>
+            </p>
+        </div>
+        <div id="search">
+            @Html.Partial("_Search")
+        </div>
+        <div id="opdrachten" style="margin-top: 3%">
+            @Html.Partial("_OpdrachtenListPartial",Model)
+        </div>
+
+    </body>
+</html>

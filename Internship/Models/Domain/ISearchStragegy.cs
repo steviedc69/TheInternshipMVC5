@@ -43,8 +43,8 @@ namespace Internship.Models.Domain
             }
             foreach (Opdracht opdracht in opdrachten)
             {
-                if ((opdracht.Ondertekenaar != null && opdracht.StageMentor != null) && (opdracht.Ondertekenaar.ToString().Contains(search)||opdracht.StageMentor.ToString().Contains(search)
-                    ||opdracht.ToString().Contains(search)))
+                if ((opdracht.Ondertekenaar != null && opdracht.StageMentor != null) && (opdracht.Ondertekenaar.ToString().ToLower().Contains(search.ToLower())||opdracht.StageMentor.ToString().ToLower().Contains(search.ToLower())
+                    ||opdracht.ToString().ToLower().Contains(search.ToLower())))
                 {
                     result.Add(opdracht);
                 }
@@ -59,13 +59,15 @@ namespace Internship.Models.Domain
         public IList<Opdracht> Search(IList<Opdracht> opdrachten, string search = null)
         {
             IList<Opdracht> result = new List<Opdracht>();
+            
             if (search == null)
             {
                 return opdrachten.OrderBy(o=>o.Schooljaar).ToList();
             }
             foreach (Opdracht opdracht in opdrachten)
             {
-                if (opdracht.Schooljaar.Contains(search))
+                search = search.ToLower();
+                if (opdracht.Schooljaar.ToLower().Contains(search))
                 {
                     result.Add(opdracht);
                 }
@@ -92,8 +94,9 @@ namespace Internship.Models.Domain
             }
             else
             {
+                search = search.ToLower();
                 return
-                    opdrachten.Where(o => o.Status.Id == statusId && o.ToString().Contains(search))
+                    opdrachten.Where(o => o.Status.Id == statusId && o.ToString().ToLower().Contains(search))
                         .OrderBy(o => o.Title)
                         .ToList();
             }
@@ -110,8 +113,9 @@ namespace Internship.Models.Domain
                 }
                 else
                 {
+                    search = search.ToLower();
                     return
-                        opdrachten.Where(o => o.Specialisatie.Title.Equals(search))
+                        opdrachten.Where(o => o.Specialisatie.Title.ToLower().Equals(search))
                             .OrderBy(o => o.Specialisatie.Title)
                             .ToList();
                 }

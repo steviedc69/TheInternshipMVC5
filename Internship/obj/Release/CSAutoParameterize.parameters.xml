@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="internshipdb-Web.config Connection String" description="internshipdb Connection String used in web.config by the application to access the database." defaultValue="Server=localhost;port=3306;Database=internshipdb;Uid=root;Pwd=root;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Steven\ De\ Cock\\Documents\\Visual\ Studio\ 2013\\Projects\\Internship\\Internship\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='internshipdb']/@connectionString" />
+  </parameter>
+</parameters>

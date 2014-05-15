@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -300,6 +301,7 @@ namespace Internship.Controllers
                 }
                 b.AddOpdracht(opdracht);
                 bedrijfRepository.SaveChanges();
+                Bewerkingen.SendMail(b.UserName,model);
                 if (button.Equals("contact"))
                 {
                     TempData["Info"] = "Opdracht " + opdracht.Title + " werd succesvol aangemaakt";
@@ -463,7 +465,7 @@ namespace Internship.Controllers
                 ContactPersoon c = new ContactPersoon()
                 {
                     ContactEmail = model.ContactEmail.Trim(),
-                    ContactTelNr = model.ContactTelNr.Trim(),
+                    ContactTelNr = model.ContactTelNr,
                     Functie = model.Functie.Trim(),
                     GsmNummer = model.GsmNummer,
                     Naam = model.Naam.Trim(),
@@ -477,7 +479,11 @@ namespace Internship.Controllers
                     return PartialView("_ContactDetail", c);
                 }
             }
-            return View("_ContactFormPartial", model);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_ContactFormPartial", model);
+            }
+            return RedirectToAction("MakeContactFromForm", model);
         }
 
         [HttpPost]
@@ -487,10 +493,12 @@ namespace Internship.Controllers
             Bedrijf bedrijf = bedrijfRepository.FindBedrijfByOpdrachtId(id);
             if (ModelState.IsValid)
             {
-                ContactPersoon c = contactPersoonRepository.FindPersoonWithNaamVoornaamEmail(model.Naam, model.Voornaam,
+                ContactPersoon c = null;
+                ContactPersoon contact = contactPersoonRepository.FindPersoonWithNaamVoornaamEmail(model.Naam, model.Voornaam,
                     model.ContactEmail);
-                if (c!=null)
+                if (contact!=null)
                 {
+                    c = contact;
                     c.Actief = true;
                 }
                 else
@@ -500,7 +508,7 @@ namespace Internship.Controllers
                         ContactEmail = model.ContactEmail.Trim(),
                         ContactTelNr = model.ContactTelNr,
                         Functie = model.Functie.Trim(),
-                        GsmNummer = model.GsmNummer.Trim(),
+                        GsmNummer = model.GsmNummer,
                         Naam = model.Naam.Trim(),
                         Voornaam = model.Voornaam.Trim()
                     };
@@ -508,13 +516,17 @@ namespace Internship.Controllers
                 }
              
                 opdracht.StageMentor = c;
-                bedrijfRepository.SaveChanges();
+                opdrachtRepository.SaveChanges();
                 if (Request.IsAjaxRequest())
                 {
                     return PartialView("_ContactDetail", c);
                 }
             }
-            return View("_StageBegeleiderForm", model);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_StageBegeleiderForm", model);
+            }
+            return RedirectToAction("GetNewStageBegeleider", model);
         }
 
         public ActionResult OpdrachtDetail(int id)
@@ -644,7 +656,7 @@ namespace Internship.Controllers
                 return RedirectToAction("BeheerContacten", b);
             }
 
-            return RedirectToAction("EditContact", model);
+            return RedirectToAction("EditContact",model);
 
         }
 
@@ -662,26 +674,40 @@ namespace Internship.Controllers
             {
                 Activiteit = b.Activiteit,
                 Bedrijfsnaam = b.Bedrijfsnaam,
-                Bereikbaarheid = b.Bereikbaarheid,
+                Openbaarvervoer = b.Openbaarvervoer,
+                PerAuto = b.PerAuto,
                 Url = b.Url,
                 Straat = b.Adres.StraatNaam,
                 Straatnummer = b.Adres.Nummer,
                 Telefoon = b.Telefoon,
-                Woonplaats = b.Adres.Gemeente.Structuur
+                Woonplaats = b.Adres.Gemeente.Structuur,
+                Image = b.ImageUrl
+                
             };
             RegistratieModelCreater model = new RegistratieModelCreater(gemeenteRepository,updateModel);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult EditProfile([Bind(Prefix = "UpdateModel")] UpdateModel model, String id)
+        public ActionResult EditProfile([Bind(Prefix = "UpdateModel")] UpdateModel model, String id,HttpPostedFileBase file)
         {
             Bedrijf b = FindBedrijf(id);
-           
+            //HttpPostedFileBase file = Request.Files["file"];
             if (ModelState.IsValid)
             {
+                if (file!=null)
+                {
+                    if (file.FileName.EndsWith(".jpg") || file.FileName.EndsWith(".png") ||
+                        file.FileName.EndsWith(".jpeg"))
+                    {
+
+                        file.SaveAs(HttpContext.Server.MapPath("/Images/") + file.FileName);
+                        b.ImageUrl = "/Images/" + file.FileName;
+                    }
+                }
                 b.Bedrijfsnaam = model.Bedrijfsnaam;
-                b.Bereikbaarheid = model.Bereikbaarheid;
+                b.PerAuto = model.PerAuto;
+                b.Openbaarvervoer = model.Openbaarvervoer;
                 b.Activiteit = model.Activiteit;
                 b.Telefoon = model.Telefoon;
                 b.Url = model.Url;
@@ -702,10 +728,11 @@ namespace Internship.Controllers
         {
             if (Request.IsAjaxRequest())
             {
+                
                 return PartialView("_ChangePassword",new ManageModel());
                 //return RedirectToAction("Manage", "Account");
             }
-            return RedirectToAction("Manage", "Account");
+            return View(new ManageModel());
         }
 
         [HttpPost]
@@ -718,17 +745,18 @@ namespace Internship.Controllers
                 IdentityResult result = await userRepository.ChangePaswordAsync(id, model.OldPassword, model.NewPassword);
                 if (result.Succeeded)
                 {
-                    ViewBag["info"] = "Wachtwoord werd gewijzigd";
-                    return View("EditProfile", id);
+                    TempData["Info"] = "Wachtwoord werd gewijzigd";
+                    return View("ChangePassword", model);
                 }
                 else
                 {
-                    AddErrors(result);
+                    TempData["Message"] = "Paswoord niet correct";
+                    return View("ChangePassword",model);
                 }
             }
 
 
-            return RedirectToAction("ChangePassword", id);
+            return View("ChangePassword",model);
 
         }
 

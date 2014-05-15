@@ -1,0 +1,326 @@
+﻿/*-------------------------------------------------------------- EIGEN CSS --------------------------------------------------------------*/
+html {
+    overflow-y: scroll;
+}
+
+body {
+    padding-top: 60px;
+}
+
+.logo-jumbotron {
+    text-align: center;
+}
+
+a {
+	color: #01A3D3;
+}
+
+a:focus, :focus {
+	outline-color: #01A3D3;
+}
+
+#dialog {
+    background-color: transparent;
+}
+/*---------------------------------------------------------- EINDE EIGEN CSS -----------------------------------------------------------*/
+
+/*----------------------------------------------------- AANPASSINGEN AAN BOOTSTRAP -----------------------------------------------------*/
+@media (min-width: 768px) {
+	.navbar-inverse {
+	  border-bottom: none;
+	}
+
+	.navbar-inverse .navbar-nav > li > a:hover,
+	.navbar-inverse .navbar-nav > li > a:focus {
+	  border-bottom: 5px solid #01A3D3;
+	  padding-bottom: 10px;
+	  color: #FFFFFF;
+	  transition: all .35s ease-in-out;
+	}
+
+	.navbar-inverse .navbar-nav > .active > a,
+	.navbar-inverse .navbar-nav > .active > a:hover,
+	.navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: transparent;
+	  border-bottom: 5px solid #01A3D3;
+	  padding-bottom: 10px;
+	}
+
+  .blueIcon {
+    color: #01A3D3;
+  }
+}
+
+@media (max-width: 768px) {
+    html {
+        overflow-y: hidden;
+    }
+
+    /* Om scrollbar weg te krijgen in de collapse menu */
+    .navbar-collapse.in {
+        max-height: none;
+    }
+
+    .navbar-inverse .navbar-nav li a:hover,
+    .navbar-inverse .navbar-nav li a:focus {
+        background-color: #017CA0;
+    }
+
+    .navbar-inverse .navbar-nav > .active > a,
+    .navbar-inverse .navbar-nav > .active > a:hover,
+    .navbar-inverse .navbar-nav > .active > a:focus {
+        background-color: #01A3D3;
+    }
+
+    .navbar-default .navbar-nav li {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+.navbar-default {
+    background-color: rgba(1,162,211,0.5);
+    border-color: #01A3D3;
+}
+
+.navbar-default .navbar-nav li a,
+.navbar-default .navbar-brand {
+    color: #ffffff;
+ }
+
+.navbar-default .navbar-nav li a:hover,
+.navbar-default .navbar-brand:hover {
+    color: #000000;
+    background-color: rgba(1,162,211,0.8);
+ }
+
+.navbar-inverse .navbar-brand {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.jumbotron {
+  background-color: #01A3D3;
+    color: #ffffff;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+	color: #FFFFFF;
+	background-color: #01A3D3;
+}
+
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus {
+	color: #01A3D3;
+}
+
+.input-group-addon {
+	background-color: #01A3D3;
+	color: #FFFFFF;
+	border-color: #01A3D3;
+	min-width: 110px;
+    text-align: left;
+}
+.white {
+    color: #ffffff;
+}
+.blue {
+	color: #01A3D3;
+}
+
+/* primary Button */
+.btn-primary {
+  color: #ffffff !important;
+  background-color: #01A3D3;
+  border-color: #01A3D3;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #017CA0;
+  border-color: #017CA0;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+  background-color: #01A3D3;
+  border-color: #01A3D3;
+}
+
+/* Success Button */
+.btn-success {
+  color: #ffffff;
+  background-color: #77b300;
+  border-color: #77b300;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open .dropdown-toggle.btn-success {
+  color: #ffffff;
+  background-color: #558000;
+  border-color: #558000;
+}
+
+.btn-success:active,
+.btn-success.active,
+.open .dropdown-toggle.btn-success {
+  background-image: none;
+}
+
+.btn-success.disabled,
+.btn-success[disabled],
+fieldset[disabled] .btn-success,
+.btn-success.disabled:hover,
+.btn-success[disabled]:hover,
+fieldset[disabled] .btn-success:hover,
+.btn-success.disabled:focus,
+.btn-success[disabled]:focus,
+fieldset[disabled] .btn-success:focus,
+.btn-success.disabled:active,
+.btn-success[disabled]:active,
+fieldset[disabled] .btn-success:active,
+.btn-success.disabled.active,
+.btn-success[disabled].active,
+fieldset[disabled] .btn-success.active {
+  background-color: #77b300;
+  border-color: #77b300;
+}
+
+/* Warning Button */
+.btn-warning {
+  color: #ffffff;
+  background-color: #ff8800;
+  border-color: #ff8800;
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active,
+.btn-warning.active,
+.open .dropdown-toggle.btn-warning {
+  color: #ffffff;
+  background-color: #CC6D00;
+  border-color: #CC6D00;
+}
+
+.btn-warning:active,
+.btn-warning.active,
+.open .dropdown-toggle.btn-warning {
+  background-image: none;
+}
+
+.btn-warning.disabled,
+.btn-warning[disabled],
+fieldset[disabled] .btn-warning,
+.btn-warning.disabled:hover,
+.btn-warning[disabled]:hover,
+fieldset[disabled] .btn-warning:hover,
+.btn-warning.disabled:focus,
+.btn-warning[disabled]:focus,
+fieldset[disabled] .btn-warning:focus,
+.btn-warning.disabled:active,
+.btn-warning[disabled]:active,
+fieldset[disabled] .btn-warning:active,
+.btn-warning.disabled.active,
+.btn-warning[disabled].active,
+fieldset[disabled] .btn-warning.active {
+  background-color: #ff8800;
+  border-color: #ff8800;
+}
+
+/* Default Button */
+.btn-default {
+  color: #ffffff;
+  background-color: #222222;
+  border-color: #222222;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  color: #ffffff;
+  background-color: #BBBBBB;
+  border-color: #BBBBBB;
+}
+
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  background-image: none;
+}
+
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
+  background-color: #222222;
+  border-color: #222222;
+}
+/*--------------------------------------------------- EINDE AANPASSINGEN AAN BOOTSTRAP ---------------------------------------------------*/
+
+
+/*------------------------------------------------------ TOEVOEGINGEN AAN BOOTSTRAP ------------------------------------------------------*/
+/* DIVIDER (weg uit Bootstrap 3.0) */
+.navbar .divider-vertical {
+	height: 50px;
+	margin: 0 9px;
+	border-right: 1px solid #ffffff;
+	border-left: 1px solid #f2f2f2;
+}
+
+.navbar-inverse .divider-vertical {
+	border-right-color: #222222;
+	border-left-color: #111111;
+}
+
+@media (max-width: 767px) {
+	.navbar-collapse .nav > .divider-vertical {
+    	display: none;
+  	}
+}
+
+
+
+
+/*-------------------------------------------------- EINDE TOEVOEGINGEN AAN BOOTSTRAP --------------------------------------------------*/

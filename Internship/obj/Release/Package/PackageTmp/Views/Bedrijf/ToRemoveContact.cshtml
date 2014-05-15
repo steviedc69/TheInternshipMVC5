@@ -1,0 +1,42 @@
+﻿@model Internship.Models.Domain.ContactPersoon
+
+@{
+    ViewBag.Title = "ToRemoveContact";
+    Layout = "~/Views/Bedrijf/_BedrijfLayout.cshtml";
+}
+
+<h2>Weet u zeker dat u @Model.Naam  @Model.Voornaam wilt verwijderen als contactpersoon?</h2>
+@using (Html.BeginForm("RemoveContact", "Bedrijf", new {id = Model.Id}))
+{
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Voornaam</th>
+                <th>Functie</th>
+                <th><span class="glyphicon glyphicon-phone"></span></th>
+                <th><span class="glyphicon glyphicon-phone-alt"></span></th>
+                <th><span class="glyphicon glyphicon-envelope"></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Naam</td>
+                <td>@Model.Voornaam</td>
+                <td>@Model.Functie</td>
+                <td>@Model.GsmNummer</td>
+                <td>@Model.ContactTelNr</td>
+                <td>@Model.ContactEmail</td>
+            </tr>
+        </tbody>
+    </table>
+
+                <div class="btn-group-sm">
+                    <button name="button" value="ja" class="btn btn-default">Ja</button>
+                    <button name="button" value="nee" class="btn btn-default">Nee</button>
+                </div>
+}
+
+

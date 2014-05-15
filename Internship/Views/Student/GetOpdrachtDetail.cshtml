@@ -1,0 +1,142 @@
+﻿@using Microsoft.AspNet.Identity
+@model Internship.Models.Domain.Opdracht
+
+@{
+
+    Layout = "~/Views/Student/_StudentLayout.cshtml";
+}
+@if (@Model == null)
+{
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h2>Geen stage toegewezen</h2>
+        </div>
+        <div class="panel-body">
+            Er werd nog geen stageplaats aan u toegewezen.
+            <br/>
+            <strong>Ga als volgt te werk</strong>
+            <ul>
+                <li>Zoek een geschikte en uitdagende stage opdracht uit</li> 
+                <li>Neem contact op met de firma</li> 
+                <li>Ga op gesprek</li>
+                <li>Teken het stage contract</li>
+                <li>Succes</li>
+            </ul>
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("Terug naar index","Index",new{id=User.Identity.GetUserId()},new {@class="btn btn-primary"})
+        </div>
+    </div>
+
+}
+else
+{
+
+
+    <div class="alert alert-success" style="display: none" id="added"></div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-12 col-md-8"> <h2>@Model.Title</h2></div>
+                <div class="col-xs-6 col-md-4">
+              
+                    <img data-src="holder.js/100%x180" alt="logo" height="200px" width="100px" src="@Model.Bedrijf.ImageUrl" class="img-thumbnail">
+             
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>Omschrijving : </dt>
+                <dd>@Model.Omschrijving</dd>
+                <dt>Specialisatie : </dt>
+                <dd>@Model.Specialisatie.Title</dd>
+                <dt>Schooljaar : </dt>
+                <dd>@Model.Schooljaar</dd>
+                <dt>
+                    Semester :
+                </dt>
+                <dd>
+                    <ul class="">
+                        @if (@Model.IsSemester1)
+                        {
+                            <li>Stage gaat door in het eerste semester</li>
+                        }
+                        @if (@Model.IsSemester2)
+                        {
+                            <li>Stage gaat door in het tweede semester</li>
+                        }
+                    </ul>
+                </dd>
+
+                <dt>Vaardigheden : </dt>
+                <dd>@Model.Vaardigheden</dd>
+                <dt>Aantal studenten : </dt>
+                <dd>@Model.AantalStudenten</dd>
+                <dt>Bedrijf :</dt>
+                <dd>
+                    <address>
+                        <strong>@Model.Bedrijf.Bedrijfsnaam</strong><br />
+                        @Model.Bedrijf.Adres.StraatNaam  @Model.Bedrijf.Adres.Nummer<br />
+                        @Model.Bedrijf.Adres.Gemeente.Structuur<br />
+                        <abbr title="phone">Tel :</abbr>@Model.Bedrijf.Telefoon<br />
+                        <a href="mailto:#">@Model.Bedrijf.UserName</a>
+                    </address>
+                </dd>
+                @if (@Model.Bedrijf.Adres.Id != @Model.Adres.Id)
+                {
+                    <dt>Stage adres :</dt>
+                    <dd>
+                        <address>
+                            <strong>@Model.Bedrijf.Bedrijfsnaam</strong><br />
+                            @Model.Adres.StraatNaam  @Model.Adres.Nummer<br />
+                            @Model.Adres.Gemeente.Structuur<br />
+                            <abbr title="phone">Tel :</abbr>@Model.Bedrijf.Telefoon<br />
+                            <a href="mailto:#">@Model.Bedrijf.UserName</a>
+                        </address>
+                    </dd>
+                }
+                else
+                {
+                    <dt>Stage adres : </dt>
+                    <dd>(Adres van @Model.Bedrijf.Bedrijfsnaam)</dd>
+                }
+
+                <dt>Contact opnemen met </dt>
+                @if (@Model.Ondertekenaar != null)
+                {
+                    <dd>
+                        <address>
+                            <strong>  @Model.Ondertekenaar.Naam  @Model.Ondertekenaar.Voornaam</strong><br />
+                            @Model.Ondertekenaar.Functie<br />
+                            <abbr title="phone">Tel : </abbr>@Model.Ondertekenaar.ContactTelNr <br />
+                            <a href="mailto:#">@Model.Ondertekenaar.ContactEmail</a>
+                        </address>
+                    </dd>
+                }
+                else
+                {
+                    <dd>Gegevens niet beschikbaar, gelieve u contact op te nemen via de bedrijfsgegevens</dd>
+                }
+            </dl>                             
+        </div>
+        <div class="panel-footer">
+            <div class="btn-group-sm">
+                @Html.ActionLink("Terug naar lijst", "Index", new {id = User.Identity.GetUserId()}, new {@class = "btn btn-primary"})
+                @if (!ViewBag.Title.Equals("Mijnstage"))
+                {
+                    using (Ajax.BeginForm("AddToFavorites", new {id = @Model.Id}, new AjaxOptions()
+                {
+                    HttpMethod = "Post",
+                    OnSuccess = "showMessage(data)"
+                }))
+                {
+                    <button class="btn btn-primary" type="submit">Voeg toe aan favorieten</button>
+                }
+                }
+              
+            </div>
+        </div>
+    </div>
+
+}

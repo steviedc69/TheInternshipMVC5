@@ -192,6 +192,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BedrijfController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StageBegeleiderController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -232,6 +233,7 @@
     <Compile Include="Models\Domain\IGemeenteRepository.cs" />
     <Compile Include="Models\Domain\IOpdrachtRepository.cs" />
     <Compile Include="Models\Domain\ISearchStragegy.cs" />
+    <Compile Include="Models\Domain\ISort.cs" />
     <Compile Include="Models\Domain\ISpecialisatieRepository.cs" />
     <Compile Include="Models\Domain\IStagebegeleiderRepository.cs" />
     <Compile Include="Models\Domain\IStudentRepository.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="ViewModels\Mapper.cs" />
     <Compile Include="ViewModels\OpdrachtViewModel.cs" />
     <Compile Include="ViewModels\RegistratieModel.cs" />
+    <Compile Include="ViewModels\StagebegeleiderModel.cs" />
     <Compile Include="ViewModels\StageModel.cs" />
     <Compile Include="ViewModels\StudentIndexModel.cs" />
   </ItemGroup>
@@ -269,6 +272,7 @@
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\HG-woordmerk.png" />
     <Content Include="Images\HG.gif" />
+    <Content Include="Images\img.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
     <Content Include="Images\orderedList2.png" />
@@ -283,9 +287,14 @@
     <Content Include="Images\theinternship-neg.png" />
     <Content Include="Images\theinternship-pos.png" />
     <Content Include="Images\theinternship-wit.png" />
+    <Content Include="Images\user.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Models\Domain\Domain.cd" />
+    <None Include="Properties\PublishProfiles\idevInternship - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\idevInternship - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\theinternship - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\theinternship - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -355,6 +364,29 @@
     <Content Include="Views\Bedrijf\_Search.cshtml" />
     <Content Include="Views\Bedrijf\_ChangePassword.cshtml" />
     <Content Include="Views\Student\Favoites.cshtml" />
+    <Content Include="Views\Student\GetOpdrachtDetail.cshtml" />
+    <Content Include="Views\Bedrijf\ChangePassword.cshtml" />
+    <Content Include="Views\Student\GetProfile.cshtml" />
+    <Content Include="Views\Student\EditProfile.cshtml" />
+    <Content Include="Views\Student\ChangePassword.cshtml" />
+    <Content Include="Views\StageBegeleider\Index.cshtml" />
+    <Content Include="Views\StageBegeleider\_StageBegeleiderLayout.cshtml" />
+    <Content Include="Views\StageBegeleider\_StagesPart.cshtml" />
+    <Content Include="Views\StageBegeleider\GetOpdrachtDetail.cshtml" />
+    <Content Include="Views\StageBegeleider\GetFavorites.cshtml" />
+    <Content Include="Views\StageBegeleider\_OpdrachtPartial.cshtml" />
+    <Content Include="Views\StageBegeleider\_BedrijfPartial.cshtml" />
+    <Content Include="Views\StageBegeleider\_StudentPartial.cshtml" />
+    <Content Include="Views\StageBegeleider\GetTeBegeleidenStages.cshtml" />
+    <Content Include="Views\StageBegeleider\_StagesList.cshtml" />
+    <Content Include="Views\StageBegeleider\_StageFirstPartial.cshtml" />
+    <Content Include="Views\StageBegeleider\_BedrijvenList.cshtml" />
+    <Content Include="Views\StageBegeleider\_StudentenList.cshtml" />
+    <Content Include="Views\StageBegeleider\_StudentFirstPartial.cshtml" />
+    <Content Include="Views\StageBegeleider\GetTeBegeleidenStudenten.cshtml" />
+    <Content Include="Views\StageBegeleider\GetProfile.cshtml" />
+    <Content Include="Views\StageBegeleider\EditProfile.cshtml" />
+    <Content Include="Views\StageBegeleider\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

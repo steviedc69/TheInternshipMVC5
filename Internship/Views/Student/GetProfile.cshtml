@@ -1,0 +1,47 @@
+﻿@model Internship.Models.Domain.Student
+
+@{
+    ViewBag.Title = "GetProfile";
+    Layout = "~/Views/Student/_StudentLayout.cshtml";
+}
+
+<h2>Profiel</h2>
+<div class="panel panel-default">
+    <div class="panel panel-heading">
+        <h2>@Model.Naam @Model.Voornaam</h2>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <dl>
+                    <dt>Geboortedatum :</dt><dd>@Model.Gebdatum</dd>
+                    <dt>Adres : </dt><dd>
+                                         <br/>
+                                         @if (Model.Adres != null)
+                                         {
+
+
+                                             <address>
+                                                 @Model.Adres.StraatNaam @Model.Adres.Nummer<br/>
+                                                 @Model.Adres.Gemeente.Structuur<br/>
+                                                 <abbr title="phone">Gsm : </abbr>@Model.Gsmnummer<br/>
+
+                                             </address>
+                                         }
+                                         else
+                                         {
+                                             <p>Wijzig uw gegevens om een adres aan uw profiel toe te voegen</p>
+                                         }
+                                     </dd>
+                    <dt>E-mail/Username :</dt><dd>@Model.UserName</dd>
+                </dl>
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <img src="@Model.ImageUrl" alt="profileImage" class="img-thumbnail"/>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Wijzig gegevens","EditProfile",new{id=Model.Id},new {@class="btn btn-primary"})
+    </div>
+</div>

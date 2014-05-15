@@ -1,0 +1,56 @@
+﻿@using Microsoft.Ajax.Utilities
+@using Microsoft.AspNet.Identity
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Internship.Models.Domain.Opdracht>
+
+
+
+<div class="container">
+    @if (Model == null)
+    {
+        <p>Geen opdrachten gevonden</p>
+    }
+    else
+    {
+      foreach (var item in Model)
+    {
+
+             <div class="@item.Status.PanelClass">
+                 <div class="panel-heading">
+                     <h2 class="panel-title">@item.Title</h2>
+                     <strong>Status : </strong>@item.Status.Naam @item.Status.Id
+                 </div>
+                 <div class="panel-body">
+                     <p>@item.Omschrijving</p>
+                     Schooljaar :  @item.Schooljaar<br />
+                     Specialisatie : @item.Specialisatie.Title
+                 </div>
+                 <div class=" panel-footer">
+                     <div class="btn-group">
+                         
+                             @Html.ActionLink("Details", "OpdrachtDetail", new { id = item.Id},new{ @class ="btn btn-primary"})
+                        
+                         @if (!(item.Status.Id == 3 || item.Status.Id == 4))
+                         {
+                     
+                                 @Html.ActionLink("Verwijder", "ToRemoveOpdracht", new { id = item.Id }, new { @class = "btn btn-primary" })
+                   
+                      
+                                 @Html.ActionLink("Pas aan", "EditOpdracht", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        
+                         }
+                     </div>
+                 </div>
+                 </div>
+                 } 
+    }
+ 
+</div>
+    
+@Html.PagedListPager(Model, page =>Url.Action("Index",new
+{
+    id = User.Identity.GetUserId(),page
+        
+}))
+    

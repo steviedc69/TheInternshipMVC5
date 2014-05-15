@@ -16,7 +16,10 @@ namespace Internship.Models.Domain
         public String Url { get; set; }
         public virtual Adres Adres { get; set; }
         public String Telefoon { get; set; }
-        public String Bereikbaarheid { get; set; }
+        public Boolean Openbaarvervoer { get; set; }
+        public Boolean PerAuto { get; set; }
+        public DateTime BeginDate { get; set; }
+        public DateTime EindDate { get; set; }
         public String Activiteit { get; set; }
 
 
@@ -31,6 +34,7 @@ namespace Internship.Models.Domain
         {
             ContactPersonen = new List<ContactPersoon>();
             Opdrachten = new List<Opdracht>();
+            ImageUrl = "/Images/HG.gif";
         }
 
 

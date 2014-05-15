@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNet.Identity
+@model Internship.ViewModels.StagebegeleiderModel
+
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/StageBegeleider/_StageBegeleiderLayout.cshtml";
+}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">Profiel</a></li>
+    <li>@Html.ActionLink("Beveiliging","ChangePassword",new{id=User.Identity.GetUserId()})</li>
+</ul>
+
+<div class="row">
+<div class="form-horizontal">
+    @using (Html.BeginForm("EditProfile", "StageBegeleider", FormMethod.Post,
+        new {enctype = "multipart/form-data", @class = "form-horizontal", role = "form"}))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Wijzig gegevens</h4>
+        <hr />
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Naam, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Naam, new {@class = "form-control", style = "width: 50%"})
+                @Html.ValidationMessageFor(m=>m.Naam)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Voornaam, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Voornaam, new {@class = "form-control", style = "width: 50%"})
+                @Html.ValidationMessageFor(m=>m.Voornaam)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.GsmNummer, new {@class = "col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.GsmNummer, new {@class = "form-control", style = "width: 50%"})
+                @Html.ValidationMessageFor(m=>m.Voornaam)
+            </div>
+        </div>
+         <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Wijzig" style="width: 50%" />
+                </div>
+            </div>
+    }
+</div>
+</div>

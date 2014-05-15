@@ -1,0 +1,24 @@
+﻿@model Internship.Models.Domain.Bedrijf
+
+<div class="panel panel-primary col-md-4">
+
+    <div class="panel-body">
+        <img src="@Model.ImageUrl" alt="logo" width="250" height="180" />
+        <dl class="dl-horizontal" style="text-align: left">
+            <dt>Website : </dt>
+            <dd><a href="@Model.Url">@Model.Url</a></dd>
+            <dt>Activiteit :</dt>
+            <dd>@Model.Activiteit</dd>
+            <dt>Adres :</dt>
+            <dd>
+                <address>
+                    @Model.Adres.StraatNaam @Model.Adres.Nummer<br />@Model.Adres.Gemeente.Structuur<br />
+                    <abbr>Tel : </abbr>@Model.Telefoon
+                </address>
+            </dd>
+
+
+        </dl>
+    </div>
+
+</div>

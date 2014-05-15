@@ -1,0 +1,7 @@
+﻿@model Internship.Models.Domain.Student
+
+<div class="row">
+    @Html.Partial("_StudentPartial", Model)
+    @Html.Partial("_BedrijfPartial", Model.StageOpdracht.Bedrijf)
+</div>
+@Html.Partial("_OpdrachtPartial",Model.StageOpdracht)

@@ -1,0 +1,32 @@
+﻿@using Internship.Models.Domain
+@model Internship.Models.Domain.Opdracht
+
+
+<div class="row">
+    @Html.Partial("_OpdrachtPartial", Model)
+    @Html.Partial("_BedrijfPartial",Model.Bedrijf)
+</div>
+<div class="row">
+    @if (Model.StageStudenten == null)
+    {
+        <div class="alert alert-info">
+            ! Nog geen studenten toegewezen
+        </div>
+    }
+    else
+    {
+        int i = 0;
+        foreach (Student student in Model.StageStudenten)
+         {
+             if (i == 1)
+             {
+                 @:<div class="row">
+             }
+             @Html.Partial("_StudentPartial",student)
+             if (i == 3)
+             {
+                 @:</div>
+             }
+         }
+    }
+</div>

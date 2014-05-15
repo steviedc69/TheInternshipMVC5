@@ -1,0 +1,18 @@
+﻿@model Internship.Models.Domain.ContactPersoon
+
+    <div class="col-sm-5">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-user"></span> Contactpersoon : @Model.Naam @Model.Voornaam<br />
+                @Model.Functie
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li><span class="glyphicon glyphicon-phone-alt"></span>    Tel : @Model.ContactTelNr</li>
+                    <li><span class="glyphicon glyphicon-phone"></span>    GSM : @Model.GsmNummer</li>
+                    <li><span class="glyphicon glyphicon-envelope"></span>    E-mail : @Model.ContactEmail</li>
+                </ul>
+            </div>
+            <div class="panel-footer"><span class="glyphicon glyphicon-thumbs-up"></span>    Deze contactpersoon werd toegevoegd</div>
+        </div>
+    </div>

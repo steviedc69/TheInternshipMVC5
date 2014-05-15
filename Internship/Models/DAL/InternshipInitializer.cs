@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Reflection;
@@ -20,7 +21,7 @@ namespace Internship.Models.DAL
         DropCreateDatabaseIfModelChanges<InternshipContext>
     {
         private Student s1;
-
+        private Stagebegeleider stagebegeleider;
         protected override void Seed(InternshipContext context)
         {
 
@@ -53,26 +54,35 @@ namespace Internship.Models.DAL
                 Status status2 = new Status(){Naam = "Afgekeurd",AlertClass = "alert alert-danger",PanelClass = "panel panel-danger"};
                 Status status3 = new Status() { Naam = "Stage", AlertClass = "alert alert-success", PanelClass = "panel panel-success" };
                 Status status4 = new Status() { Naam = "Project", AlertClass = "alert alert-info", PanelClass = "panel panel-primary" };
+                Status status5 = new Status() { Naam = "deels-Toegewezen", AlertClass = "alert alert-info", PanelClass = "panel panel-primary" };
+                Status status6 = new Status() { Naam = "Toegewezen", AlertClass = "alert alert-info", PanelClass = "panel panel-primary" };
                 var statussen = new List<Status>()
                 {
                     status1,
                     status2,
                     status3,
-                    status4
+                    status4,
+                    status5,
+                    status6
                 };
                 statussen.ForEach(c=>context.Statussen.Add(c));
 
           
-
+               /* Adres adres = new Adres()
+                {
+                    StraatNaam = "Straat",
+                    Nummer = 5,
+                    Gemeente = context.Gemeentes.Find(4)
+                };
+                */
                 s1 = new Student()
                 {
                     Naam = "De Cock",
                     Voornaam = "Steven",
                     UserName = "steven.decock.k2806@student.hogent.be",
-                    Straat = "studentstraat",
-                    Straatnummer = 34,
+                    //Adres = adres,
                     Gebdatum = "30-12-1999",
-                    Woonplaats = "Aalst",
+                   
 
                 };
                 persistIdentitySeed(s1,context,"paswoord123","Student");
@@ -145,7 +155,17 @@ namespace Internship.Models.DAL
                 };
                 persistIdentitySeed(b2,context,"paswoord123","Bedrijf");
                 context.Bedrijven.Add(b2);
-            */   
+            */
+                stagebegeleider = new Stagebegeleider()
+              {
+                  UserName = "steven.decock@hogent.be",
+                  Naam = "De Cock",
+                  Voornaam = "Steven",
+                  Gsmnummer = "0494888888"
+                  
+              };
+                 persistIdentitySeed(stagebegeleider, context, "paswoord123", "Student");
+                context.Stagebegeleiders.Add(stagebegeleider);
                 context.SaveChanges();
                 //SeedMembership();
 

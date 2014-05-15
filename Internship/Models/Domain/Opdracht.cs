@@ -27,31 +27,9 @@ namespace Internship.Models.Domain
 
         public String Schooljaar { get; set; }
         //public virtual Bedrijf Bedrijf { get; set; }
-        public Boolean IsSemester1
-        {
-            get { return isSemester1; }
-            set
-            {
-                if (!FirstSemesterPossible())
-                {
-                    throw new ArgumentException("1ste semester is niet meer mogelijk voor dit jaar");
-                }
-                isSemester1 = value;
-            }
-        }
+        public Boolean IsSemester1 { get; set; }
 
-        public Boolean IsSemester2
-        {
-            get { return isSemester2; }
-            set
-            {
-                if (!SecondSemesterPossible())
-                {
-                    throw new ArgumentException("2de semester is niet meer mogelijk voor dit jaar");
-                }
-                isSemester2 = value;
-            }
-        }
+        public Boolean IsSemester2 { get; set; }
 
         public virtual Specialisatie Specialisatie { get; set; }
         public String AdminComment { get; set; }
@@ -67,8 +45,10 @@ namespace Internship.Models.Domain
         public virtual ICollection<Stagebegeleider> StageBegeleiderPreference { get; set; }
         [InverseProperty("Opdrachten")]
         public virtual Bedrijf Bedrijf { get; set; }
+        [InverseProperty("StageOpdracht")]
         public virtual ICollection<Student> StageStudenten { get; set; }
         public virtual Stagebegeleider Begeleider { get; set; }
+       // public Boolean IsStilActive { get; set; }
 
         public Opdracht()
         {
@@ -76,6 +56,8 @@ namespace Internship.Models.Domain
 
 
         }
+
+
 
         private Boolean FirstSemesterPossible()
         {
@@ -159,6 +141,7 @@ namespace Internship.Models.Domain
         }
         public int? SchoolJaarFirstInt()
         {
+
             return Bewerkingen.TryParseString(SchooljaarFirst());
         }
 

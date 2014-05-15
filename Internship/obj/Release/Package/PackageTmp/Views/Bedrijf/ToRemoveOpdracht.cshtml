@@ -1,0 +1,28 @@
+﻿@model Internship.Models.Domain.Opdracht
+
+@{
+    ViewBag.Title = "ToRemoveOpdracht";
+    Layout = "~/Views/Bedrijf/_BedrijfLayout.cshtml";
+}
+
+<h2>Bent u zeker dat u de opdracht wilt verwijderen?</h2>
+@using (Html.BeginForm("RemoveOpdracht", "Bedrijf", new {id = Model.Id}))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Model.Title
+        </div>
+        <div class="panel-body">
+            <p>Schooljaar : @Model.Schooljaar</p> 
+            <p>Omschrijving : @Model.Omschrijving </p>
+        </div>
+    </div>
+                <p>
+                <div class="btn-group-sm">
+                    <button name="button" value="ja" class="btn btn-default">Ja</button>
+                    <button name="button" value="nee" class="btn btn-default">Nee</button>
+                </div>
+            </p>
+}
+
+

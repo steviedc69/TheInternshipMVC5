@@ -1,0 +1,92 @@
+﻿@using Microsoft.AspNet.Identity
+@model Internship.ViewModels.RegistratieModelCreater
+
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Student/_StudentLayout.cshtml";
+}
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">Profiel</a></li>
+    <li>@Html.ActionLink("Beveiliging","ChangePassword",new{id=User.Identity.GetUserId()})</li>
+</ul>
+
+<div class="row">
+    <div class="form-horizontal">
+        @using (Html.BeginForm("EditProfile", "Student", FormMethod.Post,
+            new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Wijzig gegevens</h4>
+            <hr />
+            @Html.ValidationSummary(false)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ModelStudent.Naam, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ModelStudent.Naam, new { @class = "form-control", style = "width: 50%" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ModelStudent.Voornaam, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ModelStudent.Voornaam, new { @class = "form-control", style = "width: 50%" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ModelStudent.Straat, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ModelStudent.Straat, new { @class = "form-control", style = "width: 50%" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ModelStudent.Straatnummer, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ModelStudent.Straatnummer, new { @class = "form-control", style = "width: 50%" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ModelStudent.Gemeente, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.ModelStudent.Gemeente, Model.GemeenteLijst, new { @class = "form-control", style = "width: 50%" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ModelStudent.GsmNummer, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ModelStudent.GsmNummer, new { @class = "form-control", style = "width: 50%" })
+                </div>
+            </div>
+            if (@Model.ModelStudent.GeboorteDatum ==null)
+            {
+   <div class="form-group">
+                    @Html.LabelFor(m => m.ModelStudent.GeboorteDatum, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.ModelStudent.GeboorteDatum, new { @class = "form-control", style = "width: 50%" })
+                    </div>
+                </div>
+            }
+               
+ 
+            <div class="form-group">
+
+                @Html.LabelFor(m => m.ModelStudent.Image, new { @class = "col-md-2 control-label" })
+                <div class="col-md-2">
+                    <input type="file" title="file" id="file" name="file" class="hidden form-control" style="width: 50%" onchange="readURL(this)" />
+                    <div class="thumbnail">
+                        <img data-src="holder.js/100%x180" height="200" width="200" id="profile" alt="logo" src="@Model.ModelStudent.Image">
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Wijzig" style="width: 50%" />
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
