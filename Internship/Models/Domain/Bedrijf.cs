@@ -18,8 +18,7 @@ namespace Internship.Models.Domain
         public String Telefoon { get; set; }
         public Boolean Openbaarvervoer { get; set; }
         public Boolean PerAuto { get; set; }
-        public DateTime BeginDate { get; set; }
-        public DateTime EindDate { get; set; }
+   
         public String Activiteit { get; set; }
 
 

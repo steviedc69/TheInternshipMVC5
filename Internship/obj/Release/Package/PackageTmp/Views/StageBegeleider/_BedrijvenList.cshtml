@@ -1,0 +1,34 @@
+﻿@using Internship.Models.Domain
+@model IEnumerable<Internship.Models.Domain.Bedrijf>
+
+@if (Model == null)
+{
+    <p>Geen bedrijven gevonden</p>
+}
+else
+{
+    <div class="list-group">
+
+        @foreach (Bedrijf bedrijf in Model)
+        {
+
+            using (Ajax.BeginForm("GetTeBegeleidenStageDetail", new { id = bedrijf.Id }, new AjaxOptions()
+            {
+                HttpMethod = "Get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "details",
+
+            }))
+            {
+                string id = bedrijf.Id;
+                <a href="#" onclick="fireAjax(@id)" class="list-group-item link" id="id">
+                    <h4 class="list-group-item-heading">@bedrijf.Bedrijfsnaam</h4>
+                    <p class="list-group-item-text"><img src="@bedrijf.ImageUrl" width="80" height="50"></p>
+                </a>
+                <input type="submit" value="submit" id="@id" class="hidden submit" />
+            }
+
+        }
+
+    </div>
+}

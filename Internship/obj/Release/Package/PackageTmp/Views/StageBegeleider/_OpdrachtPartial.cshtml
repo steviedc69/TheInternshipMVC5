@@ -1,0 +1,71 @@
+﻿@model Internship.Models.Domain.Opdracht
+
+<div class="panel panel-primary col-md-8">
+    <div class="panel-heading">
+        <h2>Opdracht : @Model.Title</h2>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>Omschrijving :</dt>
+            <dd>@Model.Omschrijving</dd>
+            <dt>Schooljaar :</dt>
+            <dd>@Model.Schooljaar</dd>
+            <dt>Semester :</dt>
+            <dd>
+                <ul>
+                    @if (Model.IsSemester1)
+                    {
+                        <li>Gaat door in semester 1</li>
+                    }
+                    @if (Model.IsSemester2)
+                    {
+                        <li>Gaat door in semester 2</li>
+                    }
+                </ul>
+            </dd>
+            <dt>Vaardigheden : </dt>
+            <dd>@Model.Vaardigheden</dd>
+            <dt>Specialisatie : </dt>
+            <dd>@Model.Specialisatie.Title</dd>
+            <dt>Adres : </dt>
+            <dd><address>@Model.Adres.StraatNaam @Model.Adres.Nummer<br />@Model.Adres.Gemeente.Structuur</address></dd>
+            @if (Model.Ondertekenaar != null)
+            {
+                <dt>Contract ondertekenaar : </dt>
+                <dd>
+                    <address>
+                        <strong>@Model.Ondertekenaar.Naam @Model.Ondertekenaar.Voornaam</strong><br />
+                        @Model.Ondertekenaar.Functie<br />
+                        <abbr>Tel : </abbr>@Model.Ondertekenaar.ContactTelNr<br />
+                        <abbr>Gsm : </abbr>@Model.Ondertekenaar.GsmNummer<br />
+                        <a href="mailto:#">@Model.Ondertekenaar.ContactEmail</a>
+                    </address>
+                </dd>
+            }
+            @if (Model.StageMentor != null)
+            {
+                <dt>Stagementor : </dt>
+                <dd>
+                    <address>
+                        <strong>@Model.StageMentor.Naam @Model.StageMentor.Voornaam</strong><br />
+                        @Model.StageMentor.Functie<br />
+                        <abbr>Tel : </abbr>@Model.StageMentor.ContactTelNr<br />
+                        <abbr>Gsm : </abbr>@Model.StageMentor.GsmNummer<br />
+                        <a href="mailto:#">@Model.StageMentor.ContactEmail</a>
+                    </address>
+                </dd>
+
+            }
+        </dl>
+    </div>
+    <div class="panel-footer">
+        <div class="alert-info">
+            <dl class="dl-horizontal">
+                <dt>Status : </dt>
+                <dd>@Model.Status.Naam</dd>
+                <dt>Info van de administratie : </dt>
+                <dd>@Model.AdminComment</dd>
+            </dl>
+        </div>
+    </div>
+</div>

@@ -22,6 +22,21 @@ a:focus, :focus {
 #dialog {
     background-color: transparent;
 }
+
+.validation-summary-errors {
+
+    margin-bottom: 3px;
+    color: red;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.input-validation-error {
+    color: red;
+    border: 2px solid red;
+}
 /*---------------------------------------------------------- EINDE EIGEN CSS -----------------------------------------------------------*/
 
 /*----------------------------------------------------- AANPASSINGEN AAN BOOTSTRAP -----------------------------------------------------*/

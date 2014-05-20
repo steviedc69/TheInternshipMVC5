@@ -19,31 +19,34 @@
             @Html.AntiForgeryToken()
             <h4>Wijzig gegevens</h4>
             <hr />
-            @Html.ValidationSummary(false)
+
 
             <div class="form-group">
                 @Html.LabelFor(m => m.ModelStudent.Naam, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.ModelStudent.Naam, new { @class = "form-control", style = "width: 50%" })
-
+                    @Html.ValidationMessageFor(m=>m.ModelStudent.Naam)
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.ModelStudent.Voornaam, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.ModelStudent.Voornaam, new { @class = "form-control", style = "width: 50%" })
-                </div>
+                    @Html.ValidationMessageFor(m => m.ModelStudent.Voornaam)
+                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.ModelStudent.Straat, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.ModelStudent.Straat, new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(m => m.ModelStudent.Straat)
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.ModelStudent.Straatnummer, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.ModelStudent.Straatnummer, new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(m => m.ModelStudent.Straatnummer)
                 </div>
             </div>
 
@@ -51,12 +54,14 @@
                 @Html.LabelFor(m => m.ModelStudent.Gemeente, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.ModelStudent.Gemeente, Model.GemeenteLijst, new { @class = "form-control", style = "width: 50%" })
+                
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.ModelStudent.GsmNummer, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.ModelStudent.GsmNummer, new { @class = "form-control", style = "width: 50%" })
+                    @Html.ValidationMessageFor(m => m.ModelStudent.GsmNummer)
                 </div>
             </div>
             if (@Model.ModelStudent.GeboorteDatum ==null)
@@ -65,6 +70,7 @@
                     @Html.LabelFor(m => m.ModelStudent.GeboorteDatum, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.EditorFor(m => m.ModelStudent.GeboorteDatum, new { @class = "form-control", style = "width: 50%" })
+                        @Html.ValidationMessageFor(m => m.ModelStudent.GeboorteDatum)
                     </div>
                 </div>
             }

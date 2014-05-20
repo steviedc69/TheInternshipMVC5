@@ -1,0 +1,35 @@
+﻿@using Internship.Models.Domain
+@model IEnumerable<Internship.Models.Domain.Student>
+
+@if (Model == null)
+{
+    <p>Geen opdrachten gevonden</p>
+}
+else
+{
+    int id = 1;
+    <div class="list-group">
+       
+        @foreach (Student student in Model)
+        {
+
+            using (Ajax.BeginForm("GetTeBegeleidenStageStudentDetail", new { id = student.Id }, new AjaxOptions()
+            {
+                HttpMethod = "Get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "details",
+
+            }))
+            {
+               
+                <a href="#" onclick="fireAjax(@id)" class="list-group-item link" id="@id">
+                    <h4 class="list-group-item-heading">@student.Naam  @student.Voornaam</h4>
+                    <p class="list-group-item-text"> <img src="@student.ImageUrl" height="50" width="80" class="img-thumbnail"/></p>
+                </a>
+                <input type="submit" value="submit" id="@id" class="hidden submit" />
+            }
+            id++;
+        }
+
+    </div>
+}

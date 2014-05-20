@@ -1,0 +1,50 @@
+﻿@model Internship.Models.Domain.Stagebegeleider
+
+@{
+    ViewBag.Title = "GetTeBegeleidenStages";
+    Layout = "~/Views/StageBegeleider/_StageBegeleiderLayout.cshtml";
+}
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">Per stage</a></li> 
+    <li> <a href="@Url.Action("GetTeBegeleidenStudenten",new{id=Model.Id})">Per student</a></li>
+</ul>
+
+@if (Model.TeBegeleidenOpdrachten == null)
+{
+    <div class="alert alert-info">!! Nog geen stages toegewezen, neem contact op met de administratie</div>
+}
+<h2>Stages</h2>
+
+<div class="row">
+    <div>
+        
+        @using (Ajax.BeginForm("GetSortBy", new {id = Model.Id}, new AjaxOptions()
+        {
+            HttpMethod = "Get",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "list"
+        }))
+        {
+            <div class="form-group">
+                <label for="select">Sorteer op :</label>
+                <select id="select" name="select" class="form-control " style="width: 20%" onchange="selectAjax()">
+                    <option id="0">Schooljaar</option>
+                    <option id="1">Bedrijf</option>
+                    <option id="2">Titel</option>
+                    <option id="3">Specialisatie</option>
+                    <option id="3">Dit schooljaar</option>
+                </select>
+            </div>
+            <input type="submit" id="selectSubmit" class="hidden"/>
+        }
+    
+    </div>
+    <div class="col-md-2" id="list">
+        @Html.Partial("_StagesList",Model.TeBegeleidenOpdrachten.OrderBy(o=>o.Schooljaar))
+    </div>
+    <div class="col-md-10">
+        <div id ="details"></div>
+    </div>
+
+</div>

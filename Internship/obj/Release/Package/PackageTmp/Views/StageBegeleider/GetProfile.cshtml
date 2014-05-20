@@ -1,0 +1,35 @@
+﻿@model Internship.Models.Domain.Stagebegeleider
+
+@{
+    ViewBag.Title = "GetProfile";
+    Layout = "~/Views/StageBegeleider/_StageBegeleiderLayout.cshtml";
+}
+
+<h2>Mijn profiel</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>@Model.Naam  @Model.Voornaam</h2>
+            </div>
+            <div class="panel-body"><dl class="dl-horizontal">
+                                        <dt>E-mail : </dt><dd>@Model.UserName</dd>
+                                        <dt>Gsm : </dt>
+                                        @if (@Model.Gsmnummer != null)
+                                        {
+                                            <dd>@Model.Gsmnummer</dd>
+                                        }
+                     
+                                    </dl></div>
+            <div class="panel-footer">
+                @Html.ActionLink("Wijzig gegevens","EditProfile",new{id=Model.Id},new {@class="btn btn-primary"})
+            </div>
+        </div>
+        
+    </div>
+</div>
+

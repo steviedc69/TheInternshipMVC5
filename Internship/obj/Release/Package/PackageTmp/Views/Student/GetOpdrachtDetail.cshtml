@@ -2,7 +2,7 @@
 @model Internship.Models.Domain.Opdracht
 
 @{
-    ViewBag.Title = "GetOpdrachtDetail";
+
     Layout = "~/Views/Student/_StudentLayout.cshtml";
 }
 @if (@Model == null)
@@ -47,11 +47,15 @@ else
         </div>
         <div class="panel-body">
             <dl class="dl-horizontal">
-                <dt>Omschrijving : </dt><dd>@Model.Omschrijving</dd>
-                <dt>Specialisatie : </dt><dd>@Model.Specialisatie.Title</dd>
-                <dt>Schooljaar : </dt><dd>@Model.Schooljaar</dd>
+                <dt>Omschrijving : </dt>
+                <dd>@Model.Omschrijving</dd>
+                <dt>Specialisatie : </dt>
+                <dd>@Model.Specialisatie.Title</dd>
+                <dt>Schooljaar : </dt>
+                <dd>@Model.Schooljaar</dd>
                 <dt>
-                    Semester : </dt>
+                    Semester :
+                </dt>
                 <dd>
                     <ul class="">
                         @if (@Model.IsSemester1)
@@ -64,52 +68,64 @@ else
                         }
                     </ul>
                 </dd>
-            
-                <dt>Vaardigheden : </dt><dd>@Model.Vaardigheden</dd>
-                <dt>Aantal studenten : </dt><dd>@Model.AantalStudenten</dd>
-                <dt>Bedrijf :</dt><dd><address>
-                                          <strong>@Model.Bedrijf.Bedrijfsnaam</strong><br/>
-                                          @Model.Bedrijf.Adres.StraatNaam  @Model.Bedrijf.Adres.Nummer<br/>
-                                          @Model.Bedrijf.Adres.Gemeente.Structuur<br/>
-                                          <abbr title="phone">Tel :</abbr>@Model.Bedrijf.Telefoon<br/>
-                                          <a href="mailto:#">@Model.Bedrijf.UserName</a></address></dd>
+
+                <dt>Vaardigheden : </dt>
+                <dd>@Model.Vaardigheden</dd>
+                <dt>Aantal studenten : </dt>
+                <dd>@Model.AantalStudenten</dd>
+                <dt>Bedrijf :</dt>
+                <dd>
+                    <address>
+                        <strong>@Model.Bedrijf.Bedrijfsnaam</strong><br />
+                        @Model.Bedrijf.Adres.StraatNaam  @Model.Bedrijf.Adres.Nummer<br />
+                        @Model.Bedrijf.Adres.Gemeente.Structuur<br />
+                        <abbr title="phone">Tel :</abbr>@Model.Bedrijf.Telefoon<br />
+                        <a href="mailto:#">@Model.Bedrijf.UserName</a>
+                    </address>
+                </dd>
                 @if (@Model.Bedrijf.Adres.Id != @Model.Adres.Id)
                 {
                     <dt>Stage adres :</dt>
-                    <dd><address>
-                            <strong>@Model.Bedrijf.Bedrijfsnaam</strong><br/>
-                            @Model.Adres.StraatNaam  @Model.Adres.Nummer<br/>
-                            @Model.Adres.Gemeente.Structuur<br/>
-                            <abbr title="phone">Tel :</abbr>@Model.Bedrijf.Telefoon<br/>
+                    <dd>
+                        <address>
+                            <strong>@Model.Bedrijf.Bedrijfsnaam</strong><br />
+                            @Model.Adres.StraatNaam  @Model.Adres.Nummer<br />
+                            @Model.Adres.Gemeente.Structuur<br />
+                            <abbr title="phone">Tel :</abbr>@Model.Bedrijf.Telefoon<br />
                             <a href="mailto:#">@Model.Bedrijf.UserName</a>
-                        </address></dd>
+                        </address>
+                    </dd>
                 }
                 else
                 {
                     <dt>Stage adres : </dt>
                     <dd>(Adres van @Model.Bedrijf.Bedrijfsnaam)</dd>
                 }
-            </dl>
-            <dt>Contact opnemen met </dt>
-            @if (@Model.Ondertekenaar != null)
-            {
-                <dd><address>
-                        <strong>  @Model.Ondertekenaar.Naam  @Model.Ondertekenaar.Voornaam</strong><br/>
-                        @Model.Ondertekenaar.Functie<br/>
-                        <abbr title="phone">Tel : </abbr>@Model.Ondertekenaar.ContactTelNr <br/>
-                        <a href="mailto:#">@Model.Ondertekenaar.ContactEmail</a>
-                    </address></dd>
-            }
-            else
-            {
-                <dd>Gegevens niet beschikbaar, gelieve u contact op te nemen via de bedrijfsgegevens</dd>
-            }
-                                          
+
+                <dt>Contact opnemen met </dt>
+                @if (@Model.Ondertekenaar != null)
+                {
+                    <dd>
+                        <address>
+                            <strong>  @Model.Ondertekenaar.Naam  @Model.Ondertekenaar.Voornaam</strong><br />
+                            @Model.Ondertekenaar.Functie<br />
+                            <abbr title="phone">Tel : </abbr>@Model.Ondertekenaar.ContactTelNr <br />
+                            <a href="mailto:#">@Model.Ondertekenaar.ContactEmail</a>
+                        </address>
+                    </dd>
+                }
+                else
+                {
+                    <dd>Gegevens niet beschikbaar, gelieve u contact op te nemen via de bedrijfsgegevens</dd>
+                }
+            </dl>                             
         </div>
         <div class="panel-footer">
             <div class="btn-group-sm">
                 @Html.ActionLink("Terug naar lijst", "Index", new {id = User.Identity.GetUserId()}, new {@class = "btn btn-primary"})
-                @using (Ajax.BeginForm("AddToFavorites", new {id = @Model.Id}, new AjaxOptions()
+                @if (!ViewBag.Title.Equals("Mijnstage"))
+                {
+                    using (Ajax.BeginForm("AddToFavorites", new {id = @Model.Id}, new AjaxOptions()
                 {
                     HttpMethod = "Post",
                     OnSuccess = "showMessage(data)"
@@ -117,6 +133,8 @@ else
                 {
                     <button class="btn btn-primary" type="submit">Voeg toe aan favorieten</button>
                 }
+                }
+              
             </div>
         </div>
     </div>

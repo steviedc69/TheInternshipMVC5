@@ -1,0 +1,35 @@
+﻿@using Internship.Models.Domain
+@model IEnumerable<Internship.Models.Domain.Opdracht>
+
+
+    @if (Model == null)
+    {
+        <p>Geen opdrachten gevonden</p>
+    }
+    else
+    {
+  <div class="list-group">
+
+    @foreach (Opdracht opdracht in Model)
+    {
+
+        using (Ajax.BeginForm("GetTeBegeleidenStageDetail", new { id = opdracht.Id }, new AjaxOptions()
+        {
+            HttpMethod = "Get",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "details",
+
+        }))
+        {
+            int id = opdracht.Id;
+            <a href="#" onclick="fireAjax(@id)" class="list-group-item link" id="id" >
+                <h4 class="list-group-item-heading">@opdracht.Title</h4>
+                <p class="list-group-item-text">@opdracht.Bedrijf.Bedrijfsnaam  @opdracht.Specialisatie.Title <br />@opdracht.Schooljaar</p>
+            </a>
+            <input type="submit" value="submit" id="@id" class="hidden submit" />
+        }
+
+    }
+ 
+</div>
+    }

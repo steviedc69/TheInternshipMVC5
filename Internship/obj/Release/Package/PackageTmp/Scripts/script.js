@@ -39,7 +39,16 @@
       
         return false;
     }
+
+    function fireAjax(id) {
+
+        $("#" + id + ".submit").click();
+
+    }
  
+    function selectAjax() {
+        $("#selectSubmit").click();
+    }
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -61,5 +70,8 @@ window.onload = function() {
         $("#profile").on('click', function () {
             $('#file').click();
         });
+        $("#" + id + ".link").on('click',function() {
+            $("#" + id + ".link").addClass("active");
+        })
 
 }

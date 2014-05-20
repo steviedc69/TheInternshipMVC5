@@ -49,6 +49,8 @@ namespace Internship.Models.Domain
         public virtual ICollection<Student> StageStudenten { get; set; }
         public virtual Stagebegeleider Begeleider { get; set; }
        // public Boolean IsStilActive { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EindDate { get; set; }
 
         public Opdracht()
         {

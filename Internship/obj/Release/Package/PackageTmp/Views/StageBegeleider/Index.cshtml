@@ -1,9 +1,33 @@
-﻿@model Internship.Models.Domain.Stagebegeleider
+﻿@using Internship.Models.Domain
+@using Microsoft.AspNet.Identity
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Internship.Models.Domain.Opdracht>
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Student/_StudentLayout.cshtml";
+    Layout = "~/Views/StageBegeleider/_StageBegeleiderLayout.cshtml";
 }
 
-<h2>Welkom @Model.Voornaam</h2>
+<div class="alert alert-success" style="display: none" id="added"></div>
+<h2>Welkom</h2>
 
+<div class="row">
+
+    <div id="search">
+        @using (Ajax.BeginForm("Index", new { id = User.Identity.GetUserId() }, new AjaxOptions()
+       {
+           HttpMethod = "Get",
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "search",
+
+
+       }))
+        {
+            <button class="btn btn-primary" type="submit" id="zoekSubmit"><span class="glyphicon glyphicon-search"></span>  Zoeken</button>
+        }
+    </div>
+    <div id="Stages">
+        @Html.Partial("_StagesPart", Model)
+    </div>
+</div>

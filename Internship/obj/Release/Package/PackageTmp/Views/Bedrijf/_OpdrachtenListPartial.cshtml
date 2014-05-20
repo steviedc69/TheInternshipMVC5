@@ -31,15 +31,16 @@
                          
                              @Html.ActionLink("Details", "OpdrachtDetail", new { id = item.Id},new{ @class ="btn btn-primary"})
                         
-                         @if (!(item.Status.Id == 3 || item.Status.Id == 4))
+                         @if ((item.Status.Id == 1 || item.Status.Id == 2))
                          {
-                     
-                                 @Html.ActionLink("Verwijder", "ToRemoveOpdracht", new { id = item.Id }, new { @class = "btn btn-primary" })
-                   
-                      
-                                 @Html.ActionLink("Pas aan", "EditOpdracht", new { id = item.Id }, new { @class = "btn btn-primary" })
-                        
+
+                             @Html.ActionLink("Verwijder", "ToRemoveOpdracht", new {id = item.Id}, new {@class = "btn btn-primary"})
+
                          }
+                      
+                           @Html.ActionLink("Pas aan", "EditOpdracht", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        
+                         
                      </div>
                  </div>
                  </div>
