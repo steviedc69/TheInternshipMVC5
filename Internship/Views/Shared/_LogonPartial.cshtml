@@ -10,15 +10,15 @@
         </div>
         <div class="panel-body">
             <div class="input-group">
-                <span class="input-group-addon">Email</span>
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = true, autofocus = true, placeholder = "..." })
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = true, autofocus = true, placeholder = "E-mail" })
             </div>
             <p>
                 @Html.ValidationMessageFor(m => m.Email)
             </p>
             <div class="input-group">
-                <span class="input-group-addon">Wachtwoord</span>
-                @Html.PasswordFor(m => m.Passwd, new { @class = "form-control", type = "password", placeholder = "..." })
+                <span class="input-group-addon"><span class="glyphicon">&#57395;</span></span>
+                @Html.PasswordFor(m => m.Passwd, new { @class = "form-control", type = "password", placeholder = "Wachtwoord" })
             </div>
             <span>
                 @Html.ValidationMessageFor(m => m.Passwd)

@@ -8,28 +8,24 @@
 }))
 {
 
-        <form class="form-inline" role="form" >
-            <div class="form-group">
-                <label for="select">Zoeken :</label>
-                <select id="select" name="select" class="form-control " style="width: 20%">
-                    <option id="0"></option>
-                    <option id="1">Alle opdrachten</option>
-                    <option id="2">Uit archief</option>
-                    <option id="3">per contactpersoon</option>
-                    <option id="4">per schooljaar</option>
-                    <option id="5">uit goedgekeurde opdrachten</option>
-                    <option id="6">uit pending opdrachten</option>
-                    <option id="7">uit afgekeurde opdrachten</option>
-                    <option id="8">op specialisatie</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="search" name="search" id="search" style="width: 30%" class="form-control" placeholder="Title, omschrijving ...">
-                </div>
-   
-            <button class="btn btn-primary" value="submit" style="width: 20%" type="submit"><span class="glyphicon glyphicon-search"></span> Zoek</button>
-
-
-        </form>
+        <div class="form-group">
+            <select id="select" name="select" class="form-control" style="width: 20%; float: left;">
+                <option id="0">Selecteer</option>
+                <option id="1">Alle opdrachten</option>
+                <option id="2">Uit archief</option>
+                <option id="3">per contactpersoon</option>
+                <option id="4">per schooljaar</option>
+                <option id="5">uit goedgekeurde opdrachten</option>
+                <option id="6">uit pending opdrachten</option>
+                <option id="7">uit afgekeurde opdrachten</option>
+                <option id="8">op specialisatie</option>
+            </select>
+        </div>
+        <span style="float: left;">&nbsp;</span>
+        <div class="form-group">
+            <input type="search" name="search" id="search" class="form-control" placeholder="Title, omschrijving ..." style="width: 30%; float: left;">
+        </div>
+        <span style="float: left;">&nbsp;</span>
+        <button class="btn btn-primary" value="submit" style="width: 20%;" type="submit"><span class="glyphicon glyphicon-search"></span> Zoek</button>
 
 }

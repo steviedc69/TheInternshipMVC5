@@ -151,7 +151,7 @@ a:focus, :focus {
 	background-color: #01A3D3;
 	color: #FFFFFF;
 	border-color: #01A3D3;
-	min-width: 110px;
+	//min-width: 110px;
     text-align: left;
 }
 .white {
@@ -159,6 +159,19 @@ a:focus, :focus {
 }
 .blue {
 	color: #01A3D3;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 2;
+  color: #ffffff;
+  cursor: default;
+  background-color: #01A3D3;
+  border-color: #01A3D3;
 }
 
 /* primary Button */

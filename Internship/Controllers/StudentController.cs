@@ -238,7 +238,7 @@ namespace Internship.Controllers
                 }
                 else
                 {
-                    TempData["Message"] = "Paswoord niet correct";
+                    TempData["Message"] = "Wachtwoord niet correct";
                     return RedirectToAction("ChangePassword", model);
                 }
             }
@@ -272,8 +272,7 @@ namespace Internship.Controllers
                 if (opdracht.IsOpdrachtFull())
                 {
                     TempData["Message"] =
-                        "Deze opdracht werd volledig ingenomen, ben je zeker dat je gegevens correct zijn?" +
-                        "Indien u een ondertekend stagecontract heeft, neem contact op met de stage administratie";
+                        "Deze opdracht werd volledig ingenomen, ben je zeker dat je gegevens correct zijn?";
                     return RedirectToAction("GetMyIntern", student);
                 }
                 opdracht.AddStudent(student);

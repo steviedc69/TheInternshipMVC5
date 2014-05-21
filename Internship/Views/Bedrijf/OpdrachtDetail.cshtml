@@ -4,7 +4,6 @@
 
 @{
     ViewBag.Title = "OpdrachtDetail";
-    Layout = "~/Views/Bedrijf/_BedrijfLayout.cshtml";
 }
 <div class="panel panel-default">
 
@@ -14,17 +13,20 @@
     </div>
     <div class="panel-body">
         <p><strong>Schooljaar :</strong> @Model.Schooljaar</p>
-        <ul>
-            <strong>Semesters : </strong>
-            @if (@Model.IsSemester1)
+        <p><strong>Semesters : </strong>
+            @if (@Model.IsSemester1 && !@Model.IsSemester2)
             {
-                <li>Gaat door in de 1ste semester</li>
+                <span>1ste semester</span>
             }
-            @if (@Model.IsSemester2)
+            @if (@Model.IsSemester2 && !@Model.IsSemester1)
             {
-                <li>Gaat door in de 2e semester</li>
+                <span>2e semester</span>
             }
-        </ul>
+            @if (@Model.IsSemester1 && @Model.IsSemester2)
+            {
+                <span>1ste semester &amp; 2e semester</span>
+            }
+        </p>
         <p>
             <strong> Omschrijving :</strong> <br />
             @Model.Omschrijving

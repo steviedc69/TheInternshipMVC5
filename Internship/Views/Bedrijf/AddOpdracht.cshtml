@@ -3,7 +3,6 @@
 @model Internship.ViewModels.CreateOpdrachtViewModel
 
 @{
-    Layout = "_BedrijfLayout.cshtml";
     if (Model.Opdracht == null)
     {
         ViewBag.id = Model.BedrijfId;
@@ -12,132 +11,151 @@
     {
         ViewBag.id = Model.Opdracht.Id;
     }
+    ViewBag.Title = "Opdracht aanmaken";
 }
 @section Scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
-  
+
 }
 
-<!DOCTYPE html>
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        @using (Html.BeginForm(new { id = ViewBag.id, @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Maak een nieuwe stageopdracht aan</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @Html.LabelFor(model => model.OpdrachtViewModel.Title, new { @class = "control-label col-md-3", style = "padding: 6px 12px; font-size: 16px; text-align: right;" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.OpdrachtViewModel.Title, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Title)
+                        </div>
+                    </div>
+                    
+                    <br/>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>addStageopdracht</title>
-</head>
-<body>
-    <div>
-        <h1>Creëer een nieuwe stage opdracht</h1>
+                    <div class="row">
+                        @Html.LabelFor(m => m.OpdrachtViewModel.Schooljaar, new { @class = "control-label col-md-3", style = "padding: 6px 12px; font-size: 16px; text-align: right;" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(m => m.OpdrachtViewModel.Schooljaar, Model.SchooljaarSelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OpdrachtViewModel.Schooljaar)
+                        </div>
+                    </div>
+                    
+                    <br/>
+
+                    <div class="row">
+                        @Html.LabelFor(m => m.OpdrachtViewModel.AantalStudenten, new { @class = "control-label col-md-3", style = "padding: 6px 12px; font-size: 16px; text-align: right;" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(m => m.OpdrachtViewModel.AantalStudenten, Model.AantalStudenten, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OpdrachtViewModel.AantalStudenten)
+                        </div>
+                    </div>
+                    
+                    <br/>
+
+                    <div class="row">
+                        @Html.LabelFor(model => model.OpdrachtViewModel.Omschrijving, new { @class = "control-label col-md-3", style = "padding: 6px 12px; font-size: 16px; text-align: right;" })
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(model => model.OpdrachtViewModel.Omschrijving, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Omschrijving)
+                        </div>
+                    </div>
+                    
+                    <br/>
+
+                    <div class="row">
+                        @Html.LabelFor(model => model.OpdrachtViewModel.Specialisatie, new { @class = "control-label col-md-3", style = "padding: 6px 12px; font-size: 16px; text-align: right;" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.OpdrachtViewModel.Specialisatie,
+                                Model.SpecialisatieList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Specialisatie)
+                        </div>
+                    </div>
+                    
+                    <br/>
+
+                    <div class="row">
+                        @Html.LabelFor(model => model.OpdrachtViewModel.Vaardigheden, new { @class = "col-md-3 control-label", style = "padding: 6px 12px; font-size: 16px; text-align: right;" })
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(m => m.OpdrachtViewModel.Vaardigheden, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OpdrachtViewModel.Vaardigheden)
+                        </div>
+                    </div>
+                    
+                    <br/>
+
+                    <div class="row">
+                        @Html.LabelFor(model => model.OpdrachtViewModel.Semesters, new { @class = "control-label col-md-3", style = "padding: 6px 12px; font-size: 16px; text-align: right;" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.OpdrachtViewModel.Semesters,
+                                Model.SemesterLijst, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Semesters)
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <div class="row">
+                        <label class="col-md-3 control-label" style="padding: 6px 12px; font-size: 16px; text-align: right;"> Adres hoofdkantoor:</label>
+                        @*@Html.LabelFor(model => model.OpdrachtViewModel.IsBedrijfAdres, new { @class = "col-md-3 control-label", style = "padding: 6px 12px; font-size: 16px; text-align: right;" })*@
+                        <div class="col-md-9">
+                            @Html.CheckBoxFor(model => model.OpdrachtViewModel.IsBedrijfAdres, new { @checked = true, style = "height: 22px; width: 22px;" })
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    Of registreer hier de plaats waar de stage zal doorgaan (dit kan later nog gewijzigd worden)
+                    
+                    <br/>
+
+                    <div class="row">
+                        @Html.LabelFor(m => m.OpdrachtViewModel.Straat, new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.OpdrachtViewModel.Straat, new { @class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.OpdrachtViewModel.Straat)
+                        </div>
+                    </div>
+                    
+                    <br/>
+
+                    <div class="row">
+                        @Html.LabelFor(m => m.OpdrachtViewModel.Nummer, new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.OpdrachtViewModel.Nummer, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OpdrachtViewModel.Nummer)
+                        </div>
+                    </div>
+                    
+                    <br/>
+
+                    <div class="row">
+                        @Html.LabelFor(model => model.OpdrachtViewModel.Gemeente, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.OpdrachtViewModel.Gemeente,
+                                Model.Gemeenten, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Gemeente)
+                        </div>
+                    </div>
+                    
+                    <br/>
+
+                    <div class="btn-group-sm">
+                        <button name="button" value="submit" class="btn btn-primary">Voeg toe</button>
+                        <button name="button" value="contact" class="btn btn-primary">Voeg contacten toe</button>
+                    </div>
+                </div>
+            </div>
+              }
     </div>
-    
- 
-    
-
-    @using (Html.BeginForm( new {id =ViewBag.id, @class = "form-horizontal", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-
-        <fieldset>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.OpdrachtViewModel.Title, new { @class = "control-label col-md-2" })
-
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.OpdrachtViewModel.Title, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Title)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.OpdrachtViewModel.Schooljaar, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.OpdrachtViewModel.Schooljaar, Model.SchooljaarSelectList, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(m => m.OpdrachtViewModel.Schooljaar)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.OpdrachtViewModel.AantalStudenten, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.OpdrachtViewModel.AantalStudenten, Model.AantalStudenten, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(m => m.OpdrachtViewModel.AantalStudenten)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.OpdrachtViewModel.Omschrijving, new { @class = "control-label col-md-2" })
-
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.OpdrachtViewModel.Omschrijving, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Omschrijving)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.OpdrachtViewModel.Specialisatie, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.OpdrachtViewModel.Specialisatie,
-         Model.SpecialisatieList, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Specialisatie)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.OpdrachtViewModel.Vaardigheden, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(m => m.OpdrachtViewModel.Vaardigheden, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(m => m.OpdrachtViewModel.Vaardigheden)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.OpdrachtViewModel.Semesters, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.OpdrachtViewModel.Semesters,
-                        Model.SemesterLijst, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Semesters)
-                </div>
-            </div> 
-            <div class="form-group">
-                @Html.LabelFor(model => model.OpdrachtViewModel.IsBedrijfAdres, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.CheckBoxFor(model => model.OpdrachtViewModel.IsBedrijfAdres, new { @checked = true ,@class = "form-control", style = "width: 50%" })
-                </div>
-            </div>
-            <p>Of registreer hier de plaats waar de stage zal doorgaan (dit kan later nog gewijzigd worden)</p>
-            <div class="form-group">
-
-                @Html.LabelFor(m => m.OpdrachtViewModel.Straat, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.OpdrachtViewModel.Straat, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(m=>m.OpdrachtViewModel.Straat)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.OpdrachtViewModel.Nummer, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.EditorFor(m => m.OpdrachtViewModel.Nummer, new { @class = "form-control", style = "width: 100%" })
-                    @Html.ValidationMessageFor(m=>m.OpdrachtViewModel.Nummer)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.OpdrachtViewModel.Gemeente, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.OpdrachtViewModel.Gemeente,
-                        Model.Gemeenten, new { @class = "form-control", style = "width: 50%" })
-                    @Html.ValidationMessageFor(model => model.OpdrachtViewModel.Gemeente)
-                </div>
-            </div> 
-                
-            <p>
-                <div class="btn-group-sm">
-                    <button name="button" value="submit" class="btn btn-primary">Voeg toe</button>
-                    <button name="button" value="contact" class="btn btn-primary">Voeg contacten toe</button>
-                </div>
-            </p>
-
-        </fieldset>
-    }
-
-
-
-</body>
-</html>
+    <div class="col-lg-2">
+    </div>
+</div>
