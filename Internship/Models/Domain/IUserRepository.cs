@@ -19,5 +19,7 @@ namespace Internship.Models.Domain
         Task<ApplicationUser> FindAsyncUser(string username, string paswoord);
         Task<IdentityResult> ChangePaswordAsync(string user, String oldP, String newP);
         Task<IdentityResult> AddAsyncPassword(string user, string newP);
+        bool CreateRole(string role);
+        bool AddUserToRole(string id, string role);
     }
 }

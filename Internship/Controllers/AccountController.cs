@@ -24,17 +24,14 @@ namespace Internship.Controllers
         private IUserRepository UserRepository;
         private IGemeenteRepository gemeenteRepository;
 
-
         public AccountController(IBedrijfRepository bedrijfRepository, IStudentRepository studentRepository,
             IStagebegeleiderRepository stagebegeleider, IUserRepository userRepository,IGemeenteRepository gemeenteRepository)
         {
-           
             this.BedrijfRepository = bedrijfRepository;
             this.StagebegeleiderRepository = stagebegeleider;
             this.StudentRepository = studentRepository;
             this.UserRepository = userRepository;
             this.gemeenteRepository = gemeenteRepository;
-
         }
 
         //public UserManager<ApplicationUser> UserManager { get; private set; }
@@ -124,13 +121,13 @@ namespace Internship.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var user = DomainFactory.createBedrijf(model.Bedrijfsnaam, model.Activiteit, model.PerAuto,model.Openbaarvervoer,
                     model.Url,
                     model.Straat, model.Straatnummer, model.Woonplaats, model.Telefoon, model.Email,gemeenteRepository);
                 var result = await UserRepository.CreateAsyncUser(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserRepository.AddUserToRole(user.Id, "Bedrijf");
                     await SignInAsync(user, isPersistent: false);
                     Bedrijf b = user;
                     return RedirectToAction("Index", "Bedrijf",b);
@@ -144,7 +141,6 @@ namespace Internship.Controllers
             // If we got this far, something failed, redisplay form
             return View(new RegistratieModelCreater(gemeenteRepository,model));
         }
-
 
         //
         // GET: /Account/Manage
@@ -186,7 +182,6 @@ namespace Internship.Controllers
                         }
                         if (User.Identity.GetUserName().EndsWith("@hogent.be"))
                         {
-                                
                             StagebegeleiderRepository.UpdateFirstTime(User.Identity.GetUserName());
                             Stagebegeleider s = StagebegeleiderRepository.FindById(User.Identity.GetUserId());
                             return RedirectToAction("Index", "StageBegeleider", s);
@@ -214,7 +209,6 @@ namespace Internship.Controllers
                     IdentityResult result = await UserRepository.AddAsyncPassword(User.Identity.GetUserId(), model.NewPassword);
                     if (result.Succeeded)
                     {
-                       
                         return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
                     }
                     else
@@ -228,9 +222,6 @@ namespace Internship.Controllers
             return View(model);
         }
 
-        
-   
-
         //
         // POST: /Account/LogOff
         [HttpPost]
@@ -240,8 +231,6 @@ namespace Internship.Controllers
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
- 
 
         protected override void Dispose(bool disposing)
         {

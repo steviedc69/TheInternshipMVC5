@@ -22,13 +22,15 @@ namespace Internship.Models.DAL
             return Context.Users.Any(u => u.UserName.Equals(userName));
         }
 
-        public UserManager<ApplicationUser> Manager { get; set; } 
+        public UserManager<ApplicationUser> Manager { get; set; }
+        public RoleManager<IdentityRole> RoleManager { get; set; }
        
         public UserRepository(InternshipContext context)
         {
             this.Context = context;
             this.Users = context.Users;
             this.Manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            this.RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             UserValidator<ApplicationUser> userValidator = Manager.UserValidator as UserValidator<ApplicationUser>;
             userValidator.AllowOnlyAlphanumericUserNames = false;
         }
@@ -62,6 +64,17 @@ namespace Internship.Models.DAL
         public Task<IdentityResult> AddAsyncPassword(string user, string newP)
         {
             return Manager.AddPasswordAsync(user, newP);
+        }
+        public bool CreateRole(string role)
+        {
+            var roleCreated = RoleManager.Create(new IdentityRole(role));
+            return roleCreated.Succeeded;
+        }
+
+        public bool AddUserToRole(string id, string role)
+        {
+            var userAdded = Manager.AddToRole(id, role);
+            return userAdded.Succeeded;
         }
     }
 }

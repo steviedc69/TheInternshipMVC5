@@ -24,13 +24,16 @@ namespace Internship.Models.DAL
         private Stagebegeleider stagebegeleider;
         protected override void Seed(InternshipContext context)
         {
-
             try
             {
-                /*programmeren, webontwikkeling, mainframe, e-business, mobile, systeembeheer.
-                 */
+                //Toevoegen van de rollen
+                var rollen = new UserRepository(context);
+                rollen.CreateRole("Admin");
+                rollen.CreateRole("Student");
+                rollen.CreateRole("Bedrijf");
+                rollen.CreateRole("Stagebegeleider");
 
-
+                //Toevoegen van specialisaties
                 Specialisatie sp1 = new Specialisatie() {Title = "Programmeren"};
                 Specialisatie sp2 = new Specialisatie() {Title = "Webontwikkeling"};
                 Specialisatie sp3 = new Specialisatie() {Title = "Mainframe"};
@@ -50,6 +53,7 @@ namespace Internship.Models.DAL
                 };
                 specialisaties.ForEach(c => context.Specialisaties.Add(c));
 
+                //Toevoegen van statussen
                 Status status1 = new Status(){Naam = "Pending",AlertClass = "alert alert-info",PanelClass = "panel panel-primary"};
                 Status status2 = new Status(){Naam = "Afgekeurd",AlertClass = "alert alert-danger",PanelClass = "panel panel-danger"};
                 Status status3 = new Status() { Naam = "Stage", AlertClass = "alert alert-success", PanelClass = "panel panel-success" };
@@ -86,7 +90,6 @@ namespace Internship.Models.DAL
 
                 };
                 persistIdentitySeed(s1,context,"paswoord123","Student");
-                context.Studenten.Add(s1);
 
               /*  Bedrijf b1 = new Bedrijf()
                 {
@@ -157,18 +160,15 @@ namespace Internship.Models.DAL
                 context.Bedrijven.Add(b2);
             */
                 stagebegeleider = new Stagebegeleider()
-              {
-                  UserName = "steven.decock@hogent.be",
-                  Naam = "De Cock",
-                  Voornaam = "Steven",
-                  Gsmnummer = "0494888888"
-                  
-              };
-                 persistIdentitySeed(stagebegeleider, context, "paswoord123", "Student");
-                context.Stagebegeleiders.Add(stagebegeleider);
+                {
+                    UserName = "steven.decock@hogent.be",
+                    Naam = "De Cock",
+                    Voornaam = "Steven",
+                    Gsmnummer = "0494888888"
+                };
+                persistIdentitySeed(stagebegeleider, context, "paswoord123", "Student");
                 context.SaveChanges();
                 //SeedMembership();
-
             }
             catch (DbEntityValidationException e)
             {
@@ -191,13 +191,10 @@ namespace Internship.Models.DAL
         {
             if (!context.Users.Any(u => u.UserName == us.UserName))
             {
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                manager.CreateAsync(us,pasw);
-                //manager.AddToRole(us.Id, role);
+                var ur = new UserRepository(context);
+                ur.CreateAsyncUser(us, pasw);
+                ur.AddUserToRole(us.Id, role);
             }
         }
-
-}
-
+    }
 }
