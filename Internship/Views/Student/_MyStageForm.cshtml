@@ -1,0 +1,51 @@
+﻿@using System.Web.UI.WebControls
+@using Microsoft.AspNet.Identity
+@model Internship.ViewModels.StudentAddOpdrachtModel
+
+
+@using (Html.BeginForm("TakeStage", "Student", new {id = User.Identity.GetUserId()}))
+{
+    
+
+    <div class="form-horizontal">
+        <h3>Mijn stage</h3>
+        <div class="alert-warning"><p>Indien je reeds een ondertekend stagecontract heb, 
+                                       maar je stage staat nog niet op deze pagina, dan kan je hieronder de gegevens van de stage invullen. 
+                                       OPGELET!! wanneer je dit invult krijgt het stagebedrijf en de stage administratie hierover bericht.</p> </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.OpdrachtTitle, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.OpdrachtTitle)
+                @Html.ValidationMessageFor(model => model.OpdrachtTitle)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BedrijfsNaam, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.BedrijfsNaam)
+                @Html.ValidationMessageFor(model => model.BedrijfsNaam)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ondertekenaar, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Ondertekenaar, new{placeholder = "bv Peeters Jan"})
+                @Html.ValidationMessageFor(model => model.Ondertekenaar)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(o => o.Specialisatie, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(o=>o.Specialisatie)
+                @Html.ValidationMessageFor(o=>o.Specialisatie)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Voeg toe" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+    
+    
+}

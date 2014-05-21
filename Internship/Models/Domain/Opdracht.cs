@@ -59,7 +59,20 @@ namespace Internship.Models.Domain
 
         }
 
+        public void AddStudent(Student student)
+        {
+            if (StageStudenten.Count == AantalStudenten)
+            {
+                throw new ArgumentException("Deze opdracht zit reeds vol");
+            }
+            StageStudenten.Add(student);
+        }
 
+        public Boolean IsOpdrachtFull()
+        {
+            return StageStudenten.Count() == AantalStudenten;
+
+        }
 
         private Boolean FirstSemesterPossible()
         {

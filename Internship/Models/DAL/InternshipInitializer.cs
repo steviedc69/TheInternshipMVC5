@@ -17,8 +17,8 @@ using MySql.Data.MySqlClient;
 
 namespace Internship.Models.DAL
 {
-    public class InternshipInitializer : DropCreateDatabaseAlways<InternshipContext> 
-       // DropCreateDatabaseIfModelChanges<InternshipContext>
+    public class InternshipInitializer : //DropCreateDatabaseAlways<InternshipContext> 
+        DropCreateDatabaseIfModelChanges<InternshipContext>
     {
         private Student s1;
         private Stagebegeleider stagebegeleider;

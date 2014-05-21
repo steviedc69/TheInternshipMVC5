@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -700,9 +701,13 @@ namespace Internship.Controllers
                     if (file.FileName.EndsWith(".jpg") || file.FileName.EndsWith(".png") ||
                         file.FileName.EndsWith(".jpeg"))
                     {
-
-                        file.SaveAs(HttpContext.Server.MapPath("/Images/") + file.FileName);
-                        b.ImageUrl = "/Images/" + file.FileName;
+                        String path = "/Images/logo/";
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                        file.SaveAs(HttpContext.Server.MapPath(path) +b.Id +file.FileName);
+                        b.ImageUrl = path + b.Id+file.FileName;
                     }
                 }
                 b.Bedrijfsnaam = model.Bedrijfsnaam;

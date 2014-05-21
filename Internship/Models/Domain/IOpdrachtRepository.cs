@@ -11,7 +11,8 @@ namespace Internship.Models.Domain
         Opdracht FindOpdracht(int id);
         IEnumerable<Opdracht> GeefStageOpdrachten();
         IEnumerable<Opdracht> GeefStageOpdrachtenMetZoekstring(String search);
-        IEnumerable<Opdracht> GeefActieveOpdrachten(); 
+        IEnumerable<Opdracht> GeefActieveOpdrachten();
+        Opdracht SearchOpdracht(String title, String company, String ondertekenaar, String specialisatie);
         void SaveChanges();
         void RemoveOpdracht(Opdracht opdracht);
     }

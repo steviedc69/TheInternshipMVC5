@@ -22,7 +22,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.RegistratieModel.Url, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.RegistratieModel.Url, new { @class = "form-control", style = "width: 50%" })
+            @Html.TextBoxFor(m => m.RegistratieModel.Url, new { @class = "form-control", style = "width: 50%",placeholder="http://www.voorbeeld.be"})
         </div>
     </div>
     <div class="form-group">
@@ -47,22 +47,22 @@
     <div class="form-group">
         @Html.LabelFor(m => m.RegistratieModel.Telefoon, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.RegistratieModel.Telefoon, new { @class = "form-control", style = "width: 50%" })
+            @Html.TextBoxFor(m => m.RegistratieModel.Telefoon, new { @class = "form-control", style = "width: 50%" ,placeholder="vb: 012345678"})
         </div>
     </div>
 
     <div class="btn-group-sm">
        <strong>Bereikbaarheid :</strong><br/>
         <div class="form-group">
-            @Html.LabelFor(m => m.UpdateModel.PerAuto, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.RegistratieModel.PerAuto, new { @class = "col-md-2 control-label" })
             <div class="col-md-4">
-                @Html.CheckBoxFor(m => m.UpdateModel.PerAuto, new { @class = "form-control", style = "width: 50%" })
+                @Html.CheckBoxFor(m => m.RegistratieModel.PerAuto, new { @class = "form-control", style = "width: 50%" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.UpdateModel.Openbaarvervoer, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.RegistratieModel.Openbaarvervoer, new { @class = "col-md-2 control-label" })
             <div class="col-md-4">
-                @Html.CheckBoxFor(m => m.UpdateModel.Openbaarvervoer, new { @class = "form-control", style = "width: 50%" })
+                @Html.CheckBoxFor(m => m.RegistratieModel.Openbaarvervoer, new { @class = "form-control", style = "width: 50%" })
             </div>
         </div>
     </div>

@@ -32,6 +32,30 @@ namespace Internship.Models.DAL
             return Opdrachten.Where(o => o.Status.Id == 3 || o.Status.Id == 5 ).OrderBy(o=>o.Schooljaar);//&& o.SchoolJaarFirstInt()>=year 
                // && o.SchoolJaarSecondInt()>year).OrderBy(o => o.Schooljaar);
         }
+
+        public Opdracht SearchOpdracht(string title, string company, string ondertekenaar, string specialisatie)
+        {
+
+            String[] s = ondertekenaar.Split(' ');
+            string voorn = s[1];
+            string achtern = s[0];
+            IEnumerable<Opdracht> opdrachts = Opdrachten.Where(o => o.Title.Equals(title));
+
+            Opdracht opdracht =
+                opdrachts.SingleOrDefault(
+                    o => o.Bedrijf.Bedrijfsnaam.Equals(company) && o.Specialisatie.Title.Equals(specialisatie));
+            if (opdracht.Ondertekenaar != null)
+            {
+                if (opdracht.Ondertekenaar.Voornaam.Equals(voorn) && opdracht.Ondertekenaar.Naam.Equals(achtern))
+                {
+                    return opdracht;
+                }
+            }
+            return null;
+
+
+        }
+
         public IEnumerable<Opdracht> GeefStageOpdrachten()
         {
             return Opdrachten.Where(o=>o.Status.Id==3||o.Status.Id==5).OrderBy(o=>o.Schooljaar);

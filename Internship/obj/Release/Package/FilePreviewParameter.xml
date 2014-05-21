@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="theinternship" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Steven\ De\ Cock\\Documents\\Visual\ Studio\ 2013\\Projects\\Internship\\Internship\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Steven\ De\ Cock\\Documents\\Visual\ Studio\ 2013\\Projects\\Internship\\Internship\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="internshipdb-Web.config Connection String" description="" value="Database=interndb;Data Source=eu-cdbr-azure-west-a.cloudapp.net;User Id=b70b9e7b2c26df;Password=b8940b4c" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Steven\ De\ Cock\\Documents\\Visual\ Studio\ 2013\\Projects\\Internship\\Internship\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='internshipdb']/@connectionString" />
+  </parameter>
+</parameters>

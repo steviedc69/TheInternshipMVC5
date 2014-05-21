@@ -116,6 +116,10 @@
                         </div>
                     </div>
                 }
+                else if (@Model.Status.Id == 5 || @Model.Status.Id == 6)
+                {
+                    <div class="@Model.Status.AlertClass"><p>Uw opdracht is  @Model.Status.Naam</p></div>
+                }
                 else
                 {
                     <div class="@Model.Status.PanelClass">
@@ -136,6 +140,30 @@
                     </div>
 
                 }
+        @if (@Model.Begeleider != null)
+        {
+            <p><strong>Stagebegeleider : </strong><br/>@Model.Begeleider.Naam  @Model.Begeleider.Voornaam<br/><a href="mailto:@Model.Begeleider.UserName">@Model.Begeleider.UserName</a></p>
+        } 
+        @if (@Model.StageStudenten.Count != 0)
+{ <p>
+        <strong>Stage studenten : </strong>
+        @foreach (Student student in @Model.StageStudenten)
+        {
+        <div>
+            <dl class="dl-horizontal">
+                <dt>Naam : </dt>
+                <dd>@student.Naam</dd>
+                <dt>Voornaam : </dt>
+                <dd>@student.Voornaam</dd>
+                <dt>Gsm : </dt>
+                <dd>@student.Gsmnummer</dd>
+                <dt>E-mail : </dt>
+                <dd><a href="mailto:@student.UserName">@student.UserName</a></dd>
+            </dl>
+        </div>
+        }
+    </p>
+}
 
             </div>
 

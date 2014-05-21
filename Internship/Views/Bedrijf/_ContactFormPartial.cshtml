@@ -14,54 +14,54 @@
         @Html.ValidationSummary(true)
     <div class="form-horizontal">
         <div class="form-group">
-            @Html.LabelFor(m => m.Naam, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(m => m.Naam, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.TextBoxFor(m => m.Naam, new { @class = "form-control", style = "width: 50%" })
                 @Html.ValidationMessageFor(m => m.Naam)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Voornaam, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(m => m.Voornaam, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.TextBoxFor(m => m.Voornaam, new { @class = "form-control", style = "width: 50%" })
                 @Html.ValidationMessageFor(m => m.Voornaam)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Functie, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(m => m.Functie, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.TextBoxFor(m => m.Functie, new { @class = "form-control", style = "width: 50%" })
                 @Html.ValidationMessageFor(m => m.Functie)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.ContactEmail, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(m => m.ContactEmail, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.TextBoxFor(m => m.ContactEmail, new { @class = "form-control", style = "width: 50%" })
                 @Html.ValidationMessageFor(m => m.ContactEmail)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.ContactTelNr, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.ContactTelNr, new { @class = "form-control", style = "width: 50%" })
+            @Html.LabelFor(m => m.ContactTelNr, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.ContactTelNr, new { @class = "form-control", style = "width: 50%" ,placeholder="vb 021334455"})
                 @Html.ValidationMessageFor(m => m.ContactTelNr)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.GsmNummer, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.GsmNummer, new { @class = "form-control", style = "width: 50%" })
+            @Html.LabelFor(m => m.GsmNummer, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.GsmNummer, new { @class = "form-control", style = "width: 50%" ,placeholder="vb 0494999999"})
                 @Html.ValidationMessageFor(m => m.GsmNummer)
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Voeg toe" class="btn btn-default" />
+                <input type="submit" value="Voeg toe" class="btn btn-primary" />
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Internship.Models.Domain;
@@ -35,6 +36,23 @@ namespace Internship.ViewModels
             return repository.FindById(id);
         }
         
+    }
+
+    public class StudentAddOpdrachtModel
+    {
+        [Required(ErrorMessage = "{0} is verplicht!")]
+        [Display(Name = "Stage titel*")]
+        public String OpdrachtTitle { get; set; }
+        [Required(ErrorMessage = "{0} is verplicht!")]
+        [Display(Name = "Bedrijfsnaam*")]
+        public String BedrijfsNaam { get; set; }
+        [Required(ErrorMessage = "{0} is verplicht!")]
+        [Display(Name = "Ondertekenaar*")]
+        public String Ondertekenaar { get; set; }
+                [Required(ErrorMessage = "{0} is verplicht!")]
+        [Display(Name = "Specialisatie*")]
+        public String Specialisatie { get; set; }
+
     }
 
     public class StudentOpdrachtDetailModel

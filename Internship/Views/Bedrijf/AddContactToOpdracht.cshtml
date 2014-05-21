@@ -5,48 +5,54 @@
 }
 
 <h2>Creer contactpersonen voor @Model.Opdracht.Title</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Contract ondertekenaar : </h3>
+        <p>
+            Hier volgt meer uitleg over de Contract ondertekenaar, eventueel wat zijn taak is naar de stagementor en student toe <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel pharetra neque. In cursus lorem<br />
+            ligula, eget pulvinar justo pretium vel. Donec at neque lobortis, eleifend urna ut, dictum justo.
+        </p>
+        <p>
+            @Ajax.ActionLink("Uit lijst met contactpersonen", "GetContactFromList", new { id = Model.Opdracht.Id }, new AjaxOptions()
+            {
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "contact1"
+            })
+        </p>
+        <p>
+            @Ajax.ActionLink("Maak een nieuwe contactpersoon aan", "GetNewContact", new { id = Model.Opdracht.Id }, new AjaxOptions()
+            {
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "contact1"
+            })
+        </p>
+        <div id="contact1"></div>
+    </div>
 
-<h3>Contract ondertekenaar : </h3>
-<p><p>
-    Hier volgt meer uitleg over de Contract ondertekenaar, eventueel wat zijn taak is naar de stagementor en student toe <br />
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel pharetra neque. In cursus lorem<br />
-    ligula, eget pulvinar justo pretium vel. Donec at neque lobortis, eleifend urna ut, dictum justo.
-</p></p>
-<p>
-    @Ajax.ActionLink("Uit lijst met contactpersonen","GetContactFromList",new{id=Model.Opdracht.Id},new AjaxOptions()
-    {
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "contact1"
-    })
-</p>
-<p>
-    @Ajax.ActionLink("Maak een nieuwe contactpersoon aan","GetNewContact",new{id=Model.Opdracht.Id},new AjaxOptions()
-    {
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "contact1"
-    })
-</p>
-<div id="contact1"></div>
-<div>
-    <h3>Stagebegeleider : </h3>
-    <p>
-        Hier volgt meer uitleg over de stagebegeleider, eventueel wat zijn taak is naar de stagementor en student toe <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel pharetra neque. In cursus lorem<br />
-        ligula, eget pulvinar justo pretium vel. Donec at neque lobortis, eleifend urna ut, dictum justo.
-    </p>
-    <p>
-        @Ajax.ActionLink("Uit lijst met contactpersonen", "GetStageBegeleiderFromList", new { id = Model.Opdracht.Id }, new AjaxOptions()
-    {
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "contact2"
-    })
-    </p>
-    <p>
-        @Ajax.ActionLink("Maak een nieuwe contactpersoon aan", "GetNewStageBegeleider", new { id = Model.Opdracht.Id }, new AjaxOptions()
-    {
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "contact2"
-    })
-    </p>
-    <div id="contact2"></div>
+    <div class="col-md-6">
+        <h3>Stagebegeleider : </h3>
+        <p>
+            Hier volgt meer uitleg over de stagebegeleider, eventueel wat zijn taak is naar de stagementor en student toe <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel pharetra neque. In cursus lorem<br />
+            ligula, eget pulvinar justo pretium vel. Donec at neque lobortis, eleifend urna ut, dictum justo.
+        </p>
+        <p>
+            @Ajax.ActionLink("Uit lijst met contactpersonen", "GetStageBegeleiderFromList", new { id = Model.Opdracht.Id }, new AjaxOptions()
+            {
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "contact2"
+            })
+        </p>
+        <p>
+            @Ajax.ActionLink("Maak een nieuwe contactpersoon aan", "GetNewStageBegeleider", new { id = Model.Opdracht.Id }, new AjaxOptions()
+            {
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "contact2"
+            })
+        </p>
+        <div id="contact2"></div>
+    </div>
 </div>
+
+<a href="@Url.Action("OpdrachtDetail",new{id = Model.Opdracht.Id})" class="btn btn-primary">Naar opdracht detail</a>

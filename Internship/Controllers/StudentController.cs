@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Configuration;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -24,10 +26,12 @@ namespace Internship.Controllers
         private ISpecialisatieRepository specialisatieRepository;
         private IOpdrachtRepository opdrachtRepository;
         private IGemeenteRepository gemeenteRepository;
+        private IStatusRepository statusRepository;
 
         public StudentController(IBedrijfRepository bedrijfR, IStudentRepository studentR,
             IStagebegeleiderRepository stagebegeleiderR, IUserRepository usersRepository,
-            ISpecialisatieRepository specialisatie, IOpdrachtRepository opdracht, IGemeenteRepository gemeenteRepository)
+            ISpecialisatieRepository specialisatie, IOpdrachtRepository opdracht, IGemeenteRepository gemeenteRepository,
+            IStatusRepository statusRepository)
         {
             this.bedrijfRepository = bedrijfR;
             this.stagebegeleiderRepository = stagebegeleiderR;
@@ -36,6 +40,7 @@ namespace Internship.Controllers
             this.specialisatieRepository = specialisatie;
             this.opdrachtRepository = opdracht;
             this.gemeenteRepository = gemeenteRepository;
+            this.statusRepository = statusRepository;
         }
 
         //
@@ -170,8 +175,8 @@ namespace Internship.Controllers
                     if (file.FileName.EndsWith(".jpg") || file.FileName.EndsWith(".png") ||
                         file.FileName.EndsWith(".jpeg"))
                     {
-                        file.SaveAs(HttpContext.Server.MapPath("/Images/") + file.FileName);
-                        student.ImageUrl = "/Images/" + file.FileName;
+                        file.SaveAs(HttpContext.Server.MapPath("/Images/profiel/") +student.Id+ file.FileName);
+                        student.ImageUrl = "/Images/profiel/" +student.Id +file.FileName;
                     }
                     else
                     {
@@ -242,7 +247,53 @@ namespace Internship.Controllers
             return RedirectToAction("ChangePassword", model);
 
         }
+
+        public ActionResult GetMyStageForm()
+        {
+            StudentAddOpdrachtModel model = new StudentAddOpdrachtModel();
+            return PartialView("_MyStageForm", model);
+        }
+
+        [HttpPost]
+        public ActionResult TakeStage(StudentAddOpdrachtModel model,String id)
+        {
+            Student student = FindStudent(id);
+            if (ModelState.IsValid)
+            {
+                Opdracht opdracht = opdrachtRepository.SearchOpdracht(model.OpdrachtTitle, model.BedrijfsNaam,
+                    model.Ondertekenaar, model.Specialisatie);
+                if (opdracht == null)
+                {
+                    TempData["Message"] =
+                        "Opdracht werd niet teruggevonden,controleer alle gegevens. Zorg dat alles correct werd geschreven. " +
+                        "Als dit bericht na enkele keren terugkomt neem dan contact op met de stage administratie.";
+                    return RedirectToAction("GetMyIntern", student);
+                }
+                if (opdracht.IsOpdrachtFull())
+                {
+                    TempData["Message"] =
+                        "Deze opdracht werd volledig ingenomen, ben je zeker dat je gegevens correct zijn?" +
+                        "Indien u een ondertekend stagecontract heeft, neem contact op met de stage administratie";
+                    return RedirectToAction("GetMyIntern", student);
+                }
+                opdracht.AddStudent(student);
+                if (opdracht.IsOpdrachtFull())
+                {
+                    opdracht.Status = statusRepository.FindStatusWithId(6);
+                }
+                else
+                {
+                    opdracht.Status = statusRepository.FindStatusWithId(5);
+                }
+            opdrachtRepository.SaveChanges();
+                return RedirectToAction("GetMyIntern", student);
+
+            }
+
+            return RedirectToAction("GetMyIntern", student);
+        }
     }
+   
 
 
 

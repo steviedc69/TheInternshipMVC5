@@ -2,7 +2,7 @@
 @model Internship.Models.Domain.Opdracht
 
 @{
-
+    ViewBag.Title = "Opdrachtdetail";
     Layout = "~/Views/Student/_StudentLayout.cshtml";
 }
 @if (@Model == null)
@@ -27,7 +27,17 @@
             @Html.ActionLink("Terug naar index","Index",new{id=User.Identity.GetUserId()},new {@class="btn btn-primary"})
         </div>
     </div>
-
+    <div id ="opdrachtform">
+        @using (Ajax.BeginForm("GetMyStageForm",new AjaxOptions()
+        {
+            HttpMethod = "Get",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "opdrachtform"
+        }))
+        {
+            <button class="btn btn-primary" type="submit">Ik heb al een stagecontract ondertekend</button>
+        }
+    </div>
 }
 else
 {
