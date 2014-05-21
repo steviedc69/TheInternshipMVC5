@@ -4,7 +4,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    <div class="col-lg-6">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Aanmelden</h3>
         </div>
@@ -22,11 +22,7 @@
             </div>
             <span>
                 @Html.ValidationMessageFor(m => m.Passwd)
-            </span>
-            <label class="checkbox">
-                @Html.CheckBoxFor(m => m.RememberMe, new { value = "remember-me" })
-                Onthoud me?
-            </label>
+            </span><br />
             <input type="submit" value="Aanmelden" class="btn btn-primary btn-block" />
         </div>
     </div>

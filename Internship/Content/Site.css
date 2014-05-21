@@ -47,29 +47,40 @@ a:focus, :focus {
 
 	.navbar-inverse .navbar-nav > li > a:hover,
 	.navbar-inverse .navbar-nav > li > a:focus {
-	  border-bottom: 5px solid #01A3D3;
-	  padding-bottom: 10px;
-	  color: #FFFFFF;
-	  transition: all .35s ease-in-out;
+        border-bottom: 5px solid #01A3D3;
+        padding-bottom: 10px;
+        color: #FFFFFF;
+        transition: border-bottom .35s ease-in-out, padding-bottom .35s ease-in-out, color .35s ease-in-out;
+        outline-color: transparent;
 	}
 
 	.navbar-inverse .navbar-nav > .active > a,
 	.navbar-inverse .navbar-nav > .active > a:hover,
 	.navbar-inverse .navbar-nav > .active > a:focus {
-    background-color: transparent;
-	  border-bottom: 5px solid #01A3D3;
-	  padding-bottom: 10px;
+        background-color: transparent;
+        border-bottom: 5px solid #01A3D3;
+        padding-bottom: 10px;
+	    outline-color: transparent;
 	}
 
-  .blueIcon {
-    color: #01A3D3;
-  }
+    .navbar-inverse .navbar-nav > .open > a,
+    .navbar-inverse .navbar-nav > .open > a:hover,
+    .navbar-inverse .navbar-nav > .open > a:focus {
+        color: #ffffff;
+        background-color: transparent;
+    }
+    
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+        background-color: #01A3D3;
+    }
+    
+    .blueIcon {
+        color: #01A3D3;
+    }
 }
 
 @media (max-width: 768px) {
-    html {
-        overflow-y: hidden;
-    }
 
     /* Om scrollbar weg te krijgen in de collapse menu */
     .navbar-collapse.in {
@@ -78,7 +89,7 @@ a:focus, :focus {
 
     .navbar-inverse .navbar-nav li a:hover,
     .navbar-inverse .navbar-nav li a:focus {
-        background-color: #017CA0;
+        background-color: #01A3D3;
     }
 
     .navbar-inverse .navbar-nav > .active > a,
@@ -90,6 +101,11 @@ a:focus, :focus {
     .navbar-default .navbar-nav li {
         padding-left: 20px;
         padding-right: 20px;
+    }
+    
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+        background-color: #01A3D3;
     }
 }
 
@@ -115,7 +131,7 @@ a:focus, :focus {
 }
 
 .jumbotron {
-  background-color: #01A3D3;
+    background-color: #01A3D3;
     color: #ffffff;
 }
 
@@ -312,6 +328,10 @@ fieldset[disabled] .btn-default.active {
   background-color: #222222;
   border-color: #222222;
 }
+
+.glyphicon {
+    font-size: 90%;
+}
 /*--------------------------------------------------- EINDE AANPASSINGEN AAN BOOTSTRAP ---------------------------------------------------*/
 
 
@@ -334,8 +354,4 @@ fieldset[disabled] .btn-default.active {
     	display: none;
   	}
 }
-
-
-
-
 /*-------------------------------------------------- EINDE TOEVOEGINGEN AAN BOOTSTRAP --------------------------------------------------*/

@@ -13,7 +13,7 @@ namespace Internship.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Info()
         {
             ViewBag.Message = "Your application description page.";
 

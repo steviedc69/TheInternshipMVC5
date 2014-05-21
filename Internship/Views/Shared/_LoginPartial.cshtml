@@ -7,30 +7,91 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-    </div>
-
- 
-
-
-    @if (Request.IsAuthenticated)
-    {
-        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        @if (!(User.IsInRole("Bedrijf") || User.IsInRole("Stagebegeleider") || User.IsInRole("Student")))
         {
-            @Html.AntiForgeryToken()
-
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="@Url.Action("Manage","Account")"><span class="glyphicon glyphicon-user"></span></a>
-                </li>
-                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-            </ul>
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="~/Images/theinternship-neg.png" alt="The Internship" height="50px" /></a>
         }
-    }
-    else
-    {
-        
-      <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="~/Images/theinternship-neg.png" alt="The Internship" height="50px" /></a>
+        @if (User.IsInRole("Bedrijf"))
+        {
+            <a class="navbar-brand" href="@Url.Action("Index", "Bedrijf",new{id=User.Identity.GetUserId()})"><img src="~/Images/theinternship-neg.png" alt="The Internship" height="50px" /></a>
+        }
+        @if (User.IsInRole("Student"))
+        {
+            <a class="navbar-brand" href="@Url.Action("Index", "Student",new{id=User.Identity.GetUserId()})"><img src="~/Images/theinternship-neg.png" alt="The Internship" height="50px" /></a>
+        }
+        @if (User.IsInRole("Stagebegeleider"))
+        {
+            <a class="navbar-brand" href="@Url.Action("Index", "StageBegeleider",new{id=User.Identity.GetUserId()})"><img src="~/Images/theinternship-neg.png" alt="The Internship" height="50px" /></a>
+        }
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            @if (!(User.IsInRole("Bedrijf") || User.IsInRole("Stagebegeleider") || User.IsInRole("Student")))
+            {
+                <li class="@(ViewBag.Active == "Info" ? "active" : "")">@Html.ActionLink("Info", "Info", "Home")</li>
+                <li class="@(ViewBag.Active == "Contact" ? "active" : "")">@Html.ActionLink("Contact", "Contact", "Home")</li>
+            }
+            @if (User.IsInRole("Student"))
+            {
+                <li>
+                    <a href="@Url.Action("GetFavorites", "Student", new {id = User.Identity.GetUserId()})"><span class="glyphicon glyphicon-heart-empty"></span> Favorieten</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("GetMyIntern", "Student", new {id = User.Identity.GetUserId()})"><span class="glyphicon glyphicon-briefcase"></span> Mijn stage</a>
+                </li>
+            }
+            @if (User.IsInRole("Bedrijf"))
+            {
+                <li>
+                    <a href ="@Url.Action("BeheerContacten","Bedrijf",new{id=User.Identity.GetUserId()})"><span class="glyphicon glyphicon-book"></span> Beheer Contactpersonen</a>
+                </li>
+                <li>
+                    <a href=@Url.Action("AddOpdracht", "Bedrijf", new { id = User.Identity.GetUserId() })><span class="glyphicon glyphicon-plus"></span> Nieuwe opdracht</a>
+                </li>
+            }
+            @if (User.IsInRole("Stagebegeleider"))
+            {
+                <li>
+                    <a href="@Url.Action("GetFavorites", "StageBegeleider", new { id = User.Identity.GetUserId() })"><span class="glyphicon glyphicon-heart-empty"></span> Favorieten</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("GetTeBegeleidenStages", "StageBegeleider", new { id = User.Identity.GetUserId() })"><span class="glyphicon glyphicon-briefcase"></span> Mijn stage</a>
+                </li>
+            }
+        </ul>
 
-         
-    }
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user blueIcon"></span> @User.Identity.Name <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @if (User.IsInRole("Bedrijf"))
+                            {
+                                <li><a href="@Url.Action("ShowProfile", "Bedrijf", new{ id=User.Identity.GetUserId() })"><span class="glyphicon glyphicon-user"></span> Profiel</a></li>
+                            }
+                            @if (User.IsInRole("Student"))
+                            {
+                                <li><a href="@Url.Action("GetProfile", "Student", new{ id=User.Identity.GetUserId() })"><span class="glyphicon glyphicon-user"></span> Profiel</a></li>
+                            }
+                            @if (User.IsInRole("Stagebegeleider"))
+                            {
+                                <li><a href="@Url.Action("GetProfile", "StageBegeleider", new{ id=User.Identity.GetUserId() })"><span class="glyphicon glyphicon-user"></span> Profiel</a></li>
+                            }
+                            <li><a href="@Url.Action("Manage","Account")"><span class="glyphicon glyphicon-edit"></span> Wachtwoord aanpassen</a></li>
+                            <li class="divider"></li>
+                            <li class="@(ViewBag.Active == "Info" ? "active" : "")">@Html.ActionLink("Info", "Info", "Home")</li>
+                            <li class="@(ViewBag.Active == "Contact" ? "active" : "")">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span> Afmelden</a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            }
+        }
+     </div>
 </div>
