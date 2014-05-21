@@ -30,11 +30,10 @@ else
                 <img data-src="holder.js/100%x180" width="200px" height="100px" alt="@item.Bedrijf.Bedrijfsnaam" src="@item.Bedrijf.ImageUrl">
                 <div class="caption">
                     <h3>@item.Title</h3>
-                    <p><strong>Plaats :</strong> @item.Adres.Gemeente.Naam</p>
-                    <p><strong>Specialisatie : </strong> @item.Specialisatie.Title</p>
-                    <p><strong>Omschrijving : </strong> @item.Omschrijving</p>
-                    <div class="btn-group-sm">
-                        @Html.ActionLink("Details", "GetOpdrachtDetail", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    <p><strong>Plaats:</strong> @item.Adres.Gemeente.Naam</p>
+                    <p><strong>Specialisatie: </strong> @item.Specialisatie.Title</p>
+                    <p><strong>Omschrijving: </strong> @item.Omschrijving</p>
+                    <p>@Html.ActionLink("Details", "GetOpdrachtDetail", new { id = item.Id }, new { @class = "btn btn-primary" })</p>
                         @if (ViewBag.Title.Equals("Index"))
                         {
                             using (Ajax.BeginForm("AddToFavorites", "Student", new {id = item.Id}, new AjaxOptions()
@@ -45,10 +44,9 @@ else
                              })
                                  )
                              {
-                                 <button type="submit" class="btn btn-primary">Aan favorieten</button>
+                                 <button type="submit" class="btn btn-primary">Aan favorieten toevoegen</button>
                              }
                         }
-                    </div>
                 </div>
             </div>
         </div>

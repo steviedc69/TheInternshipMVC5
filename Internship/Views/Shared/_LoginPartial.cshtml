@@ -37,7 +37,7 @@
                     <a href="@Url.Action("GetFavorites", "Student", new {id = User.Identity.GetUserId()})"><span class="glyphicon glyphicon-heart-empty"></span> Favorieten</a>
                 </li>
                 <li>
-                    <a href="@Url.Action("GetMyIntern", "Student", new {id = User.Identity.GetUserId()})"><span class="glyphicon glyphicon-briefcase"></span> Mijn stage</a>
+                    <a href="@Url.Action("GetMyIntern", "Student", new {id = User.Identity.GetUserId()})"><span class="glyphicon glyphicon-inbox"></span> Mijn stage</a>
                 </li>
             }
             @if (User.IsInRole("Bedrijf"))
@@ -55,7 +55,7 @@
                     <a href="@Url.Action("GetFavorites", "StageBegeleider", new { id = User.Identity.GetUserId() })"><span class="glyphicon glyphicon-heart-empty"></span> Favorieten</a>
                 </li>
                 <li>
-                    <a href="@Url.Action("GetTeBegeleidenStages", "StageBegeleider", new { id = User.Identity.GetUserId() })"><span class="glyphicon glyphicon-briefcase"></span> Mijn stage</a>
+                    <a href="@Url.Action("GetTeBegeleidenStages", "StageBegeleider", new { id = User.Identity.GetUserId() })"><span class="glyphicon glyphicon-inbox"></span> Mijn stage</a>
                 </li>
             }
         </ul>
